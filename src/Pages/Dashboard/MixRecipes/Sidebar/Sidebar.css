@@ -1,0 +1,43 @@
+/* FILEPATH: /d:/Candy/batch-magic-clientside/src/Pages/Dashboard/MixRecipes/Sidebar/Sidebar.css */
+
+/* Sidebar container */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background-color: #eaeaf2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 120px;
+}
+
+/* Sidebar links */
+.sidebar li {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #302980;
+  display: block;
+}
+
+/* Active/current link */
+.sidebar li.active {
+  background-color: #302980;
+  color: #ffffff;
+}
+
+/* Responsive sidebar */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar li {
+    font-size: 18px;
+  }
+}
+
+/* Hover effect */
+.sidebar li:hover {
+  background-color: white;
+}

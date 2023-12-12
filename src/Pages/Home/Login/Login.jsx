@@ -101,7 +101,7 @@ const Login = () => {
       .get(`check-email/${e}`, {
         headers: {
           'Content-Type': 'application/json',
-          Accpet: 'application/json',
+          Accept: 'application/json',
           'Access-Control-Allow-Origin': '*', // Required for CORS support to work
         },
         withCredentials: true,

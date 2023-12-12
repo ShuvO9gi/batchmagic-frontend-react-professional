@@ -90,6 +90,21 @@ const DashboardHome = () => {
               </div>
             </div>
           </div>
+          <div className="col my-3">
+            <div className="card card-dashboard">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  <h5 className="card-title card-text-dashboard mb-5">
+                    Mix Recipies
+                  </h5>
+                  <img className="dashboard-logo" src={shipment} alt="" />
+                </div>
+                <Link to="/dashboard/mix-recipes">
+                  <button className="dashboard-button my-3">View</button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
