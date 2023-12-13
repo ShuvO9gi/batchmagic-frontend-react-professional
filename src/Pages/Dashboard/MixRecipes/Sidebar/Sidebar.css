@@ -2,7 +2,7 @@
 
 /* Sidebar container */
 .sidebar {
-  width: 250px;
+  width: 280px;
   height: 100%;
   background-color: #eaeaf2;
   position: fixed;
@@ -33,6 +33,11 @@
 .sidebar li.active {
   background-color: #302980;
   color: #ffffff;
+}
+
+.sidebar-icon {
+  height: 24px;
+  width: 24px;
 }
 
 /* Responsive sidebar */
