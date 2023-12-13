@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Sidebar.css';
 
 export const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   //   const toggleSidebar = () => {
   //     setIsOpen(!isOpen);
   //   };
 
   return (
-    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <ul className="sidebar-menu">
+    <div className={`sidebar `}>
+      <ul>
         <li>Home</li>
         <li>About</li>
         <li>Services</li>

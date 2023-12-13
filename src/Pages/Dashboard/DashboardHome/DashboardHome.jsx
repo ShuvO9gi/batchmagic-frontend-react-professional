@@ -4,6 +4,7 @@ import externallink from '../../../assets/Logo/externallink.svg';
 import suppliers from '../../../assets/Logo/suppliers.svg';
 import customers from '../../../assets/Logo/customers.svg';
 import shipment from '../../../assets/Logo/shipment.svg';
+import recipe from '../../../assets/Logo/recipe.svg';
 import User from '../User/User';
 import { Link } from 'react-router-dom';
 
@@ -97,7 +98,7 @@ const DashboardHome = () => {
                   <h5 className="card-title card-text-dashboard mb-5">
                     Mix Recipies
                   </h5>
-                  <img className="dashboard-logo" src={shipment} alt="" />
+                  <img className="dashboard-logo" src={recipe} alt="" />
                 </div>
                 <Link to="/dashboard/mix-recipes">
                   <button className="dashboard-button my-3">View</button>

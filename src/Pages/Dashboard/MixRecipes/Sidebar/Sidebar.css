@@ -12,6 +12,14 @@
   padding-top: 120px;
 }
 
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  top: 50px;
+  position: relative;
+}
+
 /* Sidebar links */
 .sidebar li {
   padding: 6px 8px 6px 16px;
