@@ -13,7 +13,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`sidebar `}>
+    <div className="sidebar">
       <ul>
         {sidebarMenu.map((menuItem) => (
           <li
