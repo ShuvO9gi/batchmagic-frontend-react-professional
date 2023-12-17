@@ -35,6 +35,7 @@ import StockEdit from '../../Pages/Dashboard/Product/Stock/Edit/Edit';
 import ProductSearch from '../../Pages/Dashboard/Product/Search/Search';
 import ResetPassword from '../../Pages/Home/ResetPassword/ResetPassword';
 import MixRecipes from '../../Pages/Dashboard/MixRecipes/index';
+import MixRecipesShow from '../../Pages/Dashboard/MixRecipes/Show/Show';
 
 const router = createBrowserRouter([
   {
@@ -105,6 +106,7 @@ const router = createBrowserRouter([
       { path: '/dashboard/stock/edit/:id', element: <StockEdit /> },
 
       { path: '/dashboard/mix-recipes/*', element: <MixRecipes /> },
+      { path: '/dashboard/mix-recipes/show/:id', element: <MixRecipesShow /> },
       // { path: '/dashboard/mix-recipes/create', element: <ShipmentCreate /> },
       // { path: '/dashboard/mix-recipes/show/:id', element: <ShipmentShow /> },
 

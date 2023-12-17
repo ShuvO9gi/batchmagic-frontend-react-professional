@@ -55,7 +55,7 @@ const Navbar = () => {
         <div className="container">
           <div>
             <img src={batchMagic} alt="batchMagic" />
-            <button
+            {/* <button
               className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
@@ -65,7 +65,7 @@ const Navbar = () => {
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon"></span>
-            </button>
+            </button> */}
           </div>
 
           <div
