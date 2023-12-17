@@ -1,11 +1,29 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import Loader from './Loader';
-import SearchBar from './SearchBar';
+import SearchBar from '../../../../components/SearchBar.jsx';
 import './DataTable.css';
 import PropTypes from 'prop-types';
-import { isEmpty } from './utils';
+import { isEmpty } from '../../../../components/utils.jsx';
+import Loader from '../../../../components/Loader.jsx';
+
+const tableCustomStyles = {
+  headCells: {
+    style: {
+      fontSize: '20px',
+      fontWeight: 'bold',
+      justifyContent: 'left',
+      color: '#FFAD05',
+    },
+  },
+  cells: {
+    style: {
+      wordBreak: 'break-word',
+      justifyContent: 'left',
+    },
+    draggingStyle: {},
+  },
+};
 
 const DataTables = ({ columns, data }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,7 +69,7 @@ const DataTables = ({ columns, data }) => {
 
   return (
     <div>
-      <div className="container datatable-custom ">
+      <div className="container datatable-custom mr-20">
         {
           <DataTable
             columns={columns}
@@ -60,7 +78,7 @@ const DataTables = ({ columns, data }) => {
             fixedHeaderScrollHeight="400px"
             noDataComponent="No Data Found"
             highlightOnHover
-            pagination
+            // pagination
             progressPending={pending}
             progressComponent={<Loader />}
             responsive
@@ -78,6 +96,7 @@ const DataTables = ({ columns, data }) => {
               )
             }
             subHeaderAlign="right"
+            customStyles={tableCustomStyles}
             subHeaderWrap
           />
         }

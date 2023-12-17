@@ -2,10 +2,11 @@ import React from 'react';
 import './list.css';
 import { Link } from 'react-router-dom';
 import show from '../../../../assets/Logo/actions/show.svg';
-import DataTables from '../../../../components/DataTables';
+import edit from '../../../../assets/Logo/actions/edit.svg';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import ErrorModal from '../../../../components/ErrorModal';
+import DataTables from '../DataTable/DataTables.jsx';
 
 const columns = [
   {
@@ -21,11 +22,12 @@ const columns = [
   {
     name: 'Actions',
     cell: (row) => (
-      <div>
+      <div className="action-container">
         <Link to={`/dashboard/mix-recipes/show/${row.id}`}>
-          <button className="btn btn-success">
-            <img src={show} className="edit-image" alt="" />
-          </button>
+          <img src={show} className="show-recipe" alt="" />
+        </Link>
+        <Link to={`/dashboard/mix-recipes/edit/${row.id}`}>
+          <img src={edit} className="edit-recipe" alt="" />
         </Link>
       </div>
     ),
@@ -62,10 +64,10 @@ const MixRecipeList = () => {
     };
   }, []);
   return (
-    <>
-      <h3 className="text-center my-5 text-purple">Products</h3>
+    <div>
+      <h3 className="text-center my-5 text-purple">Mix Recipes</h3>
       <DataTables columns={columns} data={products.data} />
-    </>
+    </div>
   );
 };
 

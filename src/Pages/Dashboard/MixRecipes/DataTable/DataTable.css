@@ -26,3 +26,7 @@
   height: 42px !important;
   width: 42px !important;
 }
+
+.pr-20 {
+  padding: 20px;
+}
