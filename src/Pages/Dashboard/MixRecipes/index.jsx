@@ -4,7 +4,7 @@ import MixRecipeList from './List/mix-recipies-list';
 import Sidebar from './Sidebar/Sidebar';
 import './mix-recipes.css';
 
-const MixRecipes: React.FC = () => {
+const MixRecipes = () => {
   return (
     <div className="recipe-content">
       <div className="recipe-sidebar">

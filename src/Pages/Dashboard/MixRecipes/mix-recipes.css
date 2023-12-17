@@ -5,11 +5,10 @@
 
 .recipe-sidebar {
   flex: 1;
-  overflow: 'auto';
 }
 
 .recipe-component {
-  flex: 1;
-  overflow: 'auto';
-  padding: '20px';
+  flex: 4;
+  /* overflow: 'auto';
+  padding: '20px'; */
 }
