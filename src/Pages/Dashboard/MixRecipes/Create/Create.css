@@ -1,0 +1,16 @@
+.btn-style {
+  width: 321px;
+  height: 40px;
+  background-color: #ff6e05;
+  border-style: none;
+  border-radius: 4px;
+}
+
+.btn-text {
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  line-height: 24px;
+  color: #ffffff;
+  padding: 8px 0;
+}

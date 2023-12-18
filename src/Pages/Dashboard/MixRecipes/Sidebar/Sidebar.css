@@ -1,13 +1,12 @@
 /* Sidebar container */
 .sidebar {
   width: 280px;
-  height: 100%;
+  height: 100vh;
   background-color: #eaeaf2;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   overflow: hidden;
-  padding-top: 120px;
 }
 
 .sidebar ul {
