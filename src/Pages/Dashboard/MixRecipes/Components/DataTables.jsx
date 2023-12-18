@@ -1,13 +1,18 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import SearchBar from '../../../../components/SearchBar.jsx';
 import './DataTable.css';
 import PropTypes from 'prop-types';
 import { isEmpty } from '../../../../components/utils.jsx';
 import Loader from '../../../../components/Loader.jsx';
+import SearchBar from '../Components/SearchBar.jsx';
 
 const tableCustomStyles = {
+  table: {
+    style: {
+      minHeight: '400px',
+    },
+  },
   headCells: {
     style: {
       fontSize: '20px',
@@ -43,24 +48,20 @@ const DataTables = ({ columns, data }) => {
   }, [rows]);
 
   const handleSearch = (query) => {
+    console.log(query);
     if (!query && !searchExpanded) {
       setSearchExpanded(false);
       setFilteredRows([]);
     } else {
       const filteredData = rows.filter((row) => {
-        const propertiesToSearch = [
-          'name',
-          'outgoing_batch_code',
-          'ingoing_batch_number',
-        ];
-        for (const property of propertiesToSearch) {
-          if (
-            row[property] &&
-            row[property].toLowerCase().includes(query.toLowerCase())
-          ) {
-            return true;
-          }
+        const property = ['name'];
+        if (
+          row[property] &&
+          row[property].toLowerCase().includes(query.toLowerCase())
+        ) {
+          return true;
         }
+
         return false;
       });
       setFilteredRows(filteredData);
