@@ -6,7 +6,7 @@ import edit from '../../../../assets/Logo/actions/edit.svg';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import ErrorModal from '../../../../components/ErrorModal';
-import DataTables from '../DataTable/DataTables.jsx';
+import DataTables from '../Components/DataTables.jsx';
 
 const columns = [
   {
@@ -16,7 +16,7 @@ const columns = [
   },
   {
     name: 'Weight (g)',
-    selector: (row) => row?.supplier?.name,
+    selector: (row) => row.total_weight,
     sortable: true,
   },
   {
@@ -35,29 +35,28 @@ const columns = [
 ];
 
 const MixRecipeList = () => {
-  const [products, setProducts] = useState([]);
+  const [batch_template, setBatch_template] = useState([]);
   const axiosPrivate = useAxiosPrivate();
-
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    const getProducts = async () => {
+    const getBatchtemplates = async () => {
       try {
-        const response = await axiosPrivate.get('/products', {
+        const response = await axiosPrivate.get('/batch-templates', {
           signal: controller.signal,
         });
         if (isMounted) {
-          setProducts(response.data);
+          setBatch_template(response?.data);
         }
       } catch (error) {
-        if (error instanceof DOMException && error.name == 'AbortError') {
+        if (error instanceof DOMException && error.name === 'AbortError') {
           <ErrorModal />;
         } else {
           <ErrorModal />;
         }
       }
     };
-    getProducts();
+    getBatchtemplates();
     return () => {
       isMounted = false;
       controller.abort();
@@ -66,7 +65,7 @@ const MixRecipeList = () => {
   return (
     <div>
       <h3 className="text-center my-5 text-purple">Mix Recipes</h3>
-      <DataTables columns={columns} data={products.data} />
+      <DataTables columns={columns} data={batch_template.data} />
     </div>
   );
 };
