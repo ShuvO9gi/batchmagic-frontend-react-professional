@@ -79,7 +79,7 @@ const DataTables = ({ columns, data }) => {
             fixedHeaderScrollHeight="400px"
             noDataComponent="No Data Found"
             highlightOnHover
-            // pagination
+            pagination
             progressPending={pending}
             progressComponent={<Loader />}
             responsive
