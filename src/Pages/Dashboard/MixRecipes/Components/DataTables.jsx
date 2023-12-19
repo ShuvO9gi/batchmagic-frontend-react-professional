@@ -1,11 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import './DataTable.css';
+import './components.css';
 import PropTypes from 'prop-types';
 import { isEmpty } from '../../../../components/utils.jsx';
 import Loader from '../../../../components/Loader.jsx';
 import SearchBar from '../Components/SearchBar.jsx';
+import { Link } from 'react-router-dom';
 
 const tableCustomStyles = {
   table: {
@@ -32,7 +33,6 @@ const tableCustomStyles = {
 
 const DataTables = ({ columns, data }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchExpanded, setSearchExpanded] = useState(false);
   const [filteredRows, setFilteredRows] = useState([]);
   const [pending, setPending] = useState(true);
   const [rows, setRows] = useState();
@@ -48,9 +48,7 @@ const DataTables = ({ columns, data }) => {
   }, [rows]);
 
   const handleSearch = (query) => {
-    console.log(query);
-    if (!query && !searchExpanded) {
-      setSearchExpanded(false);
+    if (!query) {
       setFilteredRows([]);
     } else {
       const filteredData = rows.filter((row) => {
@@ -87,18 +85,27 @@ const DataTables = ({ columns, data }) => {
             subHeader
             subHeaderComponent={
               !isEmpty(rows) && (
-                <SearchBar
-                  searchExpanded={searchExpanded}
-                  setSearchExpanded={setSearchExpanded}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                  handleSearch={handleSearch}
-                />
+                <div className="custom-subheader">
+                  <div className="flex-column-2">
+                    <SearchBar
+                      searchQuery={searchQuery}
+                      setSearchQuery={setSearchQuery}
+                      handleSearch={handleSearch}
+                    />
+                  </div>
+                  <div className="flex-column-1">
+                    <Link to="/dashboard/mix-recipes/create">
+                      <button type="button" className="btn btn-yellow ">
+                        ADD A RECIPE
+                      </button>
+                    </Link>
+                  </div>
+                </div>
               )
             }
-            subHeaderAlign="right"
+            subHeaderAlign="center"
             customStyles={tableCustomStyles}
-            subHeaderWrap
+            // subHeaderWrap
           />
         }
       </div>

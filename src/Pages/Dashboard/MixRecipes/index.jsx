@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import MixRecipeList from './List/mix-recipies-list';
 import MixRecipesCreate from './Create/Create';
 import MixRecipesShow from './Show/Show';
+import MixRecipesEdit from './Edit/Edit';
 import Sidebar from './Sidebar/Sidebar';
 import './mix-recipes.css';
 
@@ -17,6 +18,7 @@ const MixRecipes = () => {
           <Route path="/" element={<MixRecipeList />} />
           <Route path="/create" element={<MixRecipesCreate />} />
           <Route path="/show/:id" element={<MixRecipesShow />} />
+          <Route path="/edit/:id" element={<MixRecipesEdit />} />
         </Routes>
       </div>
     </div>
