@@ -2,13 +2,15 @@ import React from 'react';
 import './Create.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { ToastContainer, toast } from 'react-toastify';
 import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
+import show from '../../../../assets/Logo/file.png';
+import edit from '../../../../assets/Logo/edit.png';
 
 const Create = () => {
   const {
@@ -357,6 +359,24 @@ const Create = () => {
                           id="amount"
                           placeholder="Amount"
                         />
+                      </div>
+                      <div className="p-3">
+                        <label
+                          htmlFor="amount"
+                          className="form-label fw-bold text-warning"
+                        >
+                          Actions
+                        </label>
+                        <Link to={`/dashboard/batch-template/show/`}>
+                          <button className="btn btn-success">
+                            <img src={show} className="edit-image" alt="" />
+                          </button>
+                        </Link>
+                        <Link to={`/dashboard/batch-template/edit/`}>
+                          <button className="btn btn-warning mx-3">
+                            <img src={edit} className="edit-image" alt="" />
+                          </button>
+                        </Link>
                       </div>
                     </div>
                     <div className="d-flex justify-content-center p-5">
