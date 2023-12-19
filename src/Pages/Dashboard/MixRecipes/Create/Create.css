@@ -14,3 +14,10 @@
   color: #ffffff;
   padding: 8px 0;
 }
+
+.recipe-text {
+  color: #000000;
+  font-weight: 400;
+  size: 16px;
+  line-height: 20px;
+}

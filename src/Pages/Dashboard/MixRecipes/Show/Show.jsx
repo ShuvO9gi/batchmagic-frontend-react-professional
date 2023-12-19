@@ -48,71 +48,65 @@ const Show = () => {
         <Loader />
       ) : (
         <div>
-          <img className="x-sign" src={Cross} alt="" />
+          <img className="close-sign" src={Cross} alt="" />
 
-          <button className="Btn Btn-text">UPDATE INFO</button>
+          <button className="btn-style btn-text">UPDATE INFO</button>
 
-          <div className="container recipe-component">
-            <h1 className="mixrecipe-card-header">Recipe Information</h1>
+          <div className="container recipe-component px-0">
+            <h1 className="recipe-header">Recipe Information</h1>
             <div>
-              <div className="card supplier-form">
-                <div className="card-body">
-                  <table className="table table-striped table-bordered">
-                    <tbody>
-                      <tr>
-                        <th className="text-orange">Mix Recipe Name</th>
-                        <td>{batchTemplate?.name}</td>
-                        <th className="text-orange">Total Weight (g)</th>
-                        <td>
-                          {Number(batchTemplate?.total_weight?.toFixed(2))}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="text-orange">External ID Ref</th>
-                        <td>{batchTemplate?.external_ref}</td>
-                        <th className="text-orange"> Create At</th>
-                        <td>
-                          <DateFormat dateValue={batchTemplate?.created_at} />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div className="container datatable-custom p-4">
+                <table className="table table-striped table-bordered mb-0">
+                  <tbody>
+                    <tr>
+                      <th className="text-orange">Mix Recipe Name</th>
+                      <td>{batchTemplate?.name}</td>
+                      <th className="text-orange">Total Weight (g)</th>
+                      <td>{Number(batchTemplate?.total_weight?.toFixed(2))}</td>
+                    </tr>
+                    <tr>
+                      <th className="text-orange">External ID Ref</th>
+                      <td>{batchTemplate?.external_ref}</td>
+                      <th className="text-orange"> Create At</th>
+                      <td>
+                        <DateFormat dateValue={batchTemplate?.created_at} />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <h1 className="mixrecipe-card-header2">Product Information</h1>
+            <h1 className="product-header">Product Information</h1>
             {batchTemplate?.batch_products && (
               <div className="my-3">
-                <div className="card p-3">
-                  <div className="card-body">
-                    <table className="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col" className="text-orange">
-                            Product Name
-                          </th>
-                          <th scope="col" className="text-orange">
-                            Weight(g)
-                          </th>
-                          <th scope="col" className="text-orange">
-                            Quantity
-                          </th>
-                        </tr>
-                      </thead>
+                <div className="container datatable-custom p-4">
+                  <table className="table table-striped table-bordered mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" className="text-orange">
+                          Product Name
+                        </th>
+                        <th scope="col" className="text-orange">
+                          Weight(g)
+                        </th>
+                        <th scope="col" className="text-orange">
+                          Quantity
+                        </th>
+                      </tr>
+                    </thead>
 
-                      <tbody>
-                        {batchTemplate?.batch_products?.map((product) => {
-                          return (
-                            <tr key={product?.id}>
-                              <td> {product?.product?.name}</td>
-                              <td>{Number(product?.weight?.toFixed(2))}</td>
-                              <td>{product?.amount}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                    <tbody>
+                      {batchTemplate?.batch_products?.map((product) => {
+                        return (
+                          <tr key={product?.id}>
+                            <td> {product?.product?.name}</td>
+                            <td>{Number(product?.weight?.toFixed(2))}</td>
+                            <td>{product?.amount}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             )}

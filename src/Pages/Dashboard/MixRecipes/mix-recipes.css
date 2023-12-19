@@ -1,7 +1,6 @@
 .recipe-content {
   display: flex;
   height: 100%;
-  position: 'relative';
 }
 
 .recipe-sidebar {
@@ -9,6 +8,7 @@
 }
 
 .recipe-component {
+  position: relative;
   flex: 4;
   /* overflow: 'auto';
   padding: '20px'; */

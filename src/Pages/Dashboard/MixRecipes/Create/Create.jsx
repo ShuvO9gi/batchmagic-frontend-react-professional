@@ -206,7 +206,7 @@ const Create = () => {
           aria-label="Close" */
         ></button>
         <form onSubmit={handleSubmit(handleAddBatchTemplete)}>
-          <div className="row supplier-form p-5">
+          <div className="datatable-custom row supplier-form p-5">
             <div className="col-md-4">
               <div className="row">
                 <div className="col-md-9 ">
@@ -232,7 +232,7 @@ const Create = () => {
                   {err && <p className="text-danger">{err?.name[0]}</p>}
                 </div>
 
-                <div className="col-md-9 py-3">
+                <div className="col-md-9 py-5">
                   <label
                     htmlFor="total-weight"
                     className="form-label fw-bold text-warning"
@@ -293,7 +293,14 @@ const Create = () => {
                 aria-hidden="true"
               >
                 <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content" style={{ width: '665px' }}>
+                  <div
+                    className="modal-content"
+                    style={{
+                      width: '666px',
+                      height: '567px',
+                      borderRadius: '20px',
+                    }}
+                  >
                     <div className="modal-header">
                       <h1 className="modal-title fs-5" id="staticBackdropLabel">
                         Add a New Product
@@ -307,9 +314,11 @@ const Create = () => {
                     </div>
                     <div
                       className="modal-body"
-                      style={{ width: '665px', height: '367px' }}
+                      style={{
+                        width: '666px',
+                      }}
                     >
-                      <div className="p-3">
+                      <div className="px-5">
                         <label
                           htmlFor="product"
                           className="form-label fw-bold text-warning"
@@ -322,7 +331,7 @@ const Create = () => {
                           dropDownValue={product}
                         />
                       </div>
-                      <div className="p-3">
+                      <div className="px-5">
                         <label
                           htmlFor="weight"
                           className="form-label fw-bold text-warning"
@@ -341,7 +350,7 @@ const Create = () => {
                           placeholder="Weight"
                         />
                       </div>
-                      <div className="p-3">
+                      <div className="px-5">
                         <label
                           htmlFor="amount"
                           className="form-label fw-bold text-warning"
@@ -360,14 +369,14 @@ const Create = () => {
                           placeholder="Amount"
                         />
                       </div>
-                      <div className="p-3">
+                      <div className="px-5">
                         <label
-                          htmlFor="amount"
+                          htmlFor="actions"
                           className="form-label fw-bold text-warning"
                         >
                           Actions
                         </label>
-                        <Link to={`/dashboard/batch-template/show/`}>
+                        {/* <Link to={`/dashboard/batch-template/show/`}>
                           <button className="btn btn-success">
                             <img src={show} className="edit-image" alt="" />
                           </button>
@@ -376,7 +385,7 @@ const Create = () => {
                           <button className="btn btn-warning mx-3">
                             <img src={edit} className="edit-image" alt="" />
                           </button>
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                     <div className="d-flex justify-content-center p-5">
@@ -396,16 +405,18 @@ const Create = () => {
               <table className="table" style={{ marginTop: '100px' }}>
                 <thead>
                   <tr>
-                    <th scope="col" className="text-warning">
+                    <th scope="col" className="recipe-text">
                       Product name
                     </th>
-                    <th scope="col" className="text-warning">
+                    <th scope="col" className="recipe-text">
                       Weight (g)
                     </th>
-                    <th scope="col" className="text-warning">
+                    <th scope="col" className="recipe-text">
                       Amount
                     </th>
-                    <th scope="col" className="text-warning"></th>
+                    <th scope="col" className="recipe-text">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
