@@ -78,7 +78,17 @@ const Edit = () => {
         );
         if (isMounted) {
           setBatchTemplate(response.data.data);
-          setBatchProduct(response.data.data.batch_products);
+          setBatchProduct(
+            response.data.data.batch_products.map((item) => {
+              return {
+                product_id: item.product_id,
+                product_name: item.product.name,
+                weight: item.weight,
+                amount: item.amount,
+              };
+            }),
+          );
+          setTotal_weight(response.data.data.total_weight);
         }
       } catch (error) {
         if (error instanceof DOMException && error.name == 'AbortError') {
@@ -107,9 +117,13 @@ const Edit = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosPrivate.put('/batch-template', makeData, {
-        signal: controller.signal,
-      });
+      const res = await axiosPrivate.put(
+        `/batch-template/${params.id}`,
+        makeData,
+        {
+          signal: controller.signal,
+        },
+      );
 
       if (res.status === 200) {
         setLoading(false);
@@ -278,7 +292,6 @@ const Edit = () => {
                     className="form-control"
                     value={Number(total_weight.toFixed(2))}
                     {...register('total_weight')}
-                    disabled
                     id="total-weight"
                     placeholder="Total weight "
                     defaultValue={batchTemplate?.total_weight}
@@ -429,8 +442,8 @@ const Edit = () => {
                 <tbody>
                   {batchProduct?.map((item) => {
                     return (
-                      <tr key={item?.id}>
-                        <td scope="row">{item?.product.name}</td>
+                      <tr key={item?.product_id}>
+                        <td scope="row">{item?.product_name}</td>
                         <td>{item?.weight}</td>
                         <td>{item?.amount}</td>
                         <td>
@@ -464,7 +477,7 @@ const Edit = () => {
                 }
                 className="btn btn-orange float-end"
               >
-                Create
+                Update
               </button>
             </div>
           </div>
