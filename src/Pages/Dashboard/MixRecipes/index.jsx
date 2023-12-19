@@ -12,7 +12,7 @@ const MixRecipes = () => {
       <div className="recipe-sidebar">
         <Sidebar />
       </div>
-      <div className="recipe-component" style={{ position: 'relative' }}>
+      <div className="recipe-component">
         <Routes>
           <Route path="/" element={<MixRecipeList />} />
           <Route path="/create" element={<MixRecipesCreate />} />
