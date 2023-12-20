@@ -50,7 +50,9 @@ const Show = () => {
         <div>
           <img className="close-sign" src={close} alt="" />
 
-          <button className="btn-style-update">Update Info</button>
+          <button type="button" className="btn-style-update">
+            Update Info
+          </button>
 
           <div className="container recipe-component px-0">
             <h1 className="recipe-header">Recipe Information</h1>

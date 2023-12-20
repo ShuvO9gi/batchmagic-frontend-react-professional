@@ -61,25 +61,26 @@
 }
 
 /* redeclaring css over bootstrap */
-
-.mixrecipe-create > .row > * {
+/* redeclaring padding */
+.mixrecipe-create .row > * {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
 /* redeclaring box border */
-.mixrecipe-create > .form-control {
-  border-radius: 0 !important;
-}
-
-.mixrecipe-create > input,
+.mixrecipe-create input,
 select,
 option {
   border-radius: 0 !important;
 }
 
+/* redeclaring product box border */
+.mixrecipe-create .select__control {
+  border-radius: 0 !important;
+}
+
 /* redeclaring modal box */
-.mixrecipe-create > .modal-content {
+.mixrecipe-create .modal-content {
   width: 666px !important;
   border-radius: 20px !important;
 }
