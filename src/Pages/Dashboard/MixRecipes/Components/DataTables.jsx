@@ -24,6 +24,7 @@ const tableCustomStyles = {
   },
   cells: {
     style: {
+      fontSize: '16px',
       wordBreak: 'break-word',
       justifyContent: 'left',
     },

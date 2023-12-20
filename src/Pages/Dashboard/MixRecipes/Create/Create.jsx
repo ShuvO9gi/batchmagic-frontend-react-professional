@@ -2,7 +2,7 @@ import React from 'react';
 import './Create.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -10,7 +10,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
 import close from '../../../../assets/Logo/actions/cross.svg';
-import edit from '../../../../assets/Logo/actions/edit.svg';
 import remove from '../../../../assets/Logo/actions/delete.svg';
 
 const Create = () => {
@@ -82,7 +81,7 @@ const Create = () => {
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
-        navigate('/dashboard/batch-template');
+        navigate('/dashboard/mix-recipes');
       }
     } catch (err) {
       setLoading(false);
@@ -196,7 +195,9 @@ const Create = () => {
         <h1 className="text-purple text-center fw-bold my-5 create-recipe-header">
           Create New Recipe
         </h1>
-        <img className="close-sign" src={close} alt="" />
+        <Link to="/dashboard/mix-recipes">
+          <img className="close-sign" src={close} alt="" />
+        </Link>
         <form onSubmit={handleSubmit(handleAddBatchTemplete)}>
           <div className="mixrecipe-create">
             <div className="datatable-custom row supplier-form p-5">
@@ -237,7 +238,7 @@ const Create = () => {
                       className="form-control"
                       value={Number(total_weight.toFixed(2))}
                       {...register('total_weight')}
-                      disabled
+                      readOnly
                       id="total-weight"
                       placeholder="Total weight "
                     />
@@ -375,16 +376,16 @@ const Create = () => {
                   <thead>
                     <tr>
                       <th scope="col" className="text-recipe">
-                        Product name
+                        <b>Product name</b>
                       </th>
                       <th scope="col" className="text-recipe">
-                        Weight (g)
+                        <b>Weight (g)</b>
                       </th>
                       <th scope="col" className="text-recipe">
-                        Amount
+                        <b>Amount</b>
                       </th>
                       <th scope="col" className="text-recipe">
-                        Actions
+                        <b>Actions</b>
                       </th>
                     </tr>
                   </thead>
@@ -397,13 +398,6 @@ const Create = () => {
                           <td>{item?.amount}</td>
                           <td>
                             <div className="action-container">
-                              <Link to={`edit/${item.id}`}>
-                                <img
-                                  src={edit}
-                                  className="edit-recipe"
-                                  alt=""
-                                />
-                              </Link>
                               <a
                                 onClick={() =>
                                   handleProductDelete(
@@ -412,6 +406,7 @@ const Create = () => {
                                     item?.product_id,
                                   )
                                 }
+                                cursor="cursor"
                               >
                                 <img
                                   src={remove}

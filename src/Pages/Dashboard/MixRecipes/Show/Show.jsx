@@ -1,7 +1,7 @@
 import React from 'react';
 import './Show.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import DateFormat from '../../../../components/DateFormat';
 import { isEmpty } from '../../../../components/utils';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -48,8 +48,9 @@ const Show = () => {
         <Loader />
       ) : (
         <div>
-          <img className="close-sign" src={close} alt="" />
-
+          <Link to="/dashboard/mix-recipes">
+            <img className="close-sign" src={close} alt="" />
+          </Link>
           <button type="button" className="btn-style-update">
             Update Info
           </button>

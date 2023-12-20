@@ -84,3 +84,11 @@ option {
   width: 666px !important;
   border-radius: 20px !important;
 }
+
+.action-container {
+  cursor: pointer !important;
+}
+
+input[readonly] {
+  background-color: #cecdcd !important; /* Set the desired background color for readonly input */
+}

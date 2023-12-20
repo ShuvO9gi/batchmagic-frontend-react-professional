@@ -9,7 +9,7 @@ const Sidebar = () => {
   const currentPath = location.pathname;
 
   const isActive = (menuItem) => {
-    return menuItem.link === currentPath;
+    return currentPath.includes(menuItem.link);
   };
 
   return (
