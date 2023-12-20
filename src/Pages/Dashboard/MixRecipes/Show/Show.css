@@ -5,33 +5,31 @@
   padding: 2px;
   margin: 0;
   position: absolute;
-  /* top: '131px', */
   top: 10px;
   right: 40px;
   color: #302980;
+  cursor: pointer;
 }
 
 /* update info button */
-.btn-style {
+.btn-style-update {
   background-color: #ffad05;
+  text-transform: uppercase;
   width: 236px;
   height: 40px;
   margin: 0;
   position: absolute;
-  /* top: '197px', */
   top: 76px;
   right: 64px;
   border-style: none;
   border-radius: 4px;
-}
-
-.btn-text {
   font-weight: 700;
   font-size: 18px;
   text-align: center;
   line-height: 24px;
   color: #ffffff;
   padding: 8px 0;
+  cursor: pointer;
 }
 
 /* header */
@@ -51,29 +49,11 @@
   line-height: 32px;
 }
 
-th {
+/* defining recipe table width */
+.table-recipe > th {
   width: 250px;
 }
 
-/* optional */
-.table-head-text {
-  color: #ff6e05;
-  font-weight: 600;
-  size: 20px;
-  line-height: 24px;
+.table-recipe > td {
+  min-width: 300px;
 }
-.table-cell-text {
-  color: #ff6e05;
-  font-weight: 400;
-  size: 16px;
-  line-height: 20px;
-}
-
-/* .supplier-form {
-  width: 100%;
-  margin: 0 auto !important;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.418);
-  border-radius: 5px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-} */

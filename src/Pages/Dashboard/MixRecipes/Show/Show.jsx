@@ -7,7 +7,7 @@ import { isEmpty } from '../../../../components/utils';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../components/Loader';
 import ErrorModal from '../../../../components/ErrorModal';
-import Cross from '../../../../assets/Logo/cross.svg';
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 const Show = () => {
   const [batchTemplate, setBatchTemplate] = useState({});
@@ -48,9 +48,9 @@ const Show = () => {
         <Loader />
       ) : (
         <div>
-          <img className="close-sign" src={Cross} alt="" />
+          <img className="close-sign" src={close} alt="" />
 
-          <button className="btn-style btn-text">UPDATE INFO</button>
+          <button className="btn-style-update">Update Info</button>
 
           <div className="container recipe-component px-0">
             <h1 className="recipe-header">Recipe Information</h1>
@@ -58,7 +58,7 @@ const Show = () => {
               <div className="container datatable-custom p-4">
                 <table className="table table-striped table-bordered mb-0">
                   <tbody>
-                    <tr>
+                    <tr className="table-recipe">
                       <th className="text-orange">Mix Recipe Name</th>
                       <td>{batchTemplate?.name}</td>
                       <th className="text-orange">Total Weight (g)</th>
