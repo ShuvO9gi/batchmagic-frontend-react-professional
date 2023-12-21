@@ -1,0 +1,87 @@
+/* Sidebar container */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: #eaeaf2;
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  top: 50px;
+  position: relative;
+}
+
+/* Sidebar links */
+.sidebar li {
+  font-size: 20px;
+  display: block;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+/* sidebar children gap 8px */
+.sidebar li a {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  color: #302980;
+  transition: 0.3s;
+  font-size: 16px;
+  white-space: nowrap;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Add margin between icon and text */
+.sidebar-icon {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+}
+
+/* Active/current link */
+.sidebar li.active a,
+.sidebar li.last-item a {
+  background-color: #302980;
+  color: #ffffff;
+}
+
+.sidebar li.active {
+  background-color: #302980;
+  color: #ffffff;
+}
+
+/* Hover effect for non-selected items */
+.sidebar li:not(.active):hover {
+  background-color: white;
+}
+
+.sidebar li:not(.active):hover a {
+  color: #302980; /* Adjust text color on hover */
+}
+
+.px-60 {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.py-20 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Responsive sidebar */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar li {
+    font-size: 18px;
+  }
+}

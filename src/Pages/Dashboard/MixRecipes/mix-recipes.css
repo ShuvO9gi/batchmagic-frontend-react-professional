@@ -1,0 +1,18 @@
+.recipe-content {
+  display: flex;
+  height: 100%;
+}
+
+.recipe-sidebar {
+  flex: 1;
+}
+
+.recipe-component {
+  position: relative;
+  flex: 4;
+}
+
+/*  recipe comonent children margin right 20px*/
+.recipe-component > * {
+  margin-right: 20px;
+}

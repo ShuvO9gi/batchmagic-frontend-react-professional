@@ -42,6 +42,7 @@ const DropDown = ({
       <Select
         className="basic-single"
         classNamePrefix="select"
+        placeholder="Select Product"
         isClearable={isClearable}
         components={animatedComponents}
         isSearchable={isSearchable}

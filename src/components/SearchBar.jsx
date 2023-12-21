@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './DataTable.css';
+import React from 'react';
 
 function SearchBar({
   searchExpanded,
