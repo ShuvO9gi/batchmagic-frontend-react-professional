@@ -213,6 +213,8 @@ const Edit = () => {
   };
 
   const handleUnique = async (nameProperty, value) => {
+    if (value === batchTemplate[nameProperty])
+      return setError(nameProperty, {});
     const controller = new AbortController();
     const data = {
       property: nameProperty,
