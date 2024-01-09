@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './list.css';
 import { Link } from 'react-router-dom';
 import show from '../../../../assets/Logo/actions/show.svg';
@@ -62,10 +62,13 @@ const MixRecipeList = () => {
       controller.abort();
     };
   }, []);
+
+  const memoizedData = useMemo(() => batch_template.data, [batch_template]);
+
   return (
     <div>
       <h3 className="text-center my-5 text-purple">Mix Recipes</h3>
-      <DataTables columns={columns} data={batch_template.data} />
+      <DataTables columns={columns} data={memoizedData} />
     </div>
   );
 };
