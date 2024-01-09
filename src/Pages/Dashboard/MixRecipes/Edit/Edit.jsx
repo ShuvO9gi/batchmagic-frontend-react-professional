@@ -109,10 +109,10 @@ const Edit = () => {
 
   const handleEditMixRecipe = async (data, e) => {
     const makeData = {
-      name: data.name,
+      name: data.name || batchTemplate.name,
       products: batchProduct,
       total_weight: Number(total_weight.toFixed(2)),
-      external_ref: data.external_ref,
+      external_ref: data.external_ref || batchTemplate.external_ref,
     };
 
     const controller = new AbortController();
@@ -309,7 +309,9 @@ const Edit = () => {
                     <input
                       type="text"
                       {...register('external_ref', {
-                        required: 'External ref ID is Required',
+                        required:
+                          isEmpty(batchProduct) &&
+                          'External ref ID is Required',
                       })}
                       onChange={(e) =>
                         handleUnique('external_ref', e.target.value)
