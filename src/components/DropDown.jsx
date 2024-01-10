@@ -12,6 +12,7 @@ const DropDown = ({
   isClear,
   defaultValue,
   isDisabled,
+  redeclaredPlaceholder,
 }) => {
   const selectRef = useRef(null);
 
@@ -42,7 +43,7 @@ const DropDown = ({
       <Select
         className="basic-single"
         classNamePrefix="select"
-        placeholder="Select Product"
+        placeholder={redeclaredPlaceholder}
         isClearable={isClearable}
         components={animatedComponents}
         isSearchable={isSearchable}
@@ -65,6 +66,7 @@ DropDown.propTypes = {
   isClear: PropTypes.bool,
   defaultValue: PropTypes.object,
   isDisabled: PropTypes.bool,
+  redeclaredPlaceholder: PropTypes.string,
 };
 
 export default DropDown;
