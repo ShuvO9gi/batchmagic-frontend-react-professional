@@ -18,6 +18,7 @@
   width: 236px;
   height: 40px;
   margin: 0;
+  z-index: 99;
   position: absolute;
   top: 76px;
   right: 64px;
