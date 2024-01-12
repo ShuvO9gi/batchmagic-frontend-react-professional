@@ -21,10 +21,12 @@ import NotFound from '../../Pages/NotFound/NotFound';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import BatchTemplateShow from '../../Pages/Dashboard/OutgoingBatch/BatchTemplate/Show/Show';
 import BatchTemplateEdit from '../../Pages/Dashboard/OutgoingBatch/BatchTemplate/Edit/Edit';
-import CustomerIndex from '../../Pages/Dashboard/Customer/Index/Index';
+/*  */
+import Customers from '../../Pages/Dashboard/Customer/Index';
+/* import CustomerIndex from '../../Pages/Dashboard/Customer/Index/Index';
 import CustomerCreate from '../../Pages/Dashboard/Customer/Create/Create';
 import CustomerEdit from '../../Pages/Dashboard/Customer/Edit/Edit';
-import CustomerShow from '../../Pages/Dashboard/Customer/Show/Show';
+import CustomerShow from '../../Pages/Dashboard/Customer/Show/Show'; */
 import ShipmentIndex from '../../Pages/Dashboard/Shipment/Index/Index';
 import ShipmentCreate from '../../Pages/Dashboard/Shipment/Create/Create';
 import ShipmentShow from '../../Pages/Dashboard/Shipment/Show/Show';
@@ -90,10 +92,11 @@ const router = createBrowserRouter([
         path: '/dashboard/batch-template/edit/:id',
         element: <BatchTemplateEdit />,
       },
-      { path: '/dashboard/customers', element: <CustomerIndex /> },
+      { path: '/dashboard/customers/*', element: <Customers /> },
+      /* { path: '/dashboard/customers', element: <CustomerIndex /> },
       { path: '/dashboard/customer/create', element: <CustomerCreate /> },
       { path: '/dashboard/customer/edit/:id', element: <CustomerEdit /> },
-      { path: '/dashboard/customer/show/:id', element: <CustomerShow /> },
+      { path: '/dashboard/customer/show/:id', element: <CustomerShow /> }, */
 
       { path: '/dashboard/shipments', element: <ShipmentIndex /> },
       { path: '/dashboard/shipment/create', element: <ShipmentCreate /> },

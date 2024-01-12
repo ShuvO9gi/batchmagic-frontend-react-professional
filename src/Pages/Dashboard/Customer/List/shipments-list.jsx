@@ -1,0 +1,80 @@
+import React from 'react';
+import './list.css';
+import { Link } from 'react-router-dom';
+import show from '../../../../assets/Logo/actions/show.svg';
+import edit from '../../../../assets/Logo/actions/edit.svg';
+import { useEffect, useState } from 'react';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate.jsx';
+//import ErrorModal from '../../../../components/ErrorModal.jsx';
+import DataTables from '../Components/DataTables.jsx';
+
+const columns = [
+  {
+    name: 'Name',
+    selector: (row) => row.name,
+    sortable: true,
+  },
+  {
+    name: 'Shipments',
+    selector: (row) => row?.shipments?.length,
+    sortable: true,
+  },
+  {
+    name: 'Actions',
+    cell: (row) => (
+      <div>
+        <Link to={`/dashboard/customer/show/${row.id}`}>
+          <button className="btn">
+            <img src={show} className="edit-image" alt="" />
+          </button>
+        </Link>
+        <Link to={`/dashboard/customer/edit/${row.id}`}>
+          <button className="btn mx-1">
+            <img src={edit} className="edit-image" alt="" />
+          </button>
+        </Link>
+        {/* <button className="btn btn-danger"><img src={deletes} className="edit-image" alt="" /></button> */}
+      </div>
+    ),
+  },
+];
+
+const ShipmentList = () => {
+  const [customers, setCustomers] = useState([]);
+  const axiosPrivate = useAxiosPrivate();
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+    const getCutomers = async () => {
+      try {
+        const response = await axiosPrivate.get('/customers', {
+          signal: controller.signal,
+        });
+        if (isMounted) {
+          setCustomers(response.data);
+        }
+      } catch (error) {
+        if (error instanceof DOMException && error.name == 'AbortError') {
+          return error;
+        } else {
+          return 'Download error: ' + error.message;
+        }
+      }
+    };
+    getCutomers();
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
+  return (
+    <div>
+      <h3 className="text-center my-64 list-header">Customer</h3>
+      <DataTables columns={columns} data={customers.data} />
+    </div>
+  );
+};
+
+export default ShipmentList;

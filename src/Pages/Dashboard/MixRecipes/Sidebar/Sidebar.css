@@ -1,7 +1,7 @@
 /* Sidebar container */
 .sidebar {
   width: 280px;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #eaeaf2;
   position: relative;
   top: 0;
