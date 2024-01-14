@@ -7,7 +7,7 @@ import SupplierShow from './Show/Show';
 import SupplierEdit from './Edit/Edit';
 import Sidebar from '../MixRecipes/Sidebar/Sidebar';
 
-const Customers = () => {
+const Supplier = () => {
   return (
     <div className="page-content">
       <div className="page-sidebar">
@@ -25,4 +25,4 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export default Supplier;

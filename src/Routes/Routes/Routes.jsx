@@ -27,9 +27,9 @@ import Customers from '../../Pages/Dashboard/Customer/Index';
 import CustomerCreate from '../../Pages/Dashboard/Customer/Create/Create';
 import CustomerEdit from '../../Pages/Dashboard/Customer/Edit/Edit';
 import CustomerShow from '../../Pages/Dashboard/Customer/Show/Show'; */
-import ShipmentIndex from '../../Pages/Dashboard/Shipment/Index/Index';
-import ShipmentCreate from '../../Pages/Dashboard/Shipment/Create/Create';
-import ShipmentShow from '../../Pages/Dashboard/Shipment/Show/Show';
+import Shipments from '../../Pages/Dashboard/Shipment/Index';
+/* import ShipmentCreate from '../../Pages/Dashboard/Shipment/Create/Create';
+import ShipmentShow from '../../Pages/Dashboard/Shipment/Show/Show'; */
 import StockIndex from '../../Pages/Dashboard/Product/Stock/Index/Index';
 import StockCreate from '../../Pages/Dashboard/Product/Stock/Create/Create';
 import StockShow from '../../Pages/Dashboard/Product/Stock/Show/Show';
@@ -99,9 +99,10 @@ const router = createBrowserRouter([
       { path: '/dashboard/customer/edit/:id', element: <CustomerEdit /> },
       { path: '/dashboard/customer/show/:id', element: <CustomerShow /> }, */
 
-      { path: '/dashboard/shipments', element: <ShipmentIndex /> },
+      { path: '/dashboard/shipments/*', element: <Shipments /> },
+      /* { path: '/dashboard/shipments', element: <ShipmentIndex /> },
       { path: '/dashboard/shipment/create', element: <ShipmentCreate /> },
-      { path: '/dashboard/shipment/show/:id', element: <ShipmentShow /> },
+      { path: '/dashboard/shipment/show/:id', element: <ShipmentShow /> }, */
 
       { path: '/dashboard/stocks', element: <StockIndex /> },
       { path: '/dashboard/stock/create', element: <StockCreate /> },

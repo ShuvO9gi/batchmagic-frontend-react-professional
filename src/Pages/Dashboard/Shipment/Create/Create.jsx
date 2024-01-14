@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import useAuth from '../../../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import DropDown from '../../../../components/DropDown';
 import ErrorModal from '../../../../components/ErrorModal';
-
-const buttons = [
-  {
-    name: 'Shipments',
-    link: '/dashboard/shipments',
-    class: 'btn-small',
-  },
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 export default function Create() {
   const {
@@ -125,12 +117,14 @@ export default function Create() {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <div className="container my-5">
-        <h3 className="text-purple my-5">Create a Shipment</h3>
+      <div className="my-5">
+        <Link to="/dashboard/shipments">
+          <img className="page-close mt-36" src={close} alt="" />
+        </Link>
+        <h1 className="text-center my-64 create-header">Create a Shipment</h1>
         <form onSubmit={handleSubmit(handleAddShipment)}>
-          <div className="row supplier-form p-5">
-            <div className="col-md-6 p-3">
+          <div className="row p-5 create-data-container create-data-info">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="shipment-name"
                 className="form-label fw-bold text-warning"
@@ -153,7 +147,7 @@ export default function Create() {
               {err && <p className="text-danger">{err?.name[0]}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="shipment-date"
                 className="form-label fw-bold text-warning"
@@ -176,7 +170,7 @@ export default function Create() {
               {err && <p className="text-danger">{err?.shipment_date}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="outgoing-batch"
                 className="form-label fw-bold text-warning"
@@ -189,43 +183,43 @@ export default function Create() {
                 optionLabel="outgoing_batch_code"
               />
             </div>
-            {outgoingBatch_id && (
-              <div className="col-md-6 p-3">
-                <label
-                  htmlFor="quantity"
-                  className="form-label fw-bold text-warning"
-                >
-                  Quantity
-                </label>
-                <input
-                  type="number"
-                  step="1"
-                  min={1}
-                  className="form-control"
-                  {...register('quantity', {
-                    required: 'Quantity is Required',
-                    validate: {
-                      positive: (value) =>
-                        parseFloat(value) > 0 || 'Quantity must be positive',
-                      max: (value) =>
-                        parseFloat(value) <= totalTotalQuantity ||
-                        `Quantity must be less than or equal to ${totalTotalQuantity}`,
-                      integer: (value) =>
-                        Number.isInteger(parseFloat(value)) ||
-                        'Quantity must be an integer',
-                    },
-                  })}
-                  id="quantity"
-                  placeholder="Quantity"
-                />
-                {errors.quantity && (
-                  <p className="text-danger">{errors.quantity.message}</p>
-                )}
-                {err && <p className="text-danger">{err?.quantity[0]}</p>}
-              </div>
-            )}
+            {/* {outgoingBatch_id && ( */}
+            <div className="col-md-6 py-3 px-80">
+              <label
+                htmlFor="quantity"
+                className="form-label fw-bold text-warning"
+              >
+                Quantity
+              </label>
+              <input
+                type="number"
+                step="1"
+                min={1}
+                className="form-control"
+                {...register('quantity', {
+                  required: 'Quantity is Required',
+                  validate: {
+                    positive: (value) =>
+                      parseFloat(value) > 0 || 'Quantity must be positive',
+                    max: (value) =>
+                      parseFloat(value) <= totalTotalQuantity ||
+                      `Quantity must be less than or equal to ${totalTotalQuantity}`,
+                    integer: (value) =>
+                      Number.isInteger(parseFloat(value)) ||
+                      'Quantity must be an integer',
+                  },
+                })}
+                id="quantity"
+                placeholder="Quantity"
+              />
+              {errors.quantity && (
+                <p className="text-danger">{errors.quantity.message}</p>
+              )}
+              {err && <p className="text-danger">{err?.quantity[0]}</p>}
+            </div>
+            {/* )} */}
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="customer"
                 className="form-label fw-bold text-warning"
@@ -237,17 +231,17 @@ export default function Create() {
                 dropDownValue={customers}
               />
             </div>
-            {customer_id && outgoingBatch_id && (
-              <div className="col-md-12 p-3">
-                <button
-                  type="submit"
-                  disabled={errors?.name?.message}
-                  className="btn btn-orange float-end"
-                >
-                  Create
-                </button>
-              </div>
-            )}
+            {/* {customer_id && outgoingBatch_id && ( */}
+            <div className="col-md-12 p-3">
+              <button
+                type="submit"
+                disabled={errors?.name?.message}
+                className="btn btn-orange float-end create-create-btn"
+              >
+                Create
+              </button>
+            </div>
+            {/* )} */}
           </div>
         </form>
       </div>

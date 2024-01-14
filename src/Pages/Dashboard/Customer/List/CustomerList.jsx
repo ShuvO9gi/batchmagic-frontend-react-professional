@@ -39,7 +39,7 @@ const columns = [
   },
 ];
 
-const ShipmentList = () => {
+const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
   const axiosPrivate = useAxiosPrivate();
 
@@ -77,4 +77,4 @@ const ShipmentList = () => {
   );
 };
 
-export default ShipmentList;
+export default CustomerList;
