@@ -25,12 +25,12 @@ const columns = [
     cell: (row) => (
       <div className="action-container">
         <Link to={`/dashboard/supplier/show/${row.id}`}>
-          <button className="btn">
+          <button className="btn btn-action-customized">
             <img src={show} className="show-action" alt="" />
           </button>
         </Link>
         <Link to={`/dashboard/supplier/edit/${row.id}`}>
-          <button className="btn">
+          <button className="btn btn-action-customized">
             <img src={edit} className="edit-action" alt="" />
           </button>
         </Link>

@@ -345,7 +345,7 @@ export default function Edit() {
                     errors?.contact_person_phone?.message ||
                     errors?.contact_person_email?.message
                   }
-                  className="btn btn-orange float-end edit-update-btn"
+                  className="btn float-end edit-update-btn"
                 >
                   Update
                 </button>

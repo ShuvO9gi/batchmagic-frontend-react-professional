@@ -44,7 +44,7 @@ export default function Show() {
       ) : (
         <div className="d-flex flex-column show-container">
           <Link to="/dashboard/customers" className="d-flex flex-column">
-            <img className="align-self-end close-sign" src={close} alt="" />
+            <img className="align-self-end page-close" src={close} alt="" />
           </Link>
 
           <Link to={`/dashboard/customers/edit/${customer.id}`}>
