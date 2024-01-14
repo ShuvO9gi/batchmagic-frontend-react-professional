@@ -71,7 +71,7 @@ const ShipmentList = () => {
 
   return (
     <div>
-      <h3 className="text-center my-64 list-header">Customer</h3>
+      <h1 className="text-center my-64 list-header">Customer</h1>
       <DataTables columns={columns} data={customers.data} />
     </div>
   );

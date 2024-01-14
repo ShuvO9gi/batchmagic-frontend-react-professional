@@ -137,7 +137,7 @@ export default function Edit() {
         <div className="my-5">
           <Link to="/dashboard/customers" className="d-flex flex-column">
             <img
-              className="align-self-end close-sign mt-36"
+              className="align-self-end page-close mt-36"
               src={close}
               alt=""
             />
@@ -146,7 +146,7 @@ export default function Edit() {
             Update Customer Information
           </h1>
           <form onSubmit={handleSubmit(handleUpdateCustomer)}>
-            <div className="row p-5 edit-customer-container edit-customer-info">
+            <div className="row p-5 edit-data-container edit-data-info">
               <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="name"

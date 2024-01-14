@@ -1,18 +1,12 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../components/Loader';
 import { isEmpty } from '../../../../components/utils';
-
-const buttons = [
-  {
-    name: 'Suppliers',
-    link: '/dashboard/supplier',
-  },
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 const Edit = () => {
   const {
@@ -139,15 +133,23 @@ const Edit = () => {
   return (
     <div>
       <div>
-        <DashboardNavigation buttons={buttons} />
         {isEmpty(supplier) ? (
           <Loader />
         ) : (
-          <div className="container my-5">
-            <h3 className="text-purple my-5">Update Supplier</h3>
+          <div className="my-5">
+            <Link to="/dashboard/supplier" className="d-flex flex-column">
+              <img
+                className="align-self-end page-close mt-36"
+                src={close}
+                alt=""
+              />
+            </Link>
+            <h1 className="text-center my-5 edit-header">
+              Update Supplier Information
+            </h1>
             <form onSubmit={handleSubmit(handleUpdateSupplier)}>
-              <div className="row supplier-form p-5">
-                <div className="col-md-6 p-3">
+              <div className="row p-5 edit-data-container edit-data-info">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="name"
                     className="form-label fw-bold text-warning"
@@ -171,7 +173,7 @@ const Edit = () => {
                   {err && <p className="text-danger">{err?.name[0]}</p>}
                 </div>
 
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="contact-person-name"
                     className="form-label fw-bold text-warning"
@@ -186,7 +188,7 @@ const Edit = () => {
                     })}
                     id="contact-person-name"
                     defaultValue={supplier?.contact_person_name}
-                    placeholder="Contact person"
+                    placeholder="Contact Person"
                   />
                   {errors.contact_person_name && (
                     <p className="text-danger">
@@ -197,7 +199,7 @@ const Edit = () => {
                     <p className="text-danger">{err?.contact_person_name}</p>
                   )}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="address"
                     className="form-label fw-bold text-warning"
@@ -212,7 +214,7 @@ const Edit = () => {
                     className="form-control"
                     defaultValue={supplier?.address}
                     id="address"
-                    placeholder="Adress"
+                    placeholder="Address"
                   />
                   {errors.address && (
                     <p className="text-danger">{errors.address.message}</p>
@@ -220,7 +222,7 @@ const Edit = () => {
                   {err && <p className="text-danger">{err?.address}</p>}
                 </div>
 
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="contact-person-email"
                     className="form-label fw-bold text-warning"
@@ -238,7 +240,7 @@ const Edit = () => {
                     }
                     defaultValue={supplier?.contact_person_email}
                     id="contact-person-email"
-                    placeholder="Contact email"
+                    placeholder="Contact Email"
                   />
                   {errors.contact_person_email && (
                     <p className="text-danger">
@@ -249,7 +251,7 @@ const Edit = () => {
                     <p className="text-danger">{err?.contact_person_email}</p>
                   )}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="city"
                     className="form-label fw-bold text-warning"
@@ -271,7 +273,7 @@ const Edit = () => {
                   )}
                   {err && <p className="text-danger">{err?.city}</p>}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="contact-phone"
                     className="form-label fw-bold text-warning"
@@ -303,7 +305,7 @@ const Edit = () => {
                     }
                     id="contact-phone"
                     defaultValue={supplier?.contact_person_phone}
-                    placeholder="Contact phone"
+                    placeholder="Contact Phone"
                   />
                   {errors.contact_person_phone && (
                     <p className="text-danger">
@@ -314,7 +316,7 @@ const Edit = () => {
                     <p className="text-danger">{err?.contact_person_phone}</p>
                   )}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="zip"
                     className="form-label fw-bold text-warning"
@@ -336,7 +338,7 @@ const Edit = () => {
                   )}
                   {err && <p className="text-danger">{err?.zip}</p>}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="legal-entity-number"
                     className="form-label fw-bold text-warning"
@@ -349,7 +351,7 @@ const Edit = () => {
                     disabled
                     id="legal-entity-number"
                     defaultValue={supplier?.legal_identity_number}
-                    placeholder="Legal entity number"
+                    placeholder="Legal Entity Number"
                   />
                   {errors.legal_identity_number && (
                     <p className="text-danger">
@@ -361,7 +363,7 @@ const Edit = () => {
                   )}
                 </div>
 
-                <div className="col-md-12 p-3">
+                <div className="col-md-12 p-3 mt-5">
                   <button
                     type="submit"
                     disabled={
@@ -370,7 +372,7 @@ const Edit = () => {
                       errors?.contact_person_phone?.message ||
                       errors?.contact_person_email?.message
                     }
-                    className="btn btn-orange float-end"
+                    className="btn btn-orange float-end edit-update-btn"
                   >
                     Update
                   </button>

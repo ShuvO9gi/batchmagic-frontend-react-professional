@@ -1,19 +1,19 @@
 import React from 'react';
+import './Index.css';
 import { Route, Routes } from 'react-router-dom';
 import ShipmentList from './List/shipments-list';
 import CustomersCreate from './Create/Create';
 import CustomersShow from './Show/Show';
 import CustomersEdit from './Edit/Edit';
 import Sidebar from '../MixRecipes/Sidebar/Sidebar';
-import '../MixRecipes/mix-recipes.css';
 
 const Customers = () => {
   return (
-    <div className="recipe-content">
-      <div className="recipe-sidebar">
+    <div className="page-content">
+      <div className="page-sidebar">
         <Sidebar />
       </div>
-      <div className="recipe-component">
+      <div className="page-component">
         <Routes>
           <Route path="/" element={<ShipmentList />} />
           <Route path="/create" element={<CustomersCreate />} />

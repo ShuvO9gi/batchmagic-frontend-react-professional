@@ -68,11 +68,11 @@ export default function Create() {
     <div>
       <div className="my-5">
         <Link to="/dashboard/customers">
-          <img className="close-sign mt-36" src={close} alt="" />
+          <img className="page-close mt-36" src={close} alt="" />
         </Link>
-        <h3 className="text-center my-64 create-header">Create New Customer</h3>
+        <h1 className="text-center my-64 create-header">Create New Customer</h1>
         <form onSubmit={handleSubmit(handleAddCustomer)}>
-          <div className="row p-5 create-customer-container create-customer-info">
+          <div className="row p-5 create-data-container create-data-info">
             <div className="col-md-6 py-3 px-80">
               <label htmlFor="name" className="form-label fw-bold text-warning">
                 Name

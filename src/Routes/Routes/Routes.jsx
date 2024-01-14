@@ -12,10 +12,10 @@ import OutgoingBatchCreate from '../../Pages/Dashboard/OutgoingBatch/Create/Crea
 import ProductCreate from '../../Pages/Dashboard/Product/Create/Create';
 import ProductIndex from '../../Pages/Dashboard/Product/Index/Index';
 import ProductShow from '../../Pages/Dashboard/Product/Show/Show';
-import SupplierCreate from '../../Pages/Dashboard/Supplier/Create/Create';
+import Supplier from '../../Pages/Dashboard/Supplier/Index';
+/* import SupplierCreate from '../../Pages/Dashboard/Supplier/Create/Create';
 import SupplierEdit from '../../Pages/Dashboard/Supplier/Edit/Edit';
-import SupplierIndex from '../../Pages/Dashboard/Supplier/Index/Index';
-import SupplierShow from '../../Pages/Dashboard/Supplier/Show/Show';
+import SupplierShow from '../../Pages/Dashboard/Supplier/Show/Show'; */
 import Home from '../../Pages/Home/Home/Home';
 import NotFound from '../../Pages/NotFound/NotFound';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -58,10 +58,11 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: '/dashboard', element: <DashboardHome /> },
-      { path: '/dashboard/supplier', element: <SupplierIndex /> },
+      { path: '/dashboard/supplier/*', element: <Supplier /> },
+      /* { path: '/dashboard/supplier', element: <SupplierIndex /> },
       { path: '/dashboard/supplier/create', element: <SupplierCreate /> },
       { path: '/dashboard/supplier/show/:id', element: <SupplierShow /> },
-      { path: '/dashboard/supplier/edit/:id', element: <SupplierEdit /> },
+      { path: '/dashboard/supplier/edit/:id', element: <SupplierEdit /> }, */
       { path: '/dashboard/product', element: <ProductIndex /> },
       { path: '/dashboard/product/create', element: <ProductCreate /> },
       { path: '/dashboard/product/show/:id', element: <ProductShow /> },

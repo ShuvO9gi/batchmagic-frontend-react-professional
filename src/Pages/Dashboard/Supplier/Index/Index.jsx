@@ -1,11 +1,11 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
-import DataTables from '../../../../components/DataTables';
+import DataTables from '../Components/DataTables';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import edit from '../../../../assets/Logo/edit.png';
-import show from '../../../../assets/Logo/file.png';
+import show from '../../../../assets/Logo/actions/show.svg';
+import edit from '../../../../assets/Logo/actions/edit.svg';
 // import deletes from '../../../../assets/Logo/delete.png';
 import './Index.css';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
 import { Link } from 'react-router-dom';
 import ErrorModal from '../../../../components/ErrorModal';
 
@@ -23,27 +23,20 @@ const columns = [
   {
     name: 'Actions',
     cell: (row) => (
-      <div>
+      <div className="action-container">
         <Link to={`/dashboard/supplier/show/${row.id}`}>
-          <button className="btn btn-success">
-            <img src={show} className="edit-image" alt="" />
+          <button className="btn">
+            <img src={show} className="show-action" alt="" />
           </button>
         </Link>
         <Link to={`/dashboard/supplier/edit/${row.id}`}>
-          <button className="btn btn-warning mx-3">
-            <img src={edit} className="edit-image" alt="" />
+          <button className="btn">
+            <img src={edit} className="edit-action" alt="" />
           </button>
         </Link>
         {/* <button className="btn btn-danger"><img src={deletes} className="edit-image" alt="" /></button> */}
       </div>
     ),
-  },
-];
-
-const buttons = [
-  {
-    name: 'Create new supplier',
-    link: '/dashboard/supplier/create',
   },
 ];
 
@@ -82,15 +75,13 @@ const Index = () => {
   }, []);
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
       {/* {
-                loading &&
+          loading &&
                 <div className='d-flex justify-content-center align-items-center'>
                     <Loader />
                 </div>
-
             } */}
-      <h3 className="text-center my-5 text-purple">Suppliers</h3>
+      <h1 className="text-center my-64 list-header">Suppliers</h1>
       <DataTables columns={columns} data={suppliers.data} />
     </div>
   );
