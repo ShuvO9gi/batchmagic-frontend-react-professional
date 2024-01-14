@@ -1,4 +1,4 @@
-.header {
+/* .header {
   padding-top: 45px;
   font-weight: 600;
   font-size: 24px;
@@ -12,13 +12,9 @@
   height: 28px;
   width: 28px;
 }
+*/
 
-.action-container {
-  display: flex;
-  gap: 12px; /* Adjust the gap value as needed */
-}
-
-/*  */
+/* Style Customized */
 .list-header {
   font-weight: 600;
   font-size: 24px;
@@ -47,4 +43,21 @@
   background-color: #ffad05 !important;
   width: 236px;
   height: 40px;
+}
+
+/* style for actions button */
+.btn {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.show-action,
+.edit-action {
+  height: 28px;
+  width: 28px;
+}
+
+.action-container {
+  display: flex;
+  gap: 26px !important; /* Adjust the gap value as needed */
 }

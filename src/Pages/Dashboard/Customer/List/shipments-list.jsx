@@ -22,15 +22,15 @@ const columns = [
   {
     name: 'Actions',
     cell: (row) => (
-      <div>
-        <Link to={`/dashboard/customer/show/${row.id}`}>
+      <div className="action-container">
+        <Link to={`/dashboard/customers/show/${row.id}`}>
           <button className="btn">
-            <img src={show} className="edit-image" alt="" />
+            <img src={show} className="show-action" alt="" />
           </button>
         </Link>
-        <Link to={`/dashboard/customer/edit/${row.id}`}>
-          <button className="btn mx-1">
-            <img src={edit} className="edit-image" alt="" />
+        <Link to={`/dashboard/customers/edit/${row.id}`}>
+          <button className="btn">
+            <img src={edit} className="edit-action" alt="" />
           </button>
         </Link>
         {/* <button className="btn btn-danger"><img src={deletes} className="edit-image" alt="" /></button> */}

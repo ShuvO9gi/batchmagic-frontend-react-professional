@@ -9,14 +9,14 @@ function SearchBar({ searchQuery, setSearchQuery, handleSearch }) {
       <input
         type="text"
         value={searchQuery}
-        className="form-control input-search"
+        className="form-control input-search input-search-style-added"
         onChange={(e) => {
           setSearchQuery(e.target.value);
           handleSearch(e.target.value);
         }}
         placeholder="Search Customer"
       />
-      <span className="search-icon">
+      <span className="search-icon search-icon-customized">
         <img src={search} height={20} width={20} />
       </span>
     </div>
