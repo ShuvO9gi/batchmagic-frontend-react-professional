@@ -317,6 +317,7 @@ const Create = () => {
                             isClear={isClear}
                             handleDropDown={handleDropDown}
                             dropDownValue={product}
+                            placeholderUpdated="Select Product"
                           />
                         </div>
                         <div className="px-5">
