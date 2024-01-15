@@ -18,6 +18,7 @@ const Create = () => {
   const { setLoading } = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+
   const handleAddSupplier = async (data, e) => {
     const controller = new AbortController();
     e.preventDefault();

@@ -94,7 +94,7 @@ const Show = () => {
                 Product Information
               </h1>
               <div className="d-flex flex-column show-table-body">
-                <table className="table table-striped table-bordered show-table-last">
+                <table className="table table-striped table-bordered show-table-last show-table-last-supplier">
                   <thead>
                     <tr>
                       <th scope="col">Name</th>

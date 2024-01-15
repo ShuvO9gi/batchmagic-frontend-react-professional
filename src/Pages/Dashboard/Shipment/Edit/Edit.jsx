@@ -7,6 +7,8 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../components/Loader';
 import { isEmpty } from '../../../../components/utils';
 import close from '../../../../assets/Logo/actions/cross.svg';
+import DropDown from '../../../../components/DropDown';
+import ErrorModal from '../../../../components/ErrorModal';
 
 const Edit = () => {
   const {
@@ -17,7 +19,12 @@ const Edit = () => {
     setError,
   } = useForm();
   const { err, setErr } = useState({});
-  const [supplier, setSupplier] = useState();
+  const [shipment, setShipment] = useState();
+  const [outgoingBatches, setOutgoingBatches] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [outgoingBatch_id, setOutgoingBatch_id] = useState();
+  const [customer_id, setCustomer_id] = useState();
+  const [totalTotalQuantity, setTotalQuantity] = useState();
   const { setLoading } = useAuth();
   const params = useParams();
   const axiosPrivate = useAxiosPrivate();
@@ -26,22 +33,23 @@ const Edit = () => {
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    const getSupplier = async () => {
+    const getShipment = async () => {
       try {
-        const res = await axiosPrivate.get(`/supplier/${params.id}`, {
+        const res = await axiosPrivate.get(`/shipment/${params.id}`, {
           signal: controller.signal,
         });
+        console.log(res);
         if (isMounted && res.status === 200) {
           setLoading(false);
           controller.abort();
-          setSupplier(res.data.data);
+          setShipment(res.data.data);
         }
       } catch (err) {
         setLoading(false);
         setErr(err.response.data.errors);
       }
     };
-    getSupplier();
+    getShipment();
     return () => {
       isMounted = false;
       controller.abort();
@@ -49,49 +57,86 @@ const Edit = () => {
   }, []);
 
   useEffect(() => {
-    if (supplier) {
-      setValue('name', supplier.name);
-      setValue('address', supplier.address);
-      setValue('zip', supplier.zip);
-      setValue('city', supplier.city);
-      setValue('contact_person_name', supplier.contact_person_name);
-      setValue('contact_person_phone', supplier.contact_person_phone);
-      setValue('contact_person_email', supplier.contact_person_email);
+    if (shipment) {
+      setValue('name', shipment.name);
+      setValue('shipment_date', shipment.shipment_date);
+      setValue('quntity', shipment.quntity);
+      setValue('outgoing_batch_id', shipment.outgoingBatch_id);
+      setValue('customer_id', shipment.customer_id);
     }
-  }, [supplier, setValue]);
+  }, [shipment, setValue]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const getOutgoingBatches = async () => {
+      try {
+        const res = await axiosPrivate.get('/outgoing-batches', {
+          signal: controller.signal,
+        });
+        if (res.status === 200) {
+          setOutgoingBatches(res?.data?.data);
+        }
+      } catch (err) {
+        <ErrorModal />;
+      }
+    };
+
+    const customers = async () => {
+      try {
+        const res = await axiosPrivate.get('/customers', {
+          signal: controller.signal,
+        });
+        if (res.status === 200) {
+          setCustomers(res?.data?.data);
+        }
+      } catch (err) {
+        <ErrorModal />;
+      }
+    };
+    getOutgoingBatches();
+    customers();
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  const handleDropDown = (outgoingBatch) => {
+    setOutgoingBatch_id(outgoingBatch?.id);
+    setTotalQuantity(outgoingBatch?.total_quantity);
+  };
+
+  const handleCustomerDropDown = (customer) => {
+    setCustomer_id(customer?.id);
+  };
 
   const makeData = (data) => {
     return {
-      name: data.name ? data.name : supplier.name,
-      address: data.address ? data.address : supplier.address,
-      zip: data.zip ? data.zip : supplier.zip,
-      city: data.city ? data.city : supplier.city,
-      contact_person_name: data.contact_person_name
-        ? data.contact_person_name
-        : supplier.contact_person_name,
-      contact_person_phone: data.contact_person_phone
-        ? data.contact_person_phone
-        : supplier.contact_person_phone,
-      contact_person_email: data.contact_person_email
-        ? data.contact_person_email
-        : supplier.contact_person_email,
+      name: data.name ? data.name : shipment.name,
+      shipment_date: data.shipment_date
+        ? data.shipment_date
+        : shipment.shipment_date,
+      quntity: data.quntity ? data.quntity : shipment.quntity,
+      outgoingBatch_id: data.outgoing_batch_id
+        ? data.outgoing_batch_id
+        : shipment.outgoing_batch_id,
+      customer_id: data.customer_id ? data.customer_id : shipment.customer_id,
     };
   };
 
-  const handleUpdateSupplier = async (data, e) => {
+  const handleUpdateShipment = async (data, e) => {
     const formData = makeData(data);
     const controller = new AbortController();
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosPrivate.put(`/supplier/${params.id}`, formData, {
+      const res = await axiosPrivate.put(`/shipment/${params.id}`, formData, {
         signal: controller.signal,
       });
-
+      console.log(res);
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
-        navigate('/dashboard/supplier');
+        navigate('/dashboard/shipments');
       }
     } catch (err) {
       setLoading(false);
@@ -100,7 +145,7 @@ const Edit = () => {
   };
 
   const handleUnique = async (nameProperty, value) => {
-    if (supplier?.[nameProperty] !== value) {
+    if (shipment?.[nameProperty] !== value) {
       const controller = new AbortController();
       const data = {
         property: nameProperty,
@@ -110,7 +155,7 @@ const Edit = () => {
       };
 
       try {
-        const res = await axiosPrivate.post('/unique-supplier', data, {
+        const res = await axiosPrivate.post('/unique-shipment-batch', data, {
           signal: controller.signal,
         });
 
@@ -133,28 +178,26 @@ const Edit = () => {
   return (
     <div>
       <div>
-        {isEmpty(supplier) ? (
+        {isEmpty(shipment) ? (
           <Loader />
         ) : (
           <div className="my-5">
-            <Link to="/dashboard/supplier" className="d-flex flex-column">
+            <Link to="/dashboard/shipments" className="d-flex flex-column">
               <img
                 className="align-self-end page-close mt-36"
                 src={close}
                 alt=""
               />
             </Link>
-            <h1 className="text-center my-5 edit-header">
-              Update Supplier Information
-            </h1>
-            <form onSubmit={handleSubmit(handleUpdateSupplier)}>
+            <h1 className="text-center my-5 edit-header">Update Information</h1>
+            <form onSubmit={handleSubmit(handleUpdateShipment)}>
               <div className="row p-5 edit-data-container edit-data-info">
                 <div className="col-md-6 py-3 px-80">
                   <label
-                    htmlFor="name"
+                    htmlFor="shipment-name"
                     className="form-label fw-bold text-warning"
                   >
-                    Name
+                    Shipment Name
                   </label>
                   <input
                     type="text"
@@ -163,8 +206,8 @@ const Edit = () => {
                       required: 'Name is Required',
                     })}
                     onBlur={(e) => handleUnique('name', e.target.value)}
-                    id="name"
-                    defaultValue={supplier?.name}
+                    id="shipment-name"
+                    defaultValue={shipment?.name}
                     placeholder="Name"
                   />
                   {errors.name && (
@@ -175,208 +218,103 @@ const Edit = () => {
 
                 <div className="col-md-6 py-3 px-80">
                   <label
-                    htmlFor="contact-person-name"
+                    htmlFor="shipment-date"
                     className="form-label fw-bold text-warning"
                   >
-                    Contact Person Name
+                    Shipment Date
                   </label>
                   <input
-                    type="text"
-                    className="form-control"
-                    {...register('contact_person_name', {
-                      required: 'Contact Person Name is Required',
+                    type="date"
+                    {...register('shipment_date', {
+                      required: 'Shipment Date is Required',
                     })}
-                    id="contact-person-name"
-                    defaultValue={supplier?.contact_person_name}
-                    placeholder="Contact Person"
+                    defaultValue={new Date().toISOString().substr(0, 10)}
+                    className="form-control"
+                    id="shipment-date"
+                    placeholder="Shipment Date"
                   />
-                  {errors.contact_person_name && (
+                  {errors.shipment_date && (
                     <p className="text-danger">
-                      {errors.contact_person_name.message}
+                      {errors.shipment_date.message}
                     </p>
                   )}
-                  {err && (
-                    <p className="text-danger">{err?.contact_person_name}</p>
-                  )}
-                </div>
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="address"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    {...register('address', {
-                      required: 'Address is Required',
-                    })}
-                    className="form-control"
-                    defaultValue={supplier?.address}
-                    id="address"
-                    placeholder="Address"
-                  />
-                  {errors.address && (
-                    <p className="text-danger">{errors.address.message}</p>
-                  )}
-                  {err && <p className="text-danger">{err?.address}</p>}
+                  {err && <p className="text-danger">{err?.shipment_date}</p>}
                 </div>
 
                 <div className="col-md-6 py-3 px-80">
                   <label
-                    htmlFor="contact-person-email"
+                    htmlFor="outgoing-batch"
                     className="form-label fw-bold text-warning"
                   >
-                    Contact Person Email
+                    Outgoing Batch
                   </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    {...register('contact_person_email', {
-                      required: 'Contact Person Email is Required',
-                    })}
-                    onBlur={(e) =>
-                      handleUnique('contact_person_email', e.target.value)
-                    }
-                    defaultValue={supplier?.contact_person_email}
-                    id="contact-person-email"
-                    placeholder="Contact Email"
+                  <DropDown
+                    handleDropDown={handleDropDown}
+                    dropDownValue={outgoingBatches}
+                    optionLabel="outgoing_batch_code"
                   />
-                  {errors.contact_person_email && (
-                    <p className="text-danger">
-                      {errors.contact_person_email.message}
-                    </p>
-                  )}
-                  {err && (
-                    <p className="text-danger">{err?.contact_person_email}</p>
-                  )}
                 </div>
+                {/* {outgoingBatch_id && ( */}
                 <div className="col-md-6 py-3 px-80">
                   <label
-                    htmlFor="city"
+                    htmlFor="quantity"
                     className="form-label fw-bold text-warning"
                   >
-                    City
+                    Quantity
                   </label>
                   <input
-                    type="text"
+                    type="number"
+                    step="1"
+                    min={1}
                     className="form-control"
-                    {...register('city', {
-                      required: 'City is Required',
-                    })}
-                    defaultValue={supplier?.city}
-                    id="city"
-                    placeholder="City"
-                  />
-                  {errors.city && (
-                    <p className="text-danger">{errors.city.message}</p>
-                  )}
-                  {err && <p className="text-danger">{err?.city}</p>}
-                </div>
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="contact-phone"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Contact Person Phone
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    maxLength={20}
-                    {...register('contact_person_phone', {
-                      required: 'Contact phone number is Required',
-                      minLength: {
-                        value: 8,
-                        message: 'Phone number must have at least 8 characters',
-                      },
-                      pattern: {
-                        value: /^[0-9+]+$/,
-                        message:
-                          'Phone number can only contain numbers and the plus (+) character',
-                      },
-                      maxLength: {
-                        value: 20,
-                        message: 'Phone number must have at most 20 characters',
+                    {...register('quantity', {
+                      required: 'Quantity is Required',
+                      validate: {
+                        positive: (value) =>
+                          parseFloat(value) > 0 || 'Quantity must be positive',
+                        max: (value) =>
+                          parseFloat(value) <= totalTotalQuantity ||
+                          `Quantity must be less than or equal to ${totalTotalQuantity}`,
+                        integer: (value) =>
+                          Number.isInteger(parseFloat(value)) ||
+                          'Quantity must be an integer',
                       },
                     })}
-                    onBlur={(e) =>
-                      handleUnique('contact_person_phone', e.target.value)
-                    }
-                    id="contact-phone"
-                    defaultValue={supplier?.contact_person_phone}
-                    placeholder="Contact Phone"
+                    id="quantity"
+                    defaultValue={shipment?.quantity}
+                    placeholder="Quantity"
                   />
-                  {errors.contact_person_phone && (
-                    <p className="text-danger">
-                      {errors.contact_person_phone.message}
-                    </p>
+                  {errors.quantity && (
+                    <p className="text-danger">{errors.quantity.message}</p>
                   )}
-                  {err && (
-                    <p className="text-danger">{err?.contact_person_phone}</p>
-                  )}
+                  {err && <p className="text-danger">{err?.quantity[0]}</p>}
                 </div>
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="zip"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Zip
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...register('zip', {
-                      required: 'Zip is Required',
-                    })}
-                    defaultValue={supplier?.zip}
-                    id="zip"
-                    placeholder="Zip"
-                  />
-                  {errors.zip && (
-                    <p className="text-danger">{errors.zip.message}</p>
-                  )}
-                  {err && <p className="text-danger">{err?.zip}</p>}
-                </div>
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="legal-entity-number"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Legal Entity Number
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    disabled
-                    id="legal-entity-number"
-                    defaultValue={supplier?.legal_identity_number}
-                    placeholder="Legal Entity Number"
-                  />
-                  {errors.legal_identity_number && (
-                    <p className="text-danger">
-                      {errors.legal_identity_number.message}
-                    </p>
-                  )}
-                  {err && (
-                    <p className="text-danger">{err?.legal_identity_number}</p>
-                  )}
-                </div>
+                {/* )} */}
 
-                <div className="col-md-12 p-3 mt-5">
+                <div className="col-md-6 py-3 px-80">
+                  <label
+                    htmlFor="customer"
+                    className="form-label fw-bold text-warning"
+                  >
+                    Customer
+                  </label>
+                  <DropDown
+                    handleDropDown={handleCustomerDropDown}
+                    dropDownValue={customers}
+                    defaultValue={customer_id}
+                  />
+                </div>
+                {/* {customer_id && outgoingBatch_id && ( */}
+                <div className="col-md-12 p-3">
                   <button
                     type="submit"
-                    disabled={
-                      errors?.name?.message ||
-                      errors?.legal_identity_number?.message ||
-                      errors?.contact_person_phone?.message ||
-                      errors?.contact_person_email?.message
-                    }
+                    disabled={errors?.name?.message}
                     className="btn btn-orange float-end edit-update-btn"
                   >
                     Update
                   </button>
                 </div>
+                {/* )} */}
               </div>
             </form>
           </div>
