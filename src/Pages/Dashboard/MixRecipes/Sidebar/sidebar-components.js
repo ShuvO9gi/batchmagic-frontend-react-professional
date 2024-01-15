@@ -9,6 +9,10 @@ import customers_selected from '../../../../assets/Logo/sidebar/customers_select
 import outgoing_shipments from '../../../../assets/Logo/sidebar/outgoing_shipments.svg';
 import outgoing_shipments_selected from '../../../../assets/Logo/sidebar/outgoing_shipments_selected.svg';
 import mix_recipes from '../../../../assets/Logo/sidebar/mix_recipes.svg';
+import stock from '../../../../assets/Logo/sidebar/stock.svg';
+import stock_selected from '../../../../assets/Logo/sidebar/stock_selected.svg';
+import shopping_bag from '../../../../assets/Logo/sidebar/shopping_bag.svg';
+import shopping_bag_selected from '../../../../assets/Logo/sidebar/shopping_bag_selected.svg';
 import mix_recipes_selected from '../../../../assets/Logo/sidebar/mix_recipes_selected.svg';
 
 export const sidebarMenu = [
@@ -17,6 +21,20 @@ export const sidebarMenu = [
     icon: incoming_products,
     iconSelected: incoming_products_selected,
     link: '/dashboard/product',
+    submenu: [
+      {
+        title: 'Products',
+        link: '/dashboard/product',
+        icon: shopping_bag,
+        iconSelected: shopping_bag_selected,
+      },
+      {
+        title: 'Product Stocks',
+        link: '/dashboard/stock',
+        icon: stock,
+        iconSelected: stock_selected,
+      },
+    ],
   },
   {
     title: 'Batches',
