@@ -1,0 +1,17 @@
+.show-table-first > tbody > tr > th {
+  font-weight: 600;
+  font-size: 20px;
+  color: #ff6e05;
+  width: 20%;
+}
+
+.show-table-first > tbody > tr > td {
+  width: 30%;
+}
+
+.show-table-last > thead > tr > th {
+  font-weight: 600;
+  font-size: 20px;
+  color: #ff6e05;
+  width: 33%;
+}

@@ -1,93 +1,21 @@
-/*  */
-.create-recipe-header {
-  font-size: 24px;
-  line-height: 32px;
-}
-/* close sign */
-.close-sign {
-  width: 28px;
-  height: 28px;
-  padding: 2px;
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  right: 40px;
-  color: #302980;
-  cursor: pointer;
-}
-
-/* add info button */
-.btn-style-add {
-  background-color: #ffad05;
-  color: #fff;
-  border: none;
-  text-transform: uppercase;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 4px;
-  width: 236px;
-  height: 40px;
-  margin: 10px;
-  padding: 8px 10px;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
-  cursor: pointer;
-}
-
-/* create & submit button */
-.btn-style-create {
-  background-color: #ff6e05;
-  color: #fff;
-  border: none;
-  text-transform: uppercase;
-  border-radius: 4px;
-  width: 322px;
-  height: 40px;
-  margin: 10px;
-  padding: 5px 10px;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
-  cursor: pointer;
-}
-
-/* product head text */
-.text-recipe {
-  color: #000000;
-  font-weight: 400;
-  size: 16px;
-  line-height: 20px;
-}
-
-/* redeclaring css over bootstrap */
-/* redeclaring padding */
-.mixrecipe-create .row > * {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+/* header top & bottom margin */
+.my-46 {
+  margin-top: 46px;
+  margin-bottom: 46px;
 }
 
 /* redeclaring box border */
 .mixrecipe-create input,
-select,
-option {
+.select__control {
   border-radius: 0 !important;
 }
 
-/* redeclaring product box border */
-.mixrecipe-create .select__control {
-  border-radius: 0 !important;
-}
-
-input[readonly] {
-  background-color: #cecdcd !important; /* Set the desired background color for readonly input */
-}
 /* redeclaring modal box */
 .mixrecipe-create .modal-content {
   width: 666px !important;
   border-radius: 20px !important;
 }
 
-.action-container {
-  cursor: pointer !important;
+input[readonly] {
+  background-color: #cecdcd !important; /* Set the desired background color for readonly input */
 }

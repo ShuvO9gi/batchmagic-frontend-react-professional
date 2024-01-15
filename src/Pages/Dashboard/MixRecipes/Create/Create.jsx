@@ -1,5 +1,5 @@
 import React from 'react';
-import './Create.css';
+import './CreateMixRecipe.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
@@ -191,18 +191,16 @@ const Create = () => {
 
   return (
     <div>
-      <div className="container px-0 my-5">
-        <h1 className="text-purple text-center fw-bold my-5 create-recipe-header">
-          Create New Recipe
-        </h1>
+      <div className="my-5">
         <Link to="/dashboard/mix-recipes">
-          <img className="close-sign" src={close} alt="" />
+          <img className="page-close" src={close} alt="" />
         </Link>
+        <h1 className="text-center my-46 create-header">Create New Recipes</h1>
         <form onSubmit={handleSubmit(handleAddBatchTemplete)}>
           <div className="mixrecipe-create">
-            <div className="datatable-custom row supplier-form p-5">
+            <div className="row p-5 create-data-container">
               <div className="col-md-4">
-                <div className="row">
+                <div className="row create-data-info">
                   <div className="col-md-9">
                     <label
                       htmlFor="name"
@@ -274,7 +272,7 @@ const Create = () => {
 
               <div className="col-md-8 pb-5">
                 <a
-                  className="btn-style-add float-end"
+                  className="btn btn-orange text-white float-end list-add-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 >
@@ -317,6 +315,7 @@ const Create = () => {
                             isClear={isClear}
                             handleDropDown={handleDropDown}
                             dropDownValue={product}
+                            placeholderUpdated="Select Product"
                           />
                         </div>
                         <div className="px-5">
@@ -363,7 +362,7 @@ const Create = () => {
                           type="button"
                           data-bs-dismiss="modal"
                           onClick={handleAddBatchProdct}
-                          className="btn-style-create"
+                          className="btn btn-orange float-center create-create-btn"
                           disabled={productSubmitDisabled}
                         >
                           Submit
@@ -430,7 +429,7 @@ const Create = () => {
                     errors?.name?.message ||
                     isEmpty(batchProduct)
                   }
-                  className="btn-style-create float-end"
+                  className="btn btn-orange float-end create-create-btn"
                 >
                   Create
                 </button>

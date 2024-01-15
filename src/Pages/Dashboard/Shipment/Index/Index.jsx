@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import show from '../../../../assets/Logo/file.png';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
-import DataTables from '../../../../components/DataTables';
+import DataTables from '../Components/DataTables';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import ErrorModal from '../../../../components/ErrorModal';
-
-const buttons = [
-  {
-    name: 'Create new shipments',
-    link: '/dashboard/shipment/create',
-    class: 'btn-small',
-  },
-];
+import show from '../../../../assets/Logo/actions/show.svg';
+import edit from '../../../../assets/Logo/actions/edit.svg';
 
 const columns = [
   {
@@ -38,13 +30,17 @@ const columns = [
   {
     name: 'Actions',
     cell: (row) => (
-      <div>
-        <Link to={`/dashboard/shipment/show/${row.id}`}>
-          <button className="btn btn-success">
-            <img src={show} className="edit-image" alt="" />
+      <div className="action-container">
+        <Link to={`/dashboard/shipments/show/${row.id}`}>
+          <button className="btn btn-action-customized">
+            <img src={show} className="show-action" alt="" />
           </button>
         </Link>
-        {/* <Link to={`/dashboard/customer/edit/${row.id}`}><button className="btn btn-warning mx-3"><img src={edit} className="edit-image" alt="" /></button></Link> */}
+        <Link to={`/dashboard/shipments/edit/${row.id}`}>
+          <button className="btn btn-action-customized">
+            <img src={edit} className="edit-action" alt="" />
+          </button>
+        </Link>
         {/* <button className="btn btn-danger"><img src={deletes} className="edit-image" alt="" /></button> */}
       </div>
     ),
@@ -82,8 +78,7 @@ export default function Index() {
   }, []);
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <h3 className="text-center my-5 text-purple">Shipments</h3>
+      <h3 className="text-center my-64 list-header">Shipments</h3>
       <DataTables columns={columns} data={shipments.data} />
     </div>
   );
