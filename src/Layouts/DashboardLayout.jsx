@@ -11,15 +11,20 @@ const DashboardLayout = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="recipe-sidebar">
-        <Sidebar />
-      </div>
-      {loading && (
-        <div className="d-flex justify-content-center align-items-center">
-          <Loader />
+      <div className="recipe-content">
+        <div className="recipe-sidebar">
+          <Sidebar />
         </div>
-      )}
-      <Outlet />
+
+        <div className="recipe-component">
+          {loading && (
+            <div className="d-flex justify-content-center align-items-center">
+              <Loader />
+            </div>
+          )}
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };
