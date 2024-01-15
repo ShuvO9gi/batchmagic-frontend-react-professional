@@ -1,4 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
+import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/Loader';
 import Navbar from '../../Pages/Shared/Navbar';
