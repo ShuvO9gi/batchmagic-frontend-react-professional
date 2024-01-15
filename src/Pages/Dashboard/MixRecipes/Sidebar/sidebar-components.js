@@ -24,13 +24,13 @@ export const sidebarMenu = [
     submenu: [
       {
         title: 'Products',
-        link: '/dashboard/product/all-products',
+        link: '/dashboard/product',
         icon: shopping_bag,
         iconSelected: shopping_bag_selected,
       },
       {
         title: 'Product Stocks',
-        link: '/dashboard/product/stock',
+        link: '/dashboard/stock',
         icon: stock,
         iconSelected: stock_selected,
       },

@@ -5,6 +5,8 @@ import DataTables from '../../../../components/DataTables';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import show from '../../../../assets/Logo/file.png';
 import ErrorModal from '../../../../components/ErrorModal';
+import React from 'react';
+
 const buttons = [
   {
     name: 'CREATE NEW PRODUCT',
@@ -62,7 +64,7 @@ const columns = [
     ),
   },
 ];
-const Index = () => {
+const ProductList = () => {
   const [products, setProducts] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
@@ -99,4 +101,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default ProductList;
