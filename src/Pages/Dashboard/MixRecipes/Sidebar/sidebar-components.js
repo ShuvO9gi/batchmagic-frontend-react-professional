@@ -10,7 +10,9 @@ import outgoing_shipments from '../../../../assets/Logo/sidebar/outgoing_shipmen
 import outgoing_shipments_selected from '../../../../assets/Logo/sidebar/outgoing_shipments_selected.svg';
 import mix_recipes from '../../../../assets/Logo/sidebar/mix_recipes.svg';
 import stock from '../../../../assets/Logo/sidebar/stock.svg';
+import stock_selected from '../../../../assets/Logo/sidebar/stock_selected.svg';
 import shopping_bag from '../../../../assets/Logo/sidebar/shopping_bag.svg';
+import shopping_bag_selected from '../../../../assets/Logo/sidebar/shopping_bag_selected.svg';
 import mix_recipes_selected from '../../../../assets/Logo/sidebar/mix_recipes_selected.svg';
 
 export const sidebarMenu = [
@@ -24,13 +26,13 @@ export const sidebarMenu = [
         title: 'Products',
         link: '/dashboard/product/all-products',
         icon: shopping_bag,
-        iconSelected: incoming_products_selected,
+        iconSelected: shopping_bag_selected,
       },
       {
         title: 'Product Stocks',
         link: '/dashboard/product/stock',
         icon: stock,
-        iconSelected: incoming_products_selected,
+        iconSelected: stock_selected,
       },
     ],
   },
