@@ -191,9 +191,13 @@ const Create = () => {
 
   return (
     <div>
-      <div className="my-5">
-        <Link to="/dashboard/mix-recipes">
-          <img className="page-close" src={close} alt="" />
+      <div>
+        <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t10-r40 "
+            src={close}
+            alt=""
+          />
         </Link>
         <h1 className="text-center my-46 create-header">Create New Recipes</h1>
         <form onSubmit={handleSubmit(handleAddBatchTemplete)}>

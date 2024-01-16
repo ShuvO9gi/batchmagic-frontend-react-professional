@@ -1,4 +1,5 @@
 import React from 'react';
+import './EditSupplier.css';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -136,15 +137,15 @@ const Edit = () => {
         {isEmpty(supplier) ? (
           <Loader />
         ) : (
-          <div className="my-5">
+          <div>
             <Link to="/dashboard/supplier" className="d-flex flex-column">
               <img
-                className="align-self-end page-close mt-36"
+                className="align-self-end page-close page-close-position-t40-r160"
                 src={close}
                 alt=""
               />
             </Link>
-            <h1 className="text-center my-5 edit-header">
+            <h1 className="text-center my-90 edit-header">
               Update Supplier Information
             </h1>
             <form onSubmit={handleSubmit(handleUpdateSupplier)}>
@@ -372,7 +373,7 @@ const Edit = () => {
                       errors?.contact_person_phone?.message ||
                       errors?.contact_person_email?.message
                     }
-                    className="btn btn-orange float-end edit-update-btn"
+                    className="btn-orange float-end edit-update-btn"
                   >
                     Update
                   </button>

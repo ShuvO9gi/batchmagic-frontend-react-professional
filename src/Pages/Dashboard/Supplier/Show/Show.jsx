@@ -43,12 +43,19 @@ const Show = () => {
       {isEmpty(supplier) ? (
         <Loader />
       ) : (
-        <div className="d-flex flex-column show-container">
+        <div>
           <Link to="/dashboard/supplier" className="d-flex flex-column">
-            <img className="align-self-end page-close" src={close} alt="" />
+            <img
+              className="align-self-end page-close page-close-position-t20-r160"
+              src={close}
+              alt=""
+            />
           </Link>
           <Link to={`/dashboard/supplier/edit/${supplier.id}`}>
-            <button type="button" className="align-self-end show-update-btn">
+            <button
+              type="button"
+              className="align-self-end show-update-btn show-update-btn-position-t70-r166"
+            >
               Update Info
             </button>
           </Link>
@@ -58,7 +65,7 @@ const Show = () => {
               Supplier Information
             </h1>
             <div className="d-flex flex-column show-table-body">
-              <table className="table table-striped table-bordered show-table-first">
+              <table className="table table-striped table-bordered show-table-first show-table-first-supplier">
                 <tbody>
                   <tr>
                     <th scope="col">Name</th>

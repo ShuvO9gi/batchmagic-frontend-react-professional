@@ -47,13 +47,20 @@ const Show = () => {
       {isEmpty(batchTemplate) ? (
         <Loader />
       ) : (
-        <div className="d-flex flex-column show-container">
+        <div>
           <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
-            <img className="align-self-end page-close" src={close} alt="" />
+            <img
+              className="align-self-end page-close page-close-position-t10-r40"
+              src={close}
+              alt=""
+            />
           </Link>
 
           <Link to={`/dashboard/mix-recipes/edit/${batchTemplate.id}`}>
-            <button type="button" className="align-self-end show-update-btn">
+            <button
+              type="button"
+              className="align-self-end show-update-btn show-update-btn-position-t76-r64"
+            >
               Update Info
             </button>
           </Link>
@@ -64,7 +71,7 @@ const Show = () => {
             </h1>
 
             <div className="d-flex flex-column show-table-body">
-              <table className="table table-striped table-bordered show-table-first">
+              <table className="table table-striped table-bordered show-table-first show-table-first-mixrecipe">
                 <tbody>
                   <tr>
                     <th scope="col">Mix Recipe Name</th>
@@ -91,7 +98,7 @@ const Show = () => {
                 Product Information
               </h1>
               <div className="d-flex flex-column show-table-body">
-                <table className="table table-striped table-bordered show-table-last">
+                <table className="table table-striped table-bordered show-table-last show-table-last-mixrecipe">
                   <thead>
                     <tr>
                       <th scope="col" className="text-orange">

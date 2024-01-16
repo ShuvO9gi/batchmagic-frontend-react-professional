@@ -1,17 +1,27 @@
-.show-table-first > tbody > tr > th {
-  font-weight: 600;
-  font-size: 20px;
-  color: #ff6e05;
+.page-close-position-t10-r40 {
+  top: 10px;
+  right: 40px;
+}
+
+.show-update-btn-position-t76-r64 {
+  top: 76px;
+  right: 64px;
+}
+
+.show-table-first-mixrecipe > tbody > tr > th {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #ff6e05 !important;
   width: 20%;
 }
 
-.show-table-first > tbody > tr > td {
+.show-table-first-mixrecipe > tbody > tr > td {
   width: 30%;
 }
 
-.show-table-last > thead > tr > th {
-  font-weight: 600;
-  font-size: 20px;
-  color: #ff6e05;
+.show-table-last-mixrecipe > thead > tr > th {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #ff6e05 !important;
   width: 33%;
 }

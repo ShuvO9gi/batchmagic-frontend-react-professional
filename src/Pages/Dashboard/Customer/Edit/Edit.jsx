@@ -1,5 +1,6 @@
 import React from 'react';
 import './Edit.css';
+import './EditCustomer.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
@@ -134,15 +135,15 @@ export default function Edit() {
       {isEmpty(customer) ? (
         <Loader />
       ) : (
-        <div className="my-5">
+        <div>
           <Link to="/dashboard/customers" className="d-flex flex-column">
             <img
-              className="align-self-end page-close mt-36"
+              className="align-self-end page-close page-close-position-t36-r160"
               src={close}
               alt=""
             />
           </Link>
-          <h1 className="text-center my-5 edit-header">
+          <h1 className="text-center my-70 edit-header">
             Update Customer Information
           </h1>
           <form onSubmit={handleSubmit(handleUpdateCustomer)}>

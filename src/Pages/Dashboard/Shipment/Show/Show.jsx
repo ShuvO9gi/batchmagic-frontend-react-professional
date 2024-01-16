@@ -43,12 +43,19 @@ export default function Show() {
       {isEmpty(shipment) ? (
         <Loader />
       ) : (
-        <div className="d-flex flex-column show-container">
+        <div>
           <Link to="/dashboard/shipments" className="d-flex flex-column">
-            <img className="align-self-end page-close" src={close} alt="" />
+            <img
+              className="align-self-end page-close page-close-position-t28-r160"
+              src={close}
+              alt=""
+            />
           </Link>
           <Link to={`/dashboard/shipments/edit/${shipment.id}`}>
-            <button type="button" className="align-self-end show-update-btn">
+            <button
+              type="button"
+              className="align-self-end show-update-btn show-update-btn-position-t86-r156"
+            >
               Update Info
             </button>
           </Link>

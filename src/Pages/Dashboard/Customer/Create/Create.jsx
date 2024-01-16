@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Create.css';
+import './CreateCustomer.css';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -66,9 +67,13 @@ export default function Create() {
 
   return (
     <div>
-      <div className="my-5">
-        <Link to="/dashboard/customers">
-          <img className="page-close mt-36" src={close} alt="" />
+      <div>
+        <Link to="/dashboard/customers" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t28-r160"
+            src={close}
+            alt=""
+          />
         </Link>
         <h1 className="text-center my-64 create-header">Create New Customer</h1>
         <form onSubmit={handleSubmit(handleAddCustomer)}>
@@ -256,7 +261,7 @@ export default function Create() {
                   errors?.contact_person_phone?.message ||
                   errors?.contact_person_email?.message
                 }
-                className="btn btn-orange float-end create-create-btn"
+                className="btn-orange float-end create-create-btn"
               >
                 Create
               </button>

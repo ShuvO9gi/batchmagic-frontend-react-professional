@@ -1,5 +1,6 @@
 import React from 'react';
 import './Show.css';
+import './ShowCustomer.css';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -42,13 +43,20 @@ export default function Show() {
       {isEmpty(customer) ? (
         <Loader />
       ) : (
-        <div className="d-flex flex-column show-container">
+        <div /* className="d-flex flex-column show-container" */>
           <Link to="/dashboard/customers" className="d-flex flex-column">
-            <img className="align-self-end page-close" src={close} alt="" />
+            <img
+              className="align-self-end page-close page-close-position-t10-r160"
+              src={close}
+              alt=""
+            />
           </Link>
 
           <Link to={`/dashboard/customers/edit/${customer.id}`}>
-            <button type="button" className="align-self-end show-update-btn">
+            <button
+              type="button"
+              className="align-self-end show-update-btn show-update-btn-position-t76-r160"
+            >
               Update Info
             </button>
           </Link>
@@ -58,7 +66,7 @@ export default function Show() {
               Customer Information
             </h1>
             <div className="d-flex flex-column show-table-body">
-              <table className="table table-striped table-bordered show-table-first">
+              <table className="table table-striped table-bordered show-table-first show-table-first-customer">
                 <tbody>
                   <tr>
                     <th scope="col">Name</th>
@@ -92,7 +100,7 @@ export default function Show() {
                 Shipments Information
               </h1>
               <div className="d-flex flex-column show-table-body">
-                <table className="table table-striped show-table-last">
+                <table className="table table-striped show-table-last show-table-last-customer">
                   <thead>
                     <tr>
                       <th scope="col">Name</th>

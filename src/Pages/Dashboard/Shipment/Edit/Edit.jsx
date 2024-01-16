@@ -1,4 +1,5 @@
 import React from 'react';
+import './EditShipment.css';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -29,6 +30,8 @@ const Edit = () => {
   const params = useParams();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+
+  console.log(customer_id);
 
   useEffect(() => {
     let isMounted = true;
@@ -61,8 +64,8 @@ const Edit = () => {
       setValue('name', shipment.name);
       setValue('shipment_date', shipment.shipment_date);
       setValue('quntity', shipment.quntity);
-      setValue('outgoing_batch_id', shipment.outgoingBatch_id);
-      setValue('customer_id', shipment.customer_id);
+      setValue('outgoingBatch_id', shipment.outgoing_batch.outgoing_batch_code);
+      setValue('customer_id', shipment.customer.name);
     }
   }, [shipment, setValue]);
 
@@ -116,7 +119,7 @@ const Edit = () => {
         ? data.shipment_date
         : shipment.shipment_date,
       quntity: data.quntity ? data.quntity : shipment.quntity,
-      outgoingBatch_id: data.outgoing_batch_id
+      outgoing_batch_id: data.outgoing_batch_id
         ? data.outgoing_batch_id
         : shipment.outgoing_batch_id,
       customer_id: data.customer_id ? data.customer_id : shipment.customer_id,
@@ -132,6 +135,7 @@ const Edit = () => {
       const res = await axiosPrivate.put(`/shipment/${params.id}`, formData, {
         signal: controller.signal,
       });
+      console.log('update');
       console.log(res);
       if (res.status === 200) {
         setLoading(false);
@@ -140,6 +144,7 @@ const Edit = () => {
       }
     } catch (err) {
       setLoading(false);
+      console.log(err);
       setErr(err.response.data.errors);
     }
   };
@@ -181,15 +186,17 @@ const Edit = () => {
         {isEmpty(shipment) ? (
           <Loader />
         ) : (
-          <div className="my-5">
+          <div>
             <Link to="/dashboard/shipments" className="d-flex flex-column">
               <img
-                className="align-self-end page-close mt-36"
+                className="align-self-end page-close page-close-position-t34-r160"
                 src={close}
                 alt=""
               />
             </Link>
-            <h1 className="text-center my-5 edit-header">Update Information</h1>
+            <h1 className="text-center my-82 edit-header">
+              Update Information
+            </h1>
             <form onSubmit={handleSubmit(handleUpdateShipment)}>
               <div className="row p-5 edit-data-container edit-data-info">
                 <div className="col-md-6 py-3 px-80">
@@ -272,9 +279,9 @@ const Edit = () => {
                       validate: {
                         positive: (value) =>
                           parseFloat(value) > 0 || 'Quantity must be positive',
-                        max: (value) =>
-                          parseFloat(value) <= totalTotalQuantity ||
-                          `Quantity must be less than or equal to ${totalTotalQuantity}`,
+                        // max: (value) =>
+                        //   parseFloat(value) <= totalTotalQuantity ||
+                        //   `Quantity must be less than or equal to ${totalTotalQuantity}`,
                         integer: (value) =>
                           Number.isInteger(parseFloat(value)) ||
                           'Quantity must be an integer',
@@ -301,7 +308,7 @@ const Edit = () => {
                   <DropDown
                     handleDropDown={handleCustomerDropDown}
                     dropDownValue={customers}
-                    defaultValue={customer_id}
+                    defaultValue={shipment?.customer?.name}
                   />
                 </div>
                 {/* {customer_id && outgoingBatch_id && ( */}

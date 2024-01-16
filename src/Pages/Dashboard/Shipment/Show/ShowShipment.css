@@ -1,3 +1,13 @@
+.page-close-position-t28-r160 {
+  top: 28px;
+  right: 160px;
+}
+
+.show-update-btn-position-t86-r156 {
+  top: 86px;
+  right: 156px;
+}
+
 .show-table-first-shipment > tbody > tr > th:nth-of-type(odd) {
   width: 18% !important;
 }
@@ -8,7 +18,7 @@
 
 .show-table-last-shipment > tbody > tr > th {
   width: 22% !important;
-  color: #fa7b1f;
-  font-weight: 700;
-  font-size: 20px;
+  color: #fa7b1f !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
 }

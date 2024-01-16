@@ -1,5 +1,5 @@
 import React from 'react';
-import './Edit.css';
+import './EditMixRecipe.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams, Link } from 'react-router-dom';
@@ -246,9 +246,13 @@ const Edit = () => {
       {isEmpty(batchTemplate) ? (
         <Loader />
       ) : (
-        <div className="my-5">
-          <Link to="/dashboard/mix-recipes">
-            <img className="page-close" src={close} alt="" />
+        <div>
+          <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
+            <img
+              className="align-self-end page-close page-close-position-t10-r40"
+              src={close}
+              alt=""
+            />
           </Link>
           <h1 className="text-center my-46 edit-header">Update Mix Recipe</h1>
 

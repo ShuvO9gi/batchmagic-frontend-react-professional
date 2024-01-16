@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CreateSupplier.css';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
@@ -67,11 +68,15 @@ const Create = () => {
 
   return (
     <div>
-      <div className="my-5">
-        <Link to="/dashboard/supplier">
-          <img className="page-close mt-36" src={close} alt="" />
+      <div>
+        <Link to="/dashboard/supplier" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t34-r160"
+            src={close}
+            alt=""
+          />
         </Link>
-        <h1 className="text-center my-64 create-header">
+        <h1 className="text-center my-90 create-header">
           Create New Suppliers
         </h1>
         <form onSubmit={handleSubmit(handleAddSupplier)}>
@@ -292,7 +297,7 @@ const Create = () => {
                   errors?.contact_person_phone?.message ||
                   errors?.contact_person_email?.message
                 }
-                className="btn btn-orange float-end create-create-btn"
+                className="btn-orange float-end create-create-btn"
               >
                 Create
               </button>

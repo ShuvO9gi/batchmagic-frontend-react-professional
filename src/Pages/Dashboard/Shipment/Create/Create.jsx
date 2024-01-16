@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './CreateShipment.css';
 import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import useAuth from '../../../../hooks/useAuth';
@@ -117,9 +118,13 @@ export default function Create() {
 
   return (
     <div>
-      <div className="my-5">
-        <Link to="/dashboard/shipments">
-          <img className="page-close mt-36" src={close} alt="" />
+      <div>
+        <Link to="/dashboard/shipments" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t34-r160"
+            src={close}
+            alt=""
+          />
         </Link>
         <h1 className="text-center my-64 create-header">Create a Shipment</h1>
         <form onSubmit={handleSubmit(handleAddShipment)}>
@@ -183,41 +188,41 @@ export default function Create() {
                 optionLabel="outgoing_batch_code"
               />
             </div>
-            {/* {outgoingBatch_id && ( */}
-            <div className="col-md-6 py-3 px-80">
-              <label
-                htmlFor="quantity"
-                className="form-label fw-bold text-warning"
-              >
-                Quantity
-              </label>
-              <input
-                type="number"
-                step="1"
-                min={1}
-                className="form-control"
-                {...register('quantity', {
-                  required: 'Quantity is Required',
-                  validate: {
-                    positive: (value) =>
-                      parseFloat(value) > 0 || 'Quantity must be positive',
-                    max: (value) =>
-                      parseFloat(value) <= totalTotalQuantity ||
-                      `Quantity must be less than or equal to ${totalTotalQuantity}`,
-                    integer: (value) =>
-                      Number.isInteger(parseFloat(value)) ||
-                      'Quantity must be an integer',
-                  },
-                })}
-                id="quantity"
-                placeholder="Quantity"
-              />
-              {errors.quantity && (
-                <p className="text-danger">{errors.quantity.message}</p>
-              )}
-              {err && <p className="text-danger">{err?.quantity[0]}</p>}
-            </div>
-            {/* )} */}
+            {outgoingBatch_id && (
+              <div className="col-md-6 py-3 px-80">
+                <label
+                  htmlFor="quantity"
+                  className="form-label fw-bold text-warning"
+                >
+                  Quantity
+                </label>
+                <input
+                  type="number"
+                  step="1"
+                  min={1}
+                  className="form-control"
+                  {...register('quantity', {
+                    required: 'Quantity is Required',
+                    validate: {
+                      positive: (value) =>
+                        parseFloat(value) > 0 || 'Quantity must be positive',
+                      max: (value) =>
+                        parseFloat(value) <= totalTotalQuantity ||
+                        `Quantity must be less than or equal to ${totalTotalQuantity}`,
+                      integer: (value) =>
+                        Number.isInteger(parseFloat(value)) ||
+                        'Quantity must be an integer',
+                    },
+                  })}
+                  id="quantity"
+                  placeholder="Quantity"
+                />
+                {errors.quantity && (
+                  <p className="text-danger">{errors.quantity.message}</p>
+                )}
+                {err && <p className="text-danger">{err?.quantity[0]}</p>}
+              </div>
+            )}
 
             <div className="col-md-6 py-3 px-80">
               <label
@@ -231,17 +236,17 @@ export default function Create() {
                 dropDownValue={customers}
               />
             </div>
-            {/* {customer_id && outgoingBatch_id && ( */}
-            <div className="col-md-12 p-3">
-              <button
-                type="submit"
-                disabled={errors?.name?.message}
-                className="btn btn-orange float-end create-create-btn"
-              >
-                Create
-              </button>
-            </div>
-            {/* )} */}
+            {customer_id && outgoingBatch_id && (
+              <div className="col-md-12 p-3">
+                <button
+                  type="submit"
+                  disabled={errors?.name?.message}
+                  className="btn btn-orange float-end create-create-btn"
+                >
+                  Create
+                </button>
+              </div>
+            )}
           </div>
         </form>
       </div>

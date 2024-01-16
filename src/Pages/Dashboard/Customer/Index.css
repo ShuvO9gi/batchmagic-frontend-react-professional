@@ -15,5 +15,5 @@
 
 /*  recipe comonent children margin right 20px*/
 .page-component > * {
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
