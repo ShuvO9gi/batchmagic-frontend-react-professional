@@ -1,29 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
-import DataTables from '../../../../components/DataTables';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import show from '../../../../assets/Logo/file.png';
 import ErrorModal from '../../../../components/ErrorModal';
 import React from 'react';
-
-const buttons = [
-  {
-    name: 'CREATE NEW PRODUCT',
-    link: '/dashboard/product/create',
-    class: 'btn-small',
-  },
-  {
-    name: 'Search product',
-    link: '/dashboard/product/search',
-    class: 'btn-small',
-  },
-  {
-    name: 'Product Stocks',
-    link: '/dashboard/stocks',
-    class: 'btn-small',
-  },
-];
+import DataTables from '../Components/DataTables';
 
 const columns = [
   {
@@ -94,7 +75,7 @@ const ProductList = () => {
   }, []);
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
+      {/* <DashboardNavigation buttons={buttons} /> */}
       <h3 className="text-center my-5 text-purple">Products</h3>
       <DataTables columns={columns} data={products.data} />
     </div>
