@@ -1,17 +1,17 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import './components.css';
+import './DataTablesNew.css';
 import PropTypes from 'prop-types';
-import { isEmpty } from '../../../../components/utils.jsx';
-import Loader from '../../../../components/Loader.jsx';
-import SearchBar from '../Components/SearchBar.jsx';
+import { isEmpty } from './utils.jsx';
+import Loader from './Loader.jsx';
+import SearchBar from './SearchBarNew.jsx';
 import { Link } from 'react-router-dom';
 
 const tableCustomStyles = {
   table: {
     style: {
-      minHeight: '400px',
+      minHeight: 'maxContent',
     },
   },
   headCells: {
@@ -20,6 +20,7 @@ const tableCustomStyles = {
       fontWeight: 'bold',
       justifyContent: 'left',
       color: '#FFAD05',
+      paddingLeft: '36px',
     },
   },
   cells: {
@@ -27,12 +28,13 @@ const tableCustomStyles = {
       fontSize: '16px',
       wordBreak: 'break-word',
       justifyContent: 'left',
+      paddingLeft: '36px',
     },
     draggingStyle: {},
   },
 };
 
-const DataTables = ({ columns, data, header }) => {
+const DataTables = ({ columns, data, header, navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRows, setFilteredRows] = useState([]);
   const [pending, setPending] = useState(true);
@@ -69,7 +71,7 @@ const DataTables = ({ columns, data, header }) => {
 
   return (
     <div>
-      <div className="container datatable-custom mr-20">
+      <div className="container list-container">
         {
           <DataTable
             columns={columns}
@@ -86,18 +88,18 @@ const DataTables = ({ columns, data, header }) => {
             subHeader
             subHeaderComponent={
               !isEmpty(rows) && (
-                <div className="custom-subheader">
-                  <div className="flex-column-2">
+                <div className="list-subheader">
+                  <div className="search">
                     <SearchBar
                       searchQuery={searchQuery}
                       setSearchQuery={setSearchQuery}
                       handleSearch={handleSearch}
                     />
                   </div>
-                  <div className="flex-column-1">
-                    <Link to="/dashboard/mix-recipes/create">
-                      <button type="button" className="btn btn-yellow ">
-                        ADD A {header}
+                  <div className="">
+                    <Link to={navigation}>
+                      <button type="button" className="btn list-add-btn">
+                        Add {header}
                       </button>
                     </Link>
                   </div>
@@ -118,6 +120,7 @@ DataTables.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array,
   header: PropTypes.string,
+  navigation: PropTypes.string,
 };
 
 export default DataTables;

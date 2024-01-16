@@ -258,45 +258,50 @@ const Edit = () => {
                   <DropDown
                     handleDropDown={handleDropDown}
                     dropDownValue={outgoingBatches}
+                    defaultValue={outgoingBatches.find(
+                      (outgoingBatche) =>
+                        outgoingBatche.id === shipment?.outgoing_batch_id,
+                    )}
                     optionLabel="outgoing_batch_code"
                   />
                 </div>
-                {/* {outgoingBatch_id && ( */}
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="quantity"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Quantity
-                  </label>
-                  <input
-                    type="number"
-                    step="1"
-                    min={1}
-                    className="form-control"
-                    {...register('quantity', {
-                      required: 'Quantity is Required',
-                      validate: {
-                        positive: (value) =>
-                          parseFloat(value) > 0 || 'Quantity must be positive',
-                        // max: (value) =>
-                        //   parseFloat(value) <= totalTotalQuantity ||
-                        //   `Quantity must be less than or equal to ${totalTotalQuantity}`,
-                        integer: (value) =>
-                          Number.isInteger(parseFloat(value)) ||
-                          'Quantity must be an integer',
-                      },
-                    })}
-                    id="quantity"
-                    defaultValue={shipment?.quantity}
-                    placeholder="Quantity"
-                  />
-                  {errors.quantity && (
-                    <p className="text-danger">{errors.quantity.message}</p>
-                  )}
-                  {err && <p className="text-danger">{err?.quantity[0]}</p>}
-                </div>
-                {/* )} */}
+                {outgoingBatch_id && (
+                  <div className="col-md-6 py-3 px-80">
+                    <label
+                      htmlFor="quantity"
+                      className="form-label fw-bold text-warning"
+                    >
+                      Quantity
+                    </label>
+                    <input
+                      type="number"
+                      step="1"
+                      min={1}
+                      className="form-control"
+                      {...register('quantity', {
+                        required: 'Quantity is Required',
+                        validate: {
+                          positive: (value) =>
+                            parseFloat(value) > 0 ||
+                            'Quantity must be positive',
+                          max: (value) =>
+                            parseFloat(value) <= totalTotalQuantity ||
+                            `Quantity must be less than or equal to ${totalTotalQuantity}`,
+                          integer: (value) =>
+                            Number.isInteger(parseFloat(value)) ||
+                            'Quantity must be an integer',
+                        },
+                      })}
+                      id="quantity"
+                      defaultValue={shipment?.quantity}
+                      placeholder="Quantity"
+                    />
+                    {errors.quantity && (
+                      <p className="text-danger">{errors.quantity.message}</p>
+                    )}
+                    {err && <p className="text-danger">{err?.quantity[0]}</p>}
+                  </div>
+                )}
 
                 <div className="col-md-6 py-3 px-80">
                   <label
@@ -308,20 +313,22 @@ const Edit = () => {
                   <DropDown
                     handleDropDown={handleCustomerDropDown}
                     dropDownValue={customers}
-                    defaultValue={shipment?.customer?.name}
+                    defaultValue={customers.find(
+                      (customer) => customer.id === shipment?.customer_id,
+                    )}
                   />
                 </div>
-                {/* {customer_id && outgoingBatch_id && ( */}
-                <div className="col-md-12 p-3">
-                  <button
-                    type="submit"
-                    disabled={errors?.name?.message}
-                    className="btn btn-orange float-end edit-update-btn"
-                  >
-                    Update
-                  </button>
-                </div>
-                {/* )} */}
+                {customer_id && outgoingBatch_id && (
+                  <div className="col-md-12 p-3">
+                    <button
+                      type="submit"
+                      disabled={errors?.name?.message}
+                      className="btn btn-orange float-end edit-update-btn"
+                    >
+                      Update
+                    </button>
+                  </div>
+                )}
               </div>
             </form>
           </div>

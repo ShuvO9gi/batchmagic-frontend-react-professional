@@ -5,10 +5,11 @@ import Main from '../../Layouts/Main';
 import DashboardHome from '../../Pages/Dashboard/DashboardHome/DashboardHome';
 import BatchTemplateCreate from '../../Pages/Dashboard/OutgoingBatch/BatchTemplate/Create/Create';
 import BatchTemplete from '../../Pages/Dashboard/OutgoingBatch/BatchTemplate/Index/Index';
-import OutgoingBatch from '../../Pages/Dashboard/OutgoingBatch/Index/Index';
-import OutGoingBatchSearch from '../../Pages/Dashboard/OutgoingBatch/Search/Search';
+/*  */
+import OutgoingBatches from '../../Pages/Dashboard/OutgoingBatch/Index';
+/* import OutGoingBatchSearch from '../../Pages/Dashboard/OutgoingBatch/Search/Search';
 import OutgoingBatchShow from '../../Pages/Dashboard/OutgoingBatch/Show/Show';
-import OutgoingBatchCreate from '../../Pages/Dashboard/OutgoingBatch/Create/Create';
+import OutgoingBatchCreate from '../../Pages/Dashboard/OutgoingBatch/Create/Create'; */
 import Supplier from '../../Pages/Dashboard/Supplier/Index';
 /* import SupplierCreate from '../../Pages/Dashboard/Supplier/Create/Create';
 import SupplierEdit from '../../Pages/Dashboard/Supplier/Edit/Edit';
@@ -51,7 +52,8 @@ const router = createBrowserRouter([
       { path: '/dashboard', element: <DashboardHome /> },
       { path: '/dashboard/supplier/*', element: <Supplier /> },
       { path: '/dashboard/product/*', element: <Products /> },
-      { path: '/dashboard/outgoing-batch', element: <OutgoingBatch /> },
+      { path: '/dashboard/outgoing-batch/*', element: <OutgoingBatches /> },
+      /* { path: '/dashboard/outgoing-batch', element: <OutgoingBatch /> },
       {
         path: '/dashboard/outgoing-batch/search',
         element: <OutGoingBatchSearch />,
@@ -63,7 +65,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/outgoing-batch/create',
         element: <OutgoingBatchCreate />,
-      },
+      }, */
       { path: '/dashboard/batch-template', element: <BatchTemplete /> },
       {
         path: '/dashboard/batch-template/create',

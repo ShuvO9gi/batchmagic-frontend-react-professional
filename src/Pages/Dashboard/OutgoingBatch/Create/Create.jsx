@@ -1,27 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
+import { Link, useNavigate } from 'react-router-dom';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { isEmpty } from '../../../../components/utils';
 import { ToastContainer, toast } from 'react-toastify';
-
-const buttons = [
-  {
-    name: 'Batch templates',
-    link: '/dashboard/batch-template',
-  },
-  {
-    name: 'Outgoing Batches',
-    link: '/dashboard/outgoing-batch',
-  },
-  {
-    name: 'search batch',
-    link: '/dashboard/outgoing-batch/search',
-  },
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 const Create = () => {
   const {
@@ -274,13 +259,19 @@ const Create = () => {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <div className="container my-5">
-        <h3 className="text-purple my-5">Create a Batch</h3>
+      <div>
+        <Link to="/dashboard/customers" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t28-r160"
+            src={close}
+            alt=""
+          />
+        </Link>
+        <h1 className="text-center my-64 create-header">Create New Batch</h1>
         <form onSubmit={handleSubmit(handleCreateBatch)}>
-          <div className="row supplier-form p-5">
-            <div className="col-md-6">
-              <div className="form-group row py-3">
+          <div className="row p-5 create-data-container create-data-info">
+            <div className="col-md-6 py-3 px-80 create-data-info">
+              <div className="form-group row py-3 ">
                 <label
                   htmlFor="name"
                   className="col-sm-4 text-warning fw-bold col-form-label"
@@ -342,9 +333,9 @@ const Create = () => {
               <div className="form-group row py-3">
                 <label
                   htmlFor="batch-template"
-                  className="col-sm-4 text-warning fw-bold col-form-label"
+                  className="col-sm-4 mr-3 text-warning fw-bold col-form-label"
                 >
-                  Batch Template
+                  {/* Batch Template */} Mix Recipe
                 </label>
                 <div className="col-sm-8">
                   <DropDown

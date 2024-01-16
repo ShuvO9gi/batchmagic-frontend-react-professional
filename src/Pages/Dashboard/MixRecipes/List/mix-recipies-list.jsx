@@ -68,7 +68,7 @@ const MixRecipeList = () => {
   return (
     <div>
       <h3 className="text-center my-5 text-purple">Mix Recipes</h3>
-      <DataTables columns={columns} data={memoizedData} />
+      <DataTables columns={columns} data={memoizedData} header={'Recipe'} />
     </div>
   );
 };
