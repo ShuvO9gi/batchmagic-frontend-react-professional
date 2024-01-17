@@ -1,7 +1,7 @@
 import React from 'react';
 // import './Index.css';
 import { Route, Routes } from 'react-router-dom';
-import ShipmentsIndex from './Index/Index';
+import ShipmentsList from './Index/ShipmentsList';
 import ShipmentsCreate from './Create/Create';
 import ShipmentsShow from './Show/Show';
 import ShipmentsEdit from './Edit/Edit';
@@ -10,7 +10,7 @@ const Shipments = () => {
   return (
     <div className="page-component">
       <Routes>
-        <Route path="/" element={<ShipmentsIndex />} />
+        <Route path="/" element={<ShipmentsList />} />
         <Route path="/create" element={<ShipmentsCreate />} />
         <Route path="/show/:id" element={<ShipmentsShow />} />
         <Route path="/edit/:id" element={<ShipmentsEdit />} />

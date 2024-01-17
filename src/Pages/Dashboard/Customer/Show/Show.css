@@ -1,7 +1,11 @@
-.show-container {
-  min-width: 100%;
-  /* padding-right: 34px; */
+.show-page-close-position {
+  top: 10px;
+  right: 20px;
 }
+
+/* .show-container {
+  min-width: 100%;
+} */
 
 .show-update-btn {
   background-color: #ffad05;
@@ -22,6 +26,11 @@
   padding: 8px 0;
   cursor: pointer;
   z-index: 99;
+}
+
+.show-update-btn-position {
+  top: 76px;
+  right: 42px;
 }
 
 .show-update-btn:hover {
@@ -49,8 +58,6 @@
 
 .show-table-body {
   padding: 30px 38px;
-  /* margin-left: 10px; */
-  /* margin-right: 34px; */
   margin-bottom: 50px;
   width: 100%;
   border-collapse: collapse;

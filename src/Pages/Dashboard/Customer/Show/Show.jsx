@@ -46,7 +46,7 @@ export default function Show() {
         <div /* className="d-flex flex-column show-container" */>
           <Link to="/dashboard/customers" className="d-flex flex-column">
             <img
-              className="align-self-end page-close page-close-position-t10-r160"
+              className="align-self-end page-close show-page-close-position"
               src={close}
               alt=""
             />
@@ -55,7 +55,7 @@ export default function Show() {
           <Link to={`/dashboard/customers/edit/${customer.id}`}>
             <button
               type="button"
-              className="align-self-end show-update-btn show-update-btn-position-t76-r160"
+              className="align-self-end show-update-btn show-update-btn-position"
             >
               Update Info
             </button>

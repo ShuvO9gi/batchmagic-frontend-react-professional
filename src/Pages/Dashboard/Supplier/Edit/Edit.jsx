@@ -140,12 +140,12 @@ const Edit = () => {
           <div>
             <Link to="/dashboard/supplier" className="d-flex flex-column">
               <img
-                className="align-self-end page-close page-close-position-t40-r160"
+                className="align-self-end page-close edit-page-close-position"
                 src={close}
                 alt=""
               />
             </Link>
-            <h1 className="text-center my-90 edit-header">
+            <h1 className="text-center my-46 edit-header">
               Update Supplier Information
             </h1>
             <form onSubmit={handleSubmit(handleUpdateSupplier)}>

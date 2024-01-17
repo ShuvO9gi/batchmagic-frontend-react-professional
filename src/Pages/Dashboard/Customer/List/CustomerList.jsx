@@ -1,12 +1,12 @@
-import React from 'react';
-import './list.css';
+import React, { useMemo } from 'react';
+import './List.css';
 import { Link } from 'react-router-dom';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate.jsx';
-//import ErrorModal from '../../../../components/ErrorModal.jsx';
-import DataTables from '../Components/DataTables.jsx';
+// import ErrorModal from '../../../../components/ErrorModal.jsx';
+import DataTables from '../../../../components/DataTablesNew';
 
 const columns = [
   {
@@ -69,10 +69,17 @@ const CustomerList = () => {
     };
   }, []);
 
+  const memoizedData = useMemo(() => customers.data, [customers]);
+
   return (
     <div>
       <h1 className="text-center my-64 list-header">Customer</h1>
-      <DataTables columns={columns} data={customers.data} />
+      <DataTables
+        columns={columns}
+        data={memoizedData}
+        header={'Customers'}
+        navigation={'/dashboard/customers/create'}
+      />
     </div>
   );
 };

@@ -138,12 +138,12 @@ export default function Edit() {
         <div>
           <Link to="/dashboard/customers" className="d-flex flex-column">
             <img
-              className="align-self-end page-close page-close-position-t36-r160"
+              className="align-self-end page-close edit-page-close-position"
               src={close}
               alt=""
             />
           </Link>
-          <h1 className="text-center my-70 edit-header">
+          <h1 className="text-center my-46 edit-header">
             Update Customer Information
           </h1>
           <form onSubmit={handleSubmit(handleUpdateCustomer)}>
@@ -338,7 +338,7 @@ export default function Edit() {
                 {err && <p className="text-danger">{err?.zip}</p>}
               </div>
 
-              <div className="col-md-12 p-3">
+              <div className="col-md-12 p-3 btn-customized">
                 <button
                   type="submit"
                   disabled={
@@ -346,7 +346,7 @@ export default function Edit() {
                     errors?.contact_person_phone?.message ||
                     errors?.contact_person_email?.message
                   }
-                  className="btn float-end edit-update-btn"
+                  className="btn btn-orange float-end edit-update-btn"
                 >
                   Update
                 </button>

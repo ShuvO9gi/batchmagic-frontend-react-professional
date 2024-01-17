@@ -1,20 +1,12 @@
+import React from 'react';
+import './SearchBatches.css';
 import { useEffect, useState } from 'react';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../components/Loader';
-
-const buttons = [
-  {
-    name: 'create new batch',
-    link: '/dashboard/outgoing-batch/create',
-  },
-  {
-    name: 'Batch templates',
-    link: '/dashboard/batch-template',
-  },
-];
+import { Link } from 'react-router-dom';
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 export default function Search() {
   const {
@@ -87,23 +79,31 @@ export default function Search() {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <div className="container my-5">
+      <div>
+        <Link to="/dashboard/outgoing-batch" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close edit-page-close-position"
+            src={close}
+            alt=""
+          />
+        </Link>
         {foundBatch?.outgoing_batch_code ? (
-          <h3 className="text-purple my-5">
+          <h3 className="text-left my-70 edit-header batch-found-header">
             {' '}
-            Outgoing Batch Found:{' '}
+            Batch Number Found:{' '}
             <span className="text-purple-fade">
               {foundBatch?.outgoing_batch_code}
             </span>{' '}
           </h3>
         ) : (
-          <h3 className="text-purple my-5">Search Outgoing Batch</h3>
+          <h1 className="text-center my-70 edit-header">
+            Search Outgoing Batch
+          </h1>
         )}
         {!foundBatch ? (
           <>
             <form onSubmit={handleSubmit(handleSearchOutGoingBatch)}>
-              <div className="row supplier-form p-5">
+              <div className="row p-5 edit-data-container">
                 <div className="col-md-6 p-3">
                   <label
                     htmlFor="exampleFormControlInput1"
@@ -130,8 +130,11 @@ export default function Search() {
                   )}
                 </div>
 
-                <div className="col-md-12 p-3">
-                  <button type="submit" className="btn btn-orange float-end">
+                <div className="col-md-12 p-3 btn-customized">
+                  <button
+                    type="submit"
+                    className="btn btn-orange float-end edit-update-btn"
+                  >
                     Search
                   </button>
                 </div>
@@ -148,29 +151,17 @@ export default function Search() {
             )}
           </>
         ) : (
-          <div className="row supplier-form p-5">
+          <div className="row p-5 edit-data-container">
             <div className="col-md-12 p-3">
-              <table className="table">
+              <table className="table search-batch-found-table-header">
                 <thead>
                   <tr>
-                    <th scope="col" className="text-warning">
-                      Customer
-                    </th>
-                    <th scope="col" className="text-warning">
-                      Contact
-                    </th>
-                    <th scope="col" className="text-warning">
-                      Quantity
-                    </th>
-                    <th scope="col" className="text-warning">
-                      Date of shipment
-                    </th>
-                    <th scope="col" className="text-warning">
-                      Total weight
-                    </th>
-                    <th scope="col" className="text-warning">
-                      Breakdown
-                    </th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Date of shipment</th>
+                    <th scope="col">Total weight</th>
+                    <th scope="col">Breakdown</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -333,7 +324,7 @@ export default function Search() {
                         aria-labelledby={`breakdownModalLabel${ship.id}`}
                         aria-hidden="true"
                       >
-                        <div className="modal-dialog modal-xl  modal-dialog-centered">
+                        <div className="modal-dialog modal-xl modal-dialog-centered">
                           <div className="modal-content">
                             <div className="modal-header">
                               <h5

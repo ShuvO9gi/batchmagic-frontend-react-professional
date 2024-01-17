@@ -194,7 +194,7 @@ const Create = () => {
       <div>
         <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
           <img
-            className="align-self-end page-close page-close-position-t10-r40 "
+            className="align-self-end page-close show-page-close-position"
             src={close}
             alt=""
           />

@@ -1,0 +1,11 @@
+.show-table-first-batches > tbody > tr > th {
+  width: 20%;
+}
+
+.show-table-first-batches > tbody > tr > td {
+  width: 25%;
+}
+
+.show-table-last-batches > thead > tr > th {
+  width: 33%;
+}

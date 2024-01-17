@@ -189,12 +189,12 @@ const Edit = () => {
           <div>
             <Link to="/dashboard/shipments" className="d-flex flex-column">
               <img
-                className="align-self-end page-close page-close-position-t34-r160"
+                className="align-self-end page-close create-page-close-position"
                 src={close}
                 alt=""
               />
             </Link>
-            <h1 className="text-center my-82 edit-header">
+            <h1 className="text-center my-46 edit-header">
               Update Information
             </h1>
             <form onSubmit={handleSubmit(handleUpdateShipment)}>

@@ -71,12 +71,12 @@ const Create = () => {
       <div>
         <Link to="/dashboard/supplier" className="d-flex flex-column">
           <img
-            className="align-self-end page-close page-close-position-t34-r160"
+            className="align-self-end page-close create-page-close-position"
             src={close}
             alt=""
           />
         </Link>
-        <h1 className="text-center my-90 create-header">
+        <h1 className="text-center my-46 create-header">
           Create New Suppliers
         </h1>
         <form onSubmit={handleSubmit(handleAddSupplier)}>

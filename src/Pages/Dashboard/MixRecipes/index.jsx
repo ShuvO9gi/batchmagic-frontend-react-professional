@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MixRecipeList from './List/mix-recipies-list';
+import MixRecipeList from './List/MixRecipesList';
 import MixRecipesCreate from './Create/Create';
 import MixRecipesShow from './Show/Show';
 import MixRecipesEdit from './Edit/Edit';
@@ -8,7 +8,7 @@ import './mix-recipes.css';
 
 const MixRecipes = () => {
   return (
-    <div className="recipe-component">
+    <div>
       <Routes>
         <Route path="/" element={<MixRecipeList />} />
         <Route path="/create" element={<MixRecipesCreate />} />

@@ -50,7 +50,7 @@ const Show = () => {
         <div>
           <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
             <img
-              className="align-self-end page-close page-close-position-t10-r40"
+              className="align-self-end page-close show-page-close-position"
               src={close}
               alt=""
             />
@@ -59,7 +59,7 @@ const Show = () => {
           <Link to={`/dashboard/mix-recipes/edit/${batchTemplate.id}`}>
             <button
               type="button"
-              className="align-self-end show-update-btn show-update-btn-position-t76-r64"
+              className="align-self-end show-update-btn show-update-btn-position"
             >
               Update Info
             </button>

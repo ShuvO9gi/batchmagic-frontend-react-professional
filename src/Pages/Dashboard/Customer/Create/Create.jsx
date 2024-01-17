@@ -70,12 +70,12 @@ export default function Create() {
       <div>
         <Link to="/dashboard/customers" className="d-flex flex-column">
           <img
-            className="align-self-end page-close page-close-position-t28-r160"
+            className="align-self-end page-close create-page-close-position"
             src={close}
             alt=""
           />
         </Link>
-        <h1 className="text-center my-64 create-header">Create New Customer</h1>
+        <h1 className="text-center my-46 create-header">Create New Customer</h1>
         <form onSubmit={handleSubmit(handleAddCustomer)}>
           <div className="row p-5 create-data-container create-data-info">
             <div className="col-md-6 py-3 px-80">
@@ -261,7 +261,7 @@ export default function Create() {
                   errors?.contact_person_phone?.message ||
                   errors?.contact_person_email?.message
                 }
-                className="btn-orange float-end create-create-btn"
+                className="btn btn-orange float-end create-create-btn"
               >
                 Create
               </button>

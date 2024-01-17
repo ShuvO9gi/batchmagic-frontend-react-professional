@@ -9,6 +9,19 @@
   color: #302980;
   z-index: 98;
   cursor: pointer;
+  opacity: 0.5;
+  transition: all ease-in-out 0.25s;
+}
+
+.page-close:hover {
+  color: #302980;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.create-page-close-position {
+  top: 10px;
+  right: 20px;
 }
 
 .create-header {
@@ -17,9 +30,14 @@
   color: #302980;
 }
 
-.my-64 {
+/* .my-64 {
   margin-top: 64px;
   margin-bottom: 64px;
+} */
+
+.my-46 {
+  margin-top: 46px;
+  margin-bottom: 46px;
 }
 
 .create-data-container {
@@ -40,6 +58,11 @@
 .px-80 {
   padding-left: 80px !important;
   padding-right: 80px !important;
+}
+
+.btn-customized > .btn {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .create-create-btn {

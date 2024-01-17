@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import './list.css';
+import './List.css';
 import { Link } from 'react-router-dom';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
 import { useEffect, useState } from 'react';
-import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import ErrorModal from '../../../../components/ErrorModal';
-import DataTables from '../Components/DataTables.jsx';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate.jsx';
+import ErrorModal from '../../../../components/ErrorModal.jsx';
+import DataTables from '../../../../components/DataTablesNew';
 
 const columns = [
   {
@@ -67,8 +67,13 @@ const MixRecipeList = () => {
 
   return (
     <div>
-      <h3 className="text-center my-5 text-purple">Mix Recipes</h3>
-      <DataTables columns={columns} data={memoizedData} header={'Recipe'} />
+      <h1 className="text-center my-64 list-header">Mix Recipes</h1>
+      <DataTables
+        columns={columns}
+        data={memoizedData}
+        header={'A Recipe'}
+        navigation={'/dashboard/mix-recipes/create'}
+      />
     </div>
   );
 };

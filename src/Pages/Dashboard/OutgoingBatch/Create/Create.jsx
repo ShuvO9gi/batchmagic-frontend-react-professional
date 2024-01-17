@@ -260,18 +260,18 @@ const Create = () => {
   return (
     <div>
       <div>
-        <Link to="/dashboard/customers" className="d-flex flex-column">
+        <Link to="/dashboard/outgoing-batch" className="d-flex flex-column">
           <img
-            className="align-self-end page-close page-close-position-t28-r160"
+            className="align-self-end page-close create-page-close-position"
             src={close}
             alt=""
           />
         </Link>
-        <h1 className="text-center my-64 create-header">Create New Batch</h1>
+        <h1 className="text-center my-46 create-header">Create New Batch</h1>
         <form onSubmit={handleSubmit(handleCreateBatch)}>
-          <div className="row p-5 create-data-container create-data-info">
-            <div className="col-md-6 py-3 px-80 create-data-info">
-              <div className="form-group row py-3 ">
+          <div className="row p-5 create-data-container">
+            <div className="col-md-6 py-3 px-80 pr-1 create-data-info">
+              <div className="form-group py-3 d-flex align-items-center">
                 <label
                   htmlFor="name"
                   className="col-sm-4 text-warning fw-bold col-form-label"
@@ -281,7 +281,7 @@ const Create = () => {
                 <div className="col-sm-8">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-0"
                     {...register('name', {
                       required: 'Name is Required',
                     })}
@@ -299,7 +299,7 @@ const Create = () => {
                   {err && <p className="text-danger">{err?.name[0]}</p>}
                 </div>
               </div>
-              <div className="form-group row py-3">
+              <div className="form-group py-3 d-flex align-items-center">
                 <label
                   htmlFor="quantity"
                   className="col-sm-4 text-warning fw-bold col-form-label"
@@ -318,7 +318,7 @@ const Create = () => {
                     })}
                     name="quantity"
                     step="1"
-                    className="form-control"
+                    className="form-control rounded-0"
                     onChange={handleQuantity}
                     id="quantity"
                     placeholder="Quantity"
@@ -330,10 +330,10 @@ const Create = () => {
                 </div>
               </div>
 
-              <div className="form-group row py-3">
+              <div className="form-group py-3 d-flex align-items-center">
                 <label
                   htmlFor="batch-template"
-                  className="col-sm-4 mr-3 text-warning fw-bold col-form-label"
+                  className="col-sm-4 text-warning fw-bold col-form-label"
                 >
                   {/* Batch Template */} Mix Recipe
                 </label>
@@ -597,17 +597,19 @@ const Create = () => {
                 </>
               )}
             </div>
-          </div>
-          <div className="col-md-12 p-3">
-            <button
-              type="submit"
-              disabled={
-                !isUnique || !isAllStocksSelected || batchProducts.length === 0
-              }
-              className="btn btn-orange float-end"
-            >
-              Create
-            </button>
+            <div className="col-md-12 p-3 btn-customized">
+              <button
+                type="submit"
+                disabled={
+                  !isUnique ||
+                  !isAllStocksSelected ||
+                  batchProducts.length === 0
+                }
+                className="btn btn-orange float-end create-create-btn"
+              >
+                Create
+              </button>
+            </div>
           </div>
         </form>
       </div>

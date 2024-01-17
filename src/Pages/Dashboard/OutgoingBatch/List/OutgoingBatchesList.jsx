@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './OutgoingBatchesList.css';
 import { Link } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -72,12 +72,14 @@ const OutgoingBatchesList = () => {
     };
   }, []);
 
+  const memoizedData = useMemo(() => batches.data, [batches]);
+
   return (
     <div>
       <h1 className="text-center my-64 list-header">Outgoing Batches</h1>
       <DataTables
         columns={columns}
-        data={batches.data}
+        data={memoizedData}
         header={'A Batch'}
         navigation={'/dashboard/outgoing-batch/create'}
       />
