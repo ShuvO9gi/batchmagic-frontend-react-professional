@@ -1,28 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
 import DateFormat from '../../../../components/DateFormat';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../components/Loader';
 import ErrorModal from '../../../../components/ErrorModal';
-
-const buttons = [
-  {
-    name: 'Products',
-    link: '/dashboard/product',
-    class: 'btn-small',
-  },
-  {
-    name: 'Search product',
-    link: '/dashboard/product/search',
-    class: 'btn-small',
-  },
-  {
-    name: 'Product Stocks',
-    link: '/dashboard/stocks',
-    class: 'btn-small',
-  },
-];
+import React from 'react';
 
 const Show = () => {
   const [product, setProduct] = useState();
@@ -55,7 +37,6 @@ const Show = () => {
   }, []);
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
       {!product ? (
         <div className="container text-center">
           <Loader />
