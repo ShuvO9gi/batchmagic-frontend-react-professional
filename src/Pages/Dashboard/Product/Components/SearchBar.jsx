@@ -14,7 +14,7 @@ function SearchBar({ searchQuery, setSearchQuery, handleSearch }) {
           setSearchQuery(e.target.value);
           handleSearch(e.target.value);
         }}
-        placeholder="Search Customer"
+        placeholder="Search"
       />
       <span className="search-icon search-icon-customized">
         <img src={search} height={20} width={20} />

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import show from '../../../../assets/Logo/file.png';
+import edit from '../../../../assets/Logo/actions/edit.svg';
 import ErrorModal from '../../../../components/ErrorModal';
 import React from 'react';
 import DataTables from '../Components/DataTables';
@@ -35,10 +36,15 @@ const columns = [
   {
     name: 'Actions',
     cell: (row) => (
-      <div>
+      <div className="action-container">
         <Link to={`/dashboard/product/show/${row.id}`}>
-          <button className="btn btn-success">
-            <img src={show} className="edit-image" alt="" />
+          <button className="btn btn-action-customized">
+            <img src={show} className="show-action" alt="" />
+          </button>
+        </Link>
+        <Link to={`/dashboard/product/edit/${row.id}`}>
+          <button className="btn btn-action-customized">
+            <img src={edit} className="edit-action" alt="" />
           </button>
         </Link>
       </div>
