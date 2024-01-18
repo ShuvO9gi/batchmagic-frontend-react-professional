@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import './CreateSupplier.css';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import close from '../../../../assets/Logo/actions/cross.svg';
-import './Create.css';
 
 const Create = () => {
   const {

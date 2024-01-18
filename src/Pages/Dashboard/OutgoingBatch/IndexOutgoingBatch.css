@@ -1,0 +1,32 @@
+/* css style for search page */
+.batch-found-header {
+  margin-left: 60px;
+}
+
+.search-header {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffad05;
+}
+
+.search-batch-found-table-header > thead > tr > th {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffad05;
+  width: fit-content;
+}
+
+/* css style for show page */
+.show-table-first-batches > tbody > tr > th {
+  width: 20%;
+  color: #ff6e05 !important;
+}
+
+.show-table-first-batches > tbody > tr > td {
+  width: 25%;
+}
+
+.show-table-last-batches > thead > tr > th {
+  width: 33%;
+  color: #ff6e05 !important;
+}

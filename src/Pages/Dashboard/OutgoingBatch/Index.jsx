@@ -4,6 +4,7 @@ import OutgoingBatchesList from './List/OutgoingBatchesList';
 import OutgoingBatchesCreate from './Create/Create';
 import OutgoingBatchesShow from './Show/Show';
 import OutgoingBatchesSearch from './Search/Search';
+import './IndexOutgoingBatch.css';
 
 const OutgoingBatches = () => {
   return (

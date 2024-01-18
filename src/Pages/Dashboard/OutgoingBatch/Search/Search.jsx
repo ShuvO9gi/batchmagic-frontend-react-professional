@@ -1,5 +1,4 @@
 import React from 'react';
-import './SearchBatches.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
@@ -88,7 +87,7 @@ export default function Search() {
           />
         </Link>
         {foundBatch?.outgoing_batch_code ? (
-          <h3 className="text-left my-70 edit-header batch-found-header">
+          <h3 className="text-left my-46 edit-header batch-found-header">
             {' '}
             Batch Number Found:{' '}
             <span className="text-purple-fade">
@@ -96,7 +95,7 @@ export default function Search() {
             </span>{' '}
           </h3>
         ) : (
-          <h1 className="text-center my-70 edit-header">
+          <h1 className="text-center my-46 edit-header">
             Search Outgoing Batch
           </h1>
         )}
@@ -107,7 +106,7 @@ export default function Search() {
                 <div className="col-md-6 p-3">
                   <label
                     htmlFor="exampleFormControlInput1"
-                    className="form-label fw-bold text-warning"
+                    className="form-label fw-bold search-header"
                   >
                     Outgoing Batch Code
                   </label>
@@ -219,7 +218,7 @@ export default function Search() {
                                 aria-label="Close"
                               ></button>
                             </div>
-                            <div className="modal-body ">
+                            <div className="modal-body">
                               <div className="row">
                                 <div className="col-md-6">
                                   <label htmlFor="name" className="text-purple">

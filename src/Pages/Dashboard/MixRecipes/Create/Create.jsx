@@ -1,5 +1,4 @@
 import React from 'react';
-import './CreateMixRecipe.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';

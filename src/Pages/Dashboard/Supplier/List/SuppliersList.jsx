@@ -5,7 +5,6 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
 // import deletes from '../../../../assets/Logo/delete.png';
-import './Index.css';
 import { Link } from 'react-router-dom';
 import ErrorModal from '../../../../components/ErrorModal';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import './EditSupplier.css';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';

@@ -1,6 +1,4 @@
 import React from 'react';
-import './Show.css';
-import './ShowCustomer.css';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -8,6 +6,7 @@ import Loader from '../../../../components/Loader';
 import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
 import close from '../../../../assets/Logo/actions/cross.svg';
+import '../../../../assets/style/CommonCSS/Show.css';
 
 export default function Show() {
   const [customer, setCustomer] = useState({});

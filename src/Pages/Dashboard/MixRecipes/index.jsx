@@ -4,6 +4,7 @@ import MixRecipeList from './List/MixRecipesList';
 import MixRecipesCreate from './Create/Create';
 import MixRecipesShow from './Show/Show';
 import MixRecipesEdit from './Edit/Edit';
+import './IndexMixRecipes.css';
 import './mix-recipes.css';
 
 const MixRecipes = () => {

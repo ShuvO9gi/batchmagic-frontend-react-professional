@@ -1,5 +1,4 @@
 import React from 'react';
-import './ShowBatches.css';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -107,15 +106,9 @@ const Show = () => {
                 <table className="table table-striped table-bordered show-table-last show-table-last-batches">
                   <thead>
                     <tr>
-                      <th scope="col" className="text-orange">
-                        Product Name
-                      </th>
-                      <th scope="col" className="text-orange">
-                        Weight (g)
-                      </th>
-                      <th scope="col" className="text-orange">
-                        Stock Number
-                      </th>
+                      <th scope="col">Product Name</th>
+                      <th scope="col">Weight (g)</th>
+                      <th scope="col">Stock Number</th>
                     </tr>
                   </thead>
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './CreateShipment.css';
 import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import useAuth from '../../../../hooks/useAuth';

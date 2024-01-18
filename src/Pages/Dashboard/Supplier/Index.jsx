@@ -1,14 +1,14 @@
 import React from 'react';
-import '../Customer/Index.css';
 import { Route, Routes } from 'react-router-dom';
-import SupplierList from './Index/SuppliersList';
+import SupplierList from './List/SuppliersList';
 import SupplierCreate from './Create/Create';
 import SupplierShow from './Show/Show';
 import SupplierEdit from './Edit/Edit';
+import './IndexSupplier.css';
 
 const Supplier = () => {
   return (
-    <div className="page-component">
+    <div>
       <Routes>
         <Route path="/" element={<SupplierList />} />
         <Route path="/create" element={<SupplierCreate />} />

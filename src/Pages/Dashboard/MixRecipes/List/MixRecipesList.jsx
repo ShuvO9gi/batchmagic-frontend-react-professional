@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import './List.css';
 import { Link } from 'react-router-dom';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
@@ -24,10 +23,14 @@ const columns = [
     cell: (row) => (
       <div className="action-container">
         <Link to={`/dashboard/mix-recipes/show/${row.id}`}>
-          <img src={show} className="show-recipe" alt="" />
+          <button className="btn btn-action-customized">
+            <img src={show} className="show-action" alt="" />
+          </button>
         </Link>
         <Link to={`/dashboard/mix-recipes/edit/${row.id}`}>
-          <img src={edit} className="edit-recipe" alt="" />
+          <button className="btn btn-action-customized">
+            <img src={edit} className="edit-action" alt="" />
+          </button>
         </Link>
       </div>
     ),

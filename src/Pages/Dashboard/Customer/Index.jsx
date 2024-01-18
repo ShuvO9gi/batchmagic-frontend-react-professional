@@ -1,5 +1,6 @@
 import React from 'react';
-import './Index.css';
+/* import './Index.css'; */
+import './IndexCustomer.css';
 import { Route, Routes } from 'react-router-dom';
 import CustomerList from './List/CustomerList';
 import CustomersCreate from './Create/Create';
@@ -8,7 +9,7 @@ import CustomersEdit from './Edit/Edit';
 
 const Customers = () => {
   return (
-    <div className="page-component">
+    <div>
       <Routes>
         <Route path="/" element={<CustomerList />} />
         <Route path="/create" element={<CustomersCreate />} />

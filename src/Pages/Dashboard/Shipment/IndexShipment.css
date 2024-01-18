@@ -1,13 +1,4 @@
-.page-close-position-t28-r160 {
-  top: 28px;
-  right: 160px;
-}
-
-.show-update-btn-position-t86-r156 {
-  top: 86px;
-  right: 156px;
-}
-
+/* css style for show page */
 .show-table-first-shipment > tbody > tr > th:nth-of-type(odd) {
   width: 18% !important;
 }

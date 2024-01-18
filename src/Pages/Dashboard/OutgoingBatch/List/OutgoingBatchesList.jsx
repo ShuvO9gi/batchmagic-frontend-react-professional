@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import './OutgoingBatchesList.css';
 import { Link } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import DataTables from '../../../../components/DataTablesNew';

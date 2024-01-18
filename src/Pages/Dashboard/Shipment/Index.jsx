@@ -1,10 +1,10 @@
 import React from 'react';
-// import './Index.css';
 import { Route, Routes } from 'react-router-dom';
 import ShipmentsList from './Index/ShipmentsList';
 import ShipmentsCreate from './Create/Create';
 import ShipmentsShow from './Show/Show';
 import ShipmentsEdit from './Edit/Edit';
+import './IndexShipment.css';
 
 const Shipments = () => {
   return (
