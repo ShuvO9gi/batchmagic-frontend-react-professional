@@ -7,6 +7,7 @@ import { isEmpty } from './utils.jsx';
 import Loader from './Loader.jsx';
 import SearchBar from './SearchBarNew.jsx';
 import { Link } from 'react-router-dom';
+import close from './../assets/Logo/actions/cross.svg';
 
 const tableCustomStyles = {
   table: {
@@ -54,23 +55,51 @@ const DataTables = ({ columns, data, header, navigation }) => {
     if (!query) {
       setFilteredRows([]);
     } else {
-      const filteredData = rows.filter((row) => {
-        const property = ['name'];
-        if (
-          row[property] &&
-          row[property].toLowerCase().includes(query.toLowerCase())
-        ) {
-          return true;
-        }
+      document.getElementById('toogle-add-btn').style.visibility = 'hidden';
+      document.getElementById('toogle-page-close').style.visibility = 'visible';
 
+      const filteredData = rows.filter((row) => {
+        const propertiesToSearch = [
+          'name',
+          'outgoing_batch_code',
+          'ingoing_batch_number',
+        ];
+        for (const property of propertiesToSearch) {
+          if (
+            row[property] &&
+            row[property].toLowerCase().includes(query.toLowerCase())
+          ) {
+            return true;
+          }
+        }
         return false;
       });
       setFilteredRows(filteredData);
     }
   };
 
+  const handleClose = () => {
+    setFilteredRows(data);
+    document.getElementById('toogle-add-btn').style.visibility = 'visible';
+    document.getElementById('toogle-page-close').style.visibility = 'hidden';
+  };
+
   return (
     <div>
+      <Link
+        // to={navigation}
+        onClick={handleClose}
+        id="toogle-page-close"
+        style={{ visibility: 'hidden' }}
+        className="d-flex flex-column"
+      >
+        <img
+          className="align-self-end page-close edit-page-close-position"
+          src={close}
+          alt=""
+        />
+      </Link>
+
       <div className="container list-container">
         {
           <DataTable
@@ -96,7 +125,7 @@ const DataTables = ({ columns, data, header, navigation }) => {
                       handleSearch={handleSearch}
                     />
                   </div>
-                  <div className="">
+                  <div id="toogle-add-btn" className="">
                     <Link to={navigation}>
                       <button type="button" className="btn list-add-btn">
                         Add {header}

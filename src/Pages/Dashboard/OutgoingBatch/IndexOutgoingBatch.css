@@ -1,3 +1,8 @@
+/* css style for create & search page */
+.modal-border-customized .modal-content {
+  border-radius: 20px !important;
+}
+
 /* css style for search page */
 .batch-found-header {
   margin-left: 60px;

@@ -36,9 +36,11 @@
 }
 
 .show-action,
-.edit-action {
+.edit-action,
+.delete-action {
   height: 28px;
   width: 28px;
+  cursor: pointer;
 }
 
 .action-container {

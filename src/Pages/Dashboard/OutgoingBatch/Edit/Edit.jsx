@@ -8,7 +8,7 @@ import { isEmpty } from '../../../../components/utils';
 import { ToastContainer, toast } from 'react-toastify';
 import close from '../../../../assets/Logo/actions/cross.svg';
 
-const Create = () => {
+const Edit = () => {
   const {
     register,
     handleSubmit,
@@ -262,12 +262,12 @@ const Create = () => {
       <div>
         <Link to="/dashboard/outgoing-batch" className="d-flex flex-column">
           <img
-            className="align-self-end page-close create-page-close-position"
+            className="align-self-end page-close edit-page-close-position"
             src={close}
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 create-header">Create New Batch</h1>
+        <h1 className="text-center my-46 edit-header">Update Batch</h1>
         <form onSubmit={handleSubmit(handleCreateBatch)}>
           <div className="row p-5 create-data-container">
             <div className="col-md-6 py-3 px-80 pr-1 create-data-info">
@@ -605,9 +605,9 @@ const Create = () => {
                   !isAllStocksSelected ||
                   batchProducts.length === 0
                 }
-                className="btn btn-orange float-end create-create-btn"
+                className="btn btn-orange float-end edit-update-btn"
               >
-                Create
+                Update
               </button>
             </div>
           </div>
@@ -618,4 +618,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;

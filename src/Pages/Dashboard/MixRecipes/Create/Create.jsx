@@ -2,10 +2,10 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { ToastContainer, toast } from 'react-toastify';
 import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
 import close from '../../../../assets/Logo/actions/cross.svg';
@@ -412,7 +412,7 @@ const Create = () => {
                               >
                                 <img
                                   src={remove}
-                                  className="delete-recipe"
+                                  className="delete-action"
                                   alt=""
                                 />
                               </a>

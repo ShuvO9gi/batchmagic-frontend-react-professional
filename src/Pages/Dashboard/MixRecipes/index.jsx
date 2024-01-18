@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import './IndexMixRecipes.css';
+import './mix-recipes.css';
 import MixRecipeList from './List/MixRecipesList';
 import MixRecipesCreate from './Create/Create';
 import MixRecipesShow from './Show/Show';
 import MixRecipesEdit from './Edit/Edit';
-import './IndexMixRecipes.css';
-import './mix-recipes.css';
+import NotFound from '../../NotFound/NotFound';
 
 const MixRecipes = () => {
   return (
@@ -15,6 +16,7 @@ const MixRecipes = () => {
         <Route path="/create" element={<MixRecipesCreate />} />
         <Route path="/show/:id" element={<MixRecipesShow />} />
         <Route path="/edit/:id" element={<MixRecipesEdit />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

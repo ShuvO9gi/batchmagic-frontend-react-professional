@@ -7,12 +7,11 @@
 
 /* redeclaring modal box */
 .mixrecipe-create .modal-content {
-  width: 666px !important;
   border-radius: 20px !important;
 }
 
-input[readonly] {
-  background-color: #cecdcd !important; /* Set the desired background color for readonly input */
+.create-data-info input[readonly] {
+  background-color: #e9ecef !important;
 }
 
 /* css style for show page */

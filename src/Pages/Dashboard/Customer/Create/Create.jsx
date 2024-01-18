@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import '../../../../assets/style/CommonCSS/Create.css';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { Link, useNavigate } from 'react-router-dom';
 import close from '../../../../assets/Logo/actions/cross.svg';
-import '../../../../assets/style/CommonCSS/Create.css';
 
 export default function Create() {
   const {

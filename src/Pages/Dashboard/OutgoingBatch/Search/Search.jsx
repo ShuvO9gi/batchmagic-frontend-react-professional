@@ -202,7 +202,7 @@ export default function Search() {
                         aria-labelledby={`customerModalLabel${ship.id}`}
                         aria-hidden="true"
                       >
-                        <div className="modal-dialog  modal-dialog-centered">
+                        <div className="modal-dialog  modal-dialog-centered modal-border-customized">
                           <div className="modal-content">
                             <div className="modal-header">
                               <h5
@@ -323,7 +323,7 @@ export default function Search() {
                         aria-labelledby={`breakdownModalLabel${ship.id}`}
                         aria-hidden="true"
                       >
-                        <div className="modal-dialog modal-xl modal-dialog-centered">
+                        <div className="modal-dialog modal-xl modal-dialog-centered modal-border-customized">
                           <div className="modal-content">
                             <div className="modal-header">
                               <h5
@@ -340,18 +340,12 @@ export default function Search() {
                               ></button>
                             </div>
                             <div className="modal-body ">
-                              <table className="table table-striped">
+                              <table className="table table-striped search-batch-found-table-header">
                                 <thead>
                                   <tr>
-                                    <th scope="col" className="text-warning">
-                                      Product
-                                    </th>
-                                    <th scope="col " className="text-warning ">
-                                      Ingoing batch numbers
-                                    </th>
-                                    <th scope="col" className="text-warning">
-                                      Total weight
-                                    </th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Ingoing batch numbers</th>
+                                    <th scope="col">Total weight</th>
                                   </tr>
                                 </thead>
                                 <tbody>
