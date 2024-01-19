@@ -14,7 +14,7 @@ const columns = [
   },
   {
     name: 'Shipped Quantity',
-    selector: (row) => row.shipment_quantity,
+    selector: (row) => row.shipment_quantity || 0,
     sortable: true,
   },
   {
