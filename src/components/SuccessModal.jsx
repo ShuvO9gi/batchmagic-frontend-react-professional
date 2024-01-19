@@ -5,7 +5,7 @@ import success from '../assets/Logo/success.svg';
 
 const SuccessModal = ({ modalText }) => {
   return (
-    <div className="modal-dialog d-flex justify-content-center align-items-center modal-success-dialog">
+    <div className="modal-dialog modal-dialog-centered d-flex justify-content-center align-items-center modal-success-dialog">
       <div className="modal-content modal-success-content">
         <div className="modal-header">
           <button
