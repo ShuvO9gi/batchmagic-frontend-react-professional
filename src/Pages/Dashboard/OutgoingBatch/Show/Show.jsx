@@ -78,7 +78,7 @@ const Show = () => {
                     <th scope="col">Mix Recipe</th>
                     <td>{batch?.batch_template?.name}</td>
                     <th scope="col">Shipped Quantity</th>
-                    <td>{batch?.shipment_quantity || 0}</td>
+                    <td>{batch?.shipment_quantity}</td>
                   </tr>
                   <tr>
                     <th scope="col">Batch Weight (g)</th>

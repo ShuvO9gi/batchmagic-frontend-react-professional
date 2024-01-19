@@ -7,7 +7,8 @@ import { isEmpty } from './utils.jsx';
 import Loader from './Loader.jsx';
 import SearchBar from './SearchBarNew.jsx';
 import { Link } from 'react-router-dom';
-import close from './../assets/Logo/actions/cross.svg';
+// import SearchList from './SearchList.jsx';
+// import close from './../assets/Logo/actions/cross.svg';
 
 const tableCustomStyles = {
   table: {
@@ -78,15 +79,17 @@ const DataTables = ({ columns, data, header, navigation }) => {
     }
   };
 
-  const handleClose = () => {
-    setFilteredRows(data);
-    document.getElementById('toogle-add-btn').style.visibility = 'visible';
-    document.getElementById('toogle-page-close').style.visibility = 'hidden';
-  };
+  // const handleClose = () => {
+  //   /* setFilteredRows(data);
+  //   // setSearchQuery('');
+  //   document.getElementById('toogle-add-btn').style.visibility = 'visible';
+  //   document.getElementById('toogle-page-close').style.visibility = 'hidden'; */
+  //   window.location.reload(); //Not Recommended
+  // };
 
   return (
     <div>
-      <Link
+      {/* <Link
         // to={navigation}
         onClick={handleClose}
         id="toogle-page-close"
@@ -98,7 +101,7 @@ const DataTables = ({ columns, data, header, navigation }) => {
           src={close}
           alt=""
         />
-      </Link>
+      </Link> */}
 
       <div className="container list-container">
         {
