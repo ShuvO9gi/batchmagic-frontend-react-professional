@@ -478,7 +478,7 @@ const Edit = () => {
                                 >
                                   <img
                                     src={remove}
-                                    className="delete-recipe"
+                                    className="delete-action"
                                     alt=""
                                   />
                                 </a>

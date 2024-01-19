@@ -441,25 +441,16 @@ const Edit = () => {
                                         </p>
                                       ) : (
                                         <>
-                                          <table className="table table-borderless">
+                                          <table className="table table-borderless outgoing-batch-table-header">
                                             <thead>
                                               <tr>
-                                                <th
-                                                  scope="col"
-                                                  className="text-warning"
-                                                >
+                                                <th scope="col">
                                                   Ingoing Stock Number
                                                 </th>
-                                                <th
-                                                  scope="col"
-                                                  className="text-warning"
-                                                >
+                                                <th scope="col">
                                                   Weight Available (g)
                                                 </th>
-                                                <th
-                                                  scope="col"
-                                                  className="text-warning"
-                                                >
+                                                <th scope="col">
                                                   Weight to Allocate
                                                 </th>
                                               </tr>

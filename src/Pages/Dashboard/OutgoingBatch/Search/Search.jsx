@@ -152,7 +152,7 @@ export default function Search() {
         ) : (
           <div className="row p-5 edit-data-container">
             <div className="col-md-12 p-3">
-              <table className="table search-batch-found-table-header">
+              <table className="table outgoing-batch-table-header">
                 <thead>
                   <tr>
                     <th scope="col">Customer</th>
@@ -340,7 +340,7 @@ export default function Search() {
                               ></button>
                             </div>
                             <div className="modal-body ">
-                              <table className="table table-striped search-batch-found-table-header">
+                              <table className="table table-striped outgoing-batch-table-header">
                                 <thead>
                                   <tr>
                                     <th scope="col">Product</th>
