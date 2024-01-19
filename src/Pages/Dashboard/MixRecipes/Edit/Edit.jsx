@@ -253,7 +253,9 @@ const Edit = () => {
               alt=""
             />
           </Link>
-          <h1 className="text-center my-46 edit-header">Update Mix Recipe</h1>
+          <h1 className="text-center edit-header edit-header-my">
+            Update Mix Recipe
+          </h1>
 
           <form onSubmit={handleSubmit(handleEditMixRecipe)}>
             <div className="mixrecipe-create">

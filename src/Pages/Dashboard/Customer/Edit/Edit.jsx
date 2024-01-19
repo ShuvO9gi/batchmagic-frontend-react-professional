@@ -142,7 +142,7 @@ export default function Edit() {
               alt=""
             />
           </Link>
-          <h1 className="text-center my-46 edit-header">
+          <h1 className="text-center edit-header edit-header-my">
             Update Customer Information
           </h1>
           <form onSubmit={handleSubmit(handleUpdateCustomer)}>

@@ -7,6 +7,7 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { isEmpty } from '../../../../components/utils';
 import { ToastContainer, toast } from 'react-toastify';
 import close from '../../../../assets/Logo/actions/cross.svg';
+import SuccessModal from '../../../../components/SuccessModal';
 
 const Create = () => {
   const {
@@ -267,7 +268,9 @@ const Create = () => {
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 create-header">Create New Batch</h1>
+        <h1 className="text-center create-header create-header-my">
+          Create New Batch
+        </h1>
         <form onSubmit={handleSubmit(handleCreateBatch)}>
           <div className="row p-5 create-data-container">
             <div className="col-md-6 py-3 px-80 pr-1 create-data-info">
@@ -335,7 +338,7 @@ const Create = () => {
                   htmlFor="batch-template"
                   className="col-sm-4 text-warning fw-bold col-form-label"
                 >
-                  {/* Batch Template */} Mix Recipe
+                  Mix Recipe
                 </label>
                 <div className="col-sm-8">
                   <DropDown
@@ -606,9 +609,24 @@ const Create = () => {
                   batchProducts.length === 0
                 }
                 className="btn btn-orange float-end create-create-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
               >
                 Create
               </button>
+              <div
+                className="modal fade modal-success"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <SuccessModal
+                  modalText={'Product has been added successfully'}
+                />
+              </div>
             </div>
           </div>
         </form>

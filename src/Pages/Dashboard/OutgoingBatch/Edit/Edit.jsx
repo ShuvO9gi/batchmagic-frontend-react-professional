@@ -267,7 +267,7 @@ const Edit = () => {
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 edit-header">Update Batch</h1>
+        <h1 className="text-center edit-header edit-header-my">Update Batch</h1>
         <form onSubmit={handleSubmit(handleCreateBatch)}>
           <div className="row p-5 create-data-container">
             <div className="col-md-6 py-3 px-80 pr-1 create-data-info">

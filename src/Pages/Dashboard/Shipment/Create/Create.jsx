@@ -125,7 +125,9 @@ export default function Create() {
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 create-header">Create a Shipment</h1>
+        <h1 className="text-center create-header create-header-my">
+          Create a Shipment
+        </h1>
         <form onSubmit={handleSubmit(handleAddShipment)}>
           <div className="row p-5 create-data-container create-data-info">
             <div className="col-md-6 py-3 px-80">
