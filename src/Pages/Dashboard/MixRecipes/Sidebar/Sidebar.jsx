@@ -16,9 +16,7 @@ const Sidebar = () => {
   };
 
   const isActiveSubmenu = (submenuItem) => {
-    console.log(submenuItem.link, currentPath);
     const data = currentPath.includes(submenuItem.link);
-    console.log(data);
     return data;
   };
 
