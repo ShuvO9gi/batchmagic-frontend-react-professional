@@ -7,7 +7,7 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { isEmpty } from '../../../../components/utils';
 import { ToastContainer, toast } from 'react-toastify';
 import close from '../../../../assets/Logo/actions/cross.svg';
-import SuccessModal from '../../../../components/SuccessModal';
+// import SuccessModal from '../../../../components/SuccessModal';
 
 const Create = () => {
   const {
@@ -610,22 +610,20 @@ const Create = () => {
                 }
                 className="btn btn-orange float-end create-create-btn"
                 data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+                data-bs-target="#exampleModal"
               >
                 Create
               </button>
               <div
                 className="modal fade modal-success"
-                id="staticBackdrop"
-                data-bs-backdrop="static"
-                data-bs-keyboard="false"
+                id="exampleModal"
                 tabIndex="-1"
-                aria-labelledby="staticBackdropLabel"
+                aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <SuccessModal
+                {/* <SuccessModal
                   modalText={'Product has been added successfully'}
-                />
+                /> */}
               </div>
             </div>
           </div>

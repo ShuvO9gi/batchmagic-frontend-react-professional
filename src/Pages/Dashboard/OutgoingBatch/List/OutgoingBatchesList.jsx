@@ -75,6 +75,16 @@ const OutgoingBatchesList = () => {
 
   return (
     <div>
+      <Link to="/dashboard/outgoing-batch/search">
+        <div className="col-md-12 p-3 btn-customized">
+          <button
+            type="submit"
+            className="btn btn-orange float-start edit-update-btn"
+          >
+            Search Batch
+          </button>
+        </div>
+      </Link>
       <h1 className="text-center my-64 list-header">Outgoing Batches</h1>
       <DataTables
         columns={columns}

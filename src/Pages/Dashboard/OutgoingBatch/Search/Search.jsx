@@ -87,7 +87,7 @@ export default function Search() {
           />
         </Link>
         {foundBatch?.outgoing_batch_code ? (
-          <h3 className="text-left my-46 edit-header batch-found-header">
+          <h3 className="text-left edit-header edit-header-my batch-found-header">
             {' '}
             Batch Number Found:{' '}
             <span className="text-purple-fade">
@@ -95,7 +95,7 @@ export default function Search() {
             </span>{' '}
           </h3>
         ) : (
-          <h1 className="text-center my-46 edit-header">
+          <h1 className="text-center edit-header edit-header-my">
             Search Outgoing Batch
           </h1>
         )}
