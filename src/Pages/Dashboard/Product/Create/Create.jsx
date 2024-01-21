@@ -95,8 +95,12 @@ const Create = () => {
   return (
     <div>
       <div className="container my-5">
-        <Link to="/dashboard/product">
-          <img className="page-close mt-36" src={close} alt="" />
+        <Link to="/dashboard/product" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t28-r160"
+            src={close}
+            alt=""
+          />
         </Link>
         <h3 className="text-purple my-5">Create a Product</h3>
         <form onSubmit={handleSubmit(handleAddProduct)}>
