@@ -74,7 +74,7 @@ const Create = () => {
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 create-header">
+        <h1 className="text-center create-header create-header-my">
           Create New Suppliers
         </h1>
         <form onSubmit={handleSubmit(handleAddSupplier)}>

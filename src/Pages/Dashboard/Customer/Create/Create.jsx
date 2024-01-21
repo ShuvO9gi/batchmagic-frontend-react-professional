@@ -74,7 +74,9 @@ export default function Create() {
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 create-header">Create New Customer</h1>
+        <h1 className="text-center create-header create-header-my">
+          Create New Customer
+        </h1>
         <form onSubmit={handleSubmit(handleAddCustomer)}>
           <div className="row p-5 create-data-container create-data-info">
             <div className="col-md-6 py-3 px-80">

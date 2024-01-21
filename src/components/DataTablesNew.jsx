@@ -56,8 +56,8 @@ const DataTables = ({ columns, data, header, navigation }) => {
     if (!query) {
       setFilteredRows([]);
     } else {
-      document.getElementById('toogle-add-btn').style.visibility = 'hidden';
-      document.getElementById('toogle-page-close').style.visibility = 'visible';
+      /* document.getElementById('toogle-add-btn').style.visibility = 'hidden';
+      document.getElementById('toogle-page-close').style.visibility = 'visible'; */
 
       const filteredData = rows.filter((row) => {
         const propertiesToSearch = [
@@ -79,13 +79,13 @@ const DataTables = ({ columns, data, header, navigation }) => {
     }
   };
 
-  // const handleClose = () => {
-  //   /* setFilteredRows(data);
-  //   // setSearchQuery('');
-  //   document.getElementById('toogle-add-btn').style.visibility = 'visible';
-  //   document.getElementById('toogle-page-close').style.visibility = 'hidden'; */
-  //   window.location.reload(); //Not Recommended
-  // };
+  /* const handleClose = () => {
+    // setFilteredRows(data);
+    // setSearchQuery('');
+    // document.getElementById('toogle-add-btn').style.visibility = 'visible';
+    // document.getElementById('toogle-page-close').style.visibility = 'hidden';
+    window.location.reload(); //Not Recommended
+  }; */
 
   return (
     <div>

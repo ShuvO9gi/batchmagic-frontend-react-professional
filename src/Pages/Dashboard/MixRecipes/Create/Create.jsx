@@ -198,7 +198,9 @@ const Create = () => {
             alt=""
           />
         </Link>
-        <h1 className="text-center my-46 create-header">Create New Recipes</h1>
+        <h1 className="text-center create-header create-header-my">
+          Create New Recipes
+        </h1>
         <form onSubmit={handleSubmit(handleAddBatchTemplete)}>
           <div className="mixrecipe-create">
             <div className="row p-5 create-data-container">

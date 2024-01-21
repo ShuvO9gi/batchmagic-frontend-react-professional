@@ -16,6 +16,11 @@ export default function SearchList({
     document.getElementById('toogle-add-btn').style.visibility = 'visible';
     document.getElementById('toogle-page-close').style.visibility = 'hidden';
     //window.location.href = `${navigationToList}`; // window.location.reload(); //reload the page/current url //Not Recommended
+    // Reload the current resources from the server
+    //window.location.reload(true);
+
+    // Reload the current resources from the browser's cache
+    //window.location.reload(false); //false is default
   };
   return (
     <div>

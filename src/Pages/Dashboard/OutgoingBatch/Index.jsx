@@ -16,7 +16,7 @@ const OutgoingBatches = () => {
         <Route path="/create" element={<OutgoingBatchesCreate />} />
         <Route path="/show/:id" element={<OutgoingBatchesShow />} />
         <Route path="/edit/:id" element={<OutgoingBatchesEdit />} />
-        <Route path="/search/:id" element={<OutgoingBatchesSearch />} />
+        <Route path="/search" element={<OutgoingBatchesSearch />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
