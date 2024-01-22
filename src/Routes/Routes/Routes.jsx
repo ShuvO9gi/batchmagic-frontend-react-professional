@@ -12,6 +12,8 @@ import Customers from '../../Pages/Dashboard/Customer/Index';
 import Shipments from '../../Pages/Dashboard/Shipment/Index';
 import StockIndex from '../../Pages/Dashboard/Product/Stock/List/List';
 import StockCreate from '../../Pages/Dashboard/Product/Stock/Create/Create';
+import StockShow from '../../Pages/Dashboard/Product/Stock/Show/Show';
+import StockEdit from '../../Pages/Dashboard/Product/Stock/Edit/Edit';
 import Products from '../../Pages/Dashboard/Product';
 // import StockIndex from '../../Pages/Dashboard/Product/Stock/Index';
 /* import StockCreate from '../../Pages/Dashboard/Product/Stock/Create/Create';
