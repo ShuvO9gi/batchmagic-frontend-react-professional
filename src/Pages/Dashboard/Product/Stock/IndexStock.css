@@ -1,0 +1,16 @@
+.show-table-first-stocks > tbody > tr > th {
+  width: 24%;
+  font-size: 20px;
+  color: #fa7b1f !important;
+}
+
+.show-table-last-stocks > tbody > tr > th {
+  width: 20%;
+  font-weight: 600;
+  font-size: 20px;
+  color: #ff6e05 !important;
+}
+
+.show-table-last-stocks > tbody > tr > td {
+  width: 25%;
+}
