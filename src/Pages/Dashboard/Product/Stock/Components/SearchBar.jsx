@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './components.css';
 import React from 'react';
-import search from '../../../../assets/Logo/actions/search.svg';
+import search from '../../../../../assets/Logo/actions/search.svg';
 
 function SearchBar({ searchQuery, setSearchQuery, handleSearch }) {
   return (

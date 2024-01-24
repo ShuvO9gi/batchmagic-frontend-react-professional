@@ -114,7 +114,7 @@ const Edit = () => {
       ) : (
         <div>
           <div>
-            <Link to="/dashboard/stocks" className="d-flex flex-column">
+            <Link to="/dashboard/stock" className="d-flex flex-column">
               <img
                 className="align-self-end page-close edit-page-close-position"
                 src={close}

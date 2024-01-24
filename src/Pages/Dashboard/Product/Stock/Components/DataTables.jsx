@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import './components.css';
 import PropTypes from 'prop-types';
-import { isEmpty } from '../../../../components/utils.jsx';
-import Loader from '../../../../components/Loader.jsx';
+import { isEmpty } from '../../../../../components/utils.jsx';
+import Loader from '../../../../../components/Loader.jsx';
 import SearchBar from '../Components/SearchBar.jsx';
 import { Link } from 'react-router-dom';
 
@@ -97,9 +97,9 @@ const DataTables = ({ columns, data }) => {
                     />
                   </div>
                   <div className="">
-                    <Link to="/dashboard/product/create">
+                    <Link to="/dashboard/stock/create">
                       <button type="button" className="btn list-add-btn">
-                        Add Products
+                        Add Stocks
                       </button>
                     </Link>
                   </div>

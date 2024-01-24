@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+// Index.js
+import React, { useEffect, useState, useMemo } from 'react';
 import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate';
-import { Link } from 'react-router-dom';
-import show from '../../../../../assets/Logo/file.png';
-import edit from '../../../../../assets/Logo/actions/edit.svg';
+import DataTables from '../Components/DataTables';
+import show from '../../../../../assets/Logo/actions/show.svg';
+import StockModal from '../Components/StockModal';
 
 const Index = () => {
   const [products, setProducts] = useState([]);
+  const [selectedRowId, setSelectedRowId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    const getProducts = async () => {
+
+    const fetchData = async () => {
       try {
         const response = await axiosPrivate.get('/products', {
           signal: controller.signal,
@@ -27,148 +31,91 @@ const Index = () => {
         }
       }
     };
-    getProducts();
+
+    fetchData();
+
     return () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [axiosPrivate]);
 
-  console.log(products);
+  const memoizedProducts = useMemo(() => products, [products]);
 
-  const filteredProducts = products?.filter(
-    (product) => product.stocks && product.stocks.length > 0,
-  );
+  const filteredProducts = useMemo(() => {
+    return memoizedProducts?.filter(
+      (product) => product.stocks && product.stocks.length > 0,
+    );
+  }, [memoizedProducts]);
+
+  const showStockModal = (rowId) => {
+    console.log('Selected Row ID:', rowId);
+    setSelectedRowId(rowId);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedRowId(null);
+  };
+
+  const columns = [
+    {
+      name: 'Name',
+      selector: (row) => row.name,
+      sortable: true,
+    },
+    {
+      name: 'Supplier',
+      selector: (row) => row?.supplier?.name,
+      sortable: true,
+    },
+    {
+      name: 'Stock Weight (g)',
+      selector: (row) => {
+        let total = 0;
+        let outgoing = 0;
+        let remaining = 0;
+        row?.stocks?.forEach((stock) => {
+          total += stock.total_weight;
+          outgoing += stock.total_sold_weight;
+          remaining = total - outgoing;
+        });
+        return Number(remaining.toFixed(2));
+      },
+      sortable: true,
+    },
+    {
+      name: 'Actions',
+      cell: (row) => (
+        <div className="action-container">
+          <button
+            className="btn btn-action-customized"
+            onClick={() => showStockModal(row.id)}
+          >
+            <img src={show} className="show-action" alt="" />
+          </button>
+        </div>
+      ),
+    },
+  ];
 
   return (
-    filteredProducts.length > 0 && (
-      <div className="flex flex-col">
-        <div className="overflow-x-auto">
-          <div className="py-2 align-middle inline-block min-w-full">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr className="text-center">
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Batch Number
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Supplier
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Stock Weight
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredProducts.map((product) => {
-                    return (
-                      <React.Fragment key={product.id}>
-                        <tr>
-                          <td
-                            className="px-6 py-4 whitespace-nowrap"
-                            rowSpan={product.stocks.length}
-                          >
-                            <div className="text-sm text-gray-900">
-                              {product.name}
-                            </div>
-                          </td>
+    <div>
+      <h3 className="text-center my-5 text-purple">Product Stocks</h3>
+      <DataTables columns={columns} data={filteredProducts} />
 
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {product.stocks[0].ingoing_batch_number}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {product.supplier.name}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {product.stocks[0].total_weight -
-                                product.stocks[0].total_sold_weight}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="action-container">
-                              <Link
-                                to={`/dashboard/stock/show/${product.stocks[0].id}`}
-                              >
-                                <button className="btn btn-action-customized">
-                                  <img
-                                    src={show}
-                                    className="show-action"
-                                    alt=""
-                                  />
-                                </button>
-                              </Link>
-                              <Link
-                                to={`/dashboard/stock/edit/${product.stocks[0].id}`}
-                              >
-                                <button className="btn btn-action-customized">
-                                  <img
-                                    src={edit}
-                                    className="edit-action"
-                                    alt=""
-                                  />
-                                </button>
-                              </Link>
-                            </div>
-                          </td>
-                        </tr>
-                        {product.stocks.slice(1).map((stock) => {
-                          return (
-                            <tr key={stock.id}>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  {stock.ingoing_batch_number}
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  {product.supplier.name}
-                                </div>
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-900">
-                                  {stock.total_weight - stock.total_sold_weight}
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </React.Fragment>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+      {selectedRowId && (
+        <StockModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          rowId={selectedRowId}
+        >
+          {/* Render your modal content here */}
+          <h2>Stock Details</h2>
+        </StockModal>
+      )}
+    </div>
   );
 };
 
