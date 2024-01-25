@@ -46,7 +46,7 @@ const Show = () => {
         <Loader />
       ) : (
         <div>
-          <Link to="/dashboard/stocks" className="d-flex flex-column">
+          <Link to="/dashboard/stock" className="d-flex flex-column">
             <img
               className="align-self-end page-close show-page-close-position"
               src={close}
