@@ -37,7 +37,8 @@
 
 .show-action,
 .edit-action,
-.delete-action {
+.delete-action,
+.search-action {
   height: 28px;
   width: 28px;
   cursor: pointer;
