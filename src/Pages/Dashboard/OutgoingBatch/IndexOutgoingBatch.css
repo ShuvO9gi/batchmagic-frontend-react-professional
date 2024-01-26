@@ -3,6 +3,11 @@
   border-radius: 20px !important;
 }
 
+/* css style for edit page */
+.mixrecipe-dropdown .css-16xfy0z-control {
+  background-color: #e9ecef !important;
+}
+
 /* css style for search page */
 .batch-found-header {
   margin-left: 60px;
