@@ -46,9 +46,10 @@ const columns = [
 
 const OutgoingBatchesList = () => {
   const [batches, setBatches] = useState([]);
+  const [message, setMessage] = useState('');
   const { err, setErr } = useState({});
   const { setLoading } = useAuth();
-  const [showLoader, setShowLoader] = useState(false);
+  //const [showLoader, setShowLoader] = useState(false);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
@@ -66,8 +67,6 @@ const OutgoingBatchesList = () => {
         const response = await axiosPrivate.get('/outgoing-batches', {
           signal: controller.signal,
         });
-        console.log('batch');
-        console.log(response);
         if (isMounted) {
           setBatches(response.data);
         }
@@ -88,7 +87,7 @@ const OutgoingBatchesList = () => {
 
   const handleSearchOutGoingBatch = async (data, e) => {
     const controller = new AbortController();
-    setShowLoader(true);
+    // setShowLoader(true);
     e.preventDefault();
     try {
       const res = await axiosPrivate.get(
@@ -96,15 +95,14 @@ const OutgoingBatchesList = () => {
         { signal: controller.signal },
       );
       if (res.status === 200) {
-        setShowLoader(false);
+        // setShowLoader(false);
         controller.abort();
         navigate(`search/${data.outgoing_batch_code}`);
-        // window.location.reload();
       } else {
-        setShowLoader(false);
+        // setShowLoader(false);
       }
     } catch (err) {
-      setShowLoader(false);
+      // setShowLoader(false);
       setLoading(false);
       setErr(err.response.data.errors);
     }
@@ -166,6 +164,8 @@ const OutgoingBatchesList = () => {
                           })}
                           id="exampleFormControlInput1"
                           placeholder="Outgoing Batch Code"
+                          onChange={(e) => setMessage(e.target.value)}
+                          value={message}
                         />
                         {errors.outgoing_batch_code && (
                           <p className="text-danger">
@@ -182,7 +182,8 @@ const OutgoingBatchesList = () => {
                         <button
                           type="submit"
                           className="btn btn-orange float-end edit-update-btn"
-                          data-bs-dismiss={!showLoader ? 'modal' : ''}
+                          /* data-bs-dismiss={!showLoader ? 'modal' : ''} */
+                          data-bs-dismiss={message == '' ? '' : 'modal'}
                         >
                           Search
                         </button>
