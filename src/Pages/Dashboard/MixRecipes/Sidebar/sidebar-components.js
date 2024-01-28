@@ -63,7 +63,7 @@ export const sidebarMenu = [
     link: '/dashboard/shipments',
   },
   {
-    title: 'Mix Recipies',
+    title: 'Mix Recipes',
     icon: mix_recipes,
     iconSelected: mix_recipes_selected,
     link: '/dashboard/mix-recipes',
