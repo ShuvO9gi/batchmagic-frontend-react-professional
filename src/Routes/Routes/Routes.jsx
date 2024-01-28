@@ -36,7 +36,6 @@ const router = createBrowserRouter([
       { path: '/dashboard', element: <DashboardHome /> },
       { path: '/dashboard/supplier/*', element: <Supplier /> },
       { path: '/dashboard/product/*', element: <Products /> },
-      { path: '/dashboard/product/stock/*', element: <Products /> },
       { path: '/dashboard/outgoing-batch/*', element: <OutgoingBatches /> },
       { path: '/dashboard/customers/*', element: <Customers /> },
       { path: '/dashboard/shipments/*', element: <Shipments /> },
