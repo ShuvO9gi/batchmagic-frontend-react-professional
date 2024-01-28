@@ -6,7 +6,7 @@ import ProductShow from './Show/Show';
 import NotFound from '../../../Pages/NotFound/NotFound';
 import ProductList from './List/List';
 import ProductEdit from './Edit/Edit';
-import StockList from './Stock/List/StocksList';
+import StockList from './Stock/List/List';
 import StockCreate from './Stock/Create/Create';
 import StockShow from './Stock/Show/Show';
 import StockEdit from './Stock/Edit/Edit';

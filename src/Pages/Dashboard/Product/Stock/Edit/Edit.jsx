@@ -98,7 +98,7 @@ const Edit = () => {
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
-        navigate(`/dashboard/stock/show/${params.id}`);
+        navigate(`/dashboard/product/stock/show/${params.id}`);
       }
     } catch (err) {
       setLoading(false);
@@ -114,7 +114,7 @@ const Edit = () => {
       ) : (
         <div>
           <div>
-            <Link to="/dashboard/stock" className="d-flex flex-column">
+            <Link to="/dashboard/product/stock" className="d-flex flex-column">
               <img
                 className="align-self-end page-close edit-page-close-position"
                 src={close}

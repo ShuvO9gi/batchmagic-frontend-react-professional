@@ -30,7 +30,7 @@ export const sidebarMenu = [
       },
       {
         title: 'Product Stocks',
-        link: '/dashboard/stock',
+        link: '/dashboard/product/stock',
         icon: stock,
         iconSelected: stock_selected,
       },

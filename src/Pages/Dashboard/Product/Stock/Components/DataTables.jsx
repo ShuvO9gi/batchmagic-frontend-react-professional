@@ -97,7 +97,7 @@ const DataTables = ({ columns, data }) => {
                     />
                   </div>
                   <div className="">
-                    <Link to="/dashboard/stock/create">
+                    <Link to="/dashboard/product/stock/create">
                       <button type="button" className="btn list-add-btn">
                         Add Stocks
                       </button>

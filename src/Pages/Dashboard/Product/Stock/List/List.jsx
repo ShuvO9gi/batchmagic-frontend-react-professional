@@ -49,7 +49,6 @@ const Index = () => {
   }, [memoizedProducts]);
 
   const showStockModal = (rowId) => {
-    console.log('Selected Row ID:', rowId);
     setSelectedRowId(rowId);
     setIsModalOpen(true);
   };
@@ -109,10 +108,9 @@ const Index = () => {
         <StockModal
           isOpen={isModalOpen}
           onClose={closeModal}
-          rowId={selectedRowId}
+          product={products.find((product) => product.id === selectedRowId)}
         >
           {/* Render your modal content here */}
-          <h2>Stock Details</h2>
         </StockModal>
       )}
     </div>

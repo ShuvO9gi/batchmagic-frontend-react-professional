@@ -59,7 +59,7 @@ const Create = () => {
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
-        navigate('/dashboard/stocks');
+        navigate('/dashboard/product/stock');
       }
     } catch (err) {
       setLoading(false);
@@ -74,7 +74,7 @@ const Create = () => {
   return (
     <div>
       <div>
-        <Link to="/dashboard/stock" className="d-flex flex-column">
+        <Link to="/dashboard/product/stock" className="d-flex flex-column">
           <img
             className="align-self-end page-close create-page-close-position"
             src={close}
