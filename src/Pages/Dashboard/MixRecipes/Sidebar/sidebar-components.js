@@ -9,9 +9,11 @@ import customers_selected from '../../../../assets/Logo/sidebar/customers_select
 import outgoing_shipments from '../../../../assets/Logo/sidebar/outgoing_shipments.svg';
 import outgoing_shipments_selected from '../../../../assets/Logo/sidebar/outgoing_shipments_selected.svg';
 import mix_recipes from '../../../../assets/Logo/sidebar/mix_recipes.svg';
-import stock from '../../../../assets/Logo/sidebar/stock.svg';
+//import stock from '../../../../assets/Logo/sidebar/stock.svg';
+import stock from '../../../../assets/Logo/sidebar/stock_black.svg';
 import stock_selected from '../../../../assets/Logo/sidebar/stock_selected.svg';
-import shopping_bag from '../../../../assets/Logo/sidebar/shopping_bag.svg';
+// import shopping_bag from '../../../../assets/Logo/sidebar/shopping_bag.svg';
+import shopping_bag from '../../../../assets/Logo/sidebar/product_black.svg';
 import shopping_bag_selected from '../../../../assets/Logo/sidebar/shopping_bag_selected.svg';
 import mix_recipes_selected from '../../../../assets/Logo/sidebar/mix_recipes_selected.svg';
 

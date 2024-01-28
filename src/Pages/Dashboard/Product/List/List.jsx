@@ -1,10 +1,10 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import show from '../../../../assets/Logo/file.png';
+import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
 import ErrorModal from '../../../../components/ErrorModal';
-import React from 'react';
 import DataTables from '../Components/DataTables';
 
 const columns = [
