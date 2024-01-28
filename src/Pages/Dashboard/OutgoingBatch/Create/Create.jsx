@@ -7,7 +7,7 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { isEmpty } from '../../../../components/utils';
 import { ToastContainer, toast } from 'react-toastify';
 import close from '../../../../assets/Logo/actions/cross.svg';
-// import SuccessModal from '../../../../components/SuccessModal';
+import SuccessModal from '../../../../components/SuccessModal';
 
 const Create = () => {
   const {
@@ -621,9 +621,9 @@ const Create = () => {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                {/* <SuccessModal
+                <SuccessModal
                   modalText={'Product has been added successfully'}
-                /> */}
+                />
               </div>
             </div>
           </div>
