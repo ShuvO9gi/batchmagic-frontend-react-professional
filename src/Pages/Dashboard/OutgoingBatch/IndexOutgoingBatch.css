@@ -4,8 +4,12 @@
 }
 
 /* css style for edit page */
-.mixrecipe-dropdown .css-16xfy0z-control {
+.mixrecipe-dropdown .select__control {
   background-color: #e9ecef !important;
+}
+
+.mixrecipe-dropdown .select__single-value {
+  color: #000 !important;
 }
 
 /* css style for search page */
@@ -17,6 +21,10 @@
   font-weight: 700;
   font-size: 20px;
   color: #ffad05;
+}
+
+.text-purple-fade {
+  color: #30298094 !important;
 }
 
 .outgoing-batch-table-header > thead > tr > th {

@@ -119,7 +119,7 @@ const OutgoingBatchesList = () => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            <button type="submit" className="btn btn-orange float-start ">
+            <button type="submit" className="btn float-end">
               <span>
                 <img src={search} className="search-action" alt="" />
               </span>
@@ -133,7 +133,7 @@ const OutgoingBatchesList = () => {
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div className="modal-dialog modal-xl modal-dialog-centered">
+            <div className="modal-dialog modal-xl modal-dialog-centered modal-border-customized">
               <div className="modal-content">
                 <div className="modal-header">
                   <button

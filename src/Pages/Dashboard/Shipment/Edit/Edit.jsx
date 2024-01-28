@@ -30,7 +30,7 @@ const Edit = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
-  console.log(customer_id);
+  // console.log(customer_id);
 
   useEffect(() => {
     let isMounted = true;
@@ -40,7 +40,7 @@ const Edit = () => {
         const res = await axiosPrivate.get(`/shipment/${params.id}`, {
           signal: controller.signal,
         });
-        console.log(res);
+        // console.log(res);
         if (isMounted && res.status === 200) {
           setLoading(false);
           controller.abort();
@@ -134,8 +134,8 @@ const Edit = () => {
       const res = await axiosPrivate.put(`/shipment/${params.id}`, formData, {
         signal: controller.signal,
       });
-      console.log('update');
-      console.log(res);
+      // console.log('update');
+      // console.log(res);
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
@@ -143,7 +143,7 @@ const Edit = () => {
       }
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      // console.log(err);
       setErr(err.response.data.errors);
     }
   };

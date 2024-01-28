@@ -96,7 +96,7 @@ export default function Search() {
             <div>
               <h3 className="text-left edit-header edit-header-my batch-found-header">
                 Batch Number Found:
-                <span className="text-purple-fade">
+                <span className="text-purple-fade mx-2">
                   {foundBatch?.outgoing_batch_code}
                 </span>
               </h3>
@@ -110,7 +110,7 @@ export default function Search() {
                         <th scope="col">Quantity</th>
                         <th scope="col">Date of shipment</th>
                         <th scope="col">Total weight</th>
-                        <th scope="col">Breakdown</th>
+                        {/* <th scope="col">Breakdown</th> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -134,7 +134,7 @@ export default function Search() {
                             {ship.quantity *
                               foundBatch?.batch_template?.total_weight}
                           </td>
-                          <td>
+                          {/* <td>
                             <button
                               type="button"
                               className="btn btn-primary"
@@ -143,7 +143,7 @@ export default function Search() {
                             >
                               Info
                             </button>
-                          </td>
+                          </td> */}
 
                           <div
                             className="modal fade"
@@ -258,7 +258,7 @@ export default function Search() {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="modal-footer">
+                                {/* <div className="modal-footer">
                                   <button
                                     type="button"
                                     className="btn btn-secondary"
@@ -266,12 +266,12 @@ export default function Search() {
                                   >
                                     Close
                                   </button>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </div>
 
-                          <div
+                          {/* <div
                             className="modal fade"
                             id={`breakdownModal${ship.id}`}
                             tabIndex="-1"
@@ -370,7 +370,7 @@ export default function Search() {
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </tr>
                       ))}
                     </tbody>
