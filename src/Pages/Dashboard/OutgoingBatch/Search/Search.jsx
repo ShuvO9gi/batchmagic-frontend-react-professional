@@ -96,7 +96,7 @@ export default function Search() {
             <div>
               <h3 className="text-left edit-header edit-header-my batch-found-header">
                 Batch Number Found:
-                <span className="text-purple-fade">
+                <span className="text-purple-fade mx-2">
                   {foundBatch?.outgoing_batch_code}
                 </span>
               </h3>
