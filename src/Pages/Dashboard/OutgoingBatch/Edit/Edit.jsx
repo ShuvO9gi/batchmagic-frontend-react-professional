@@ -226,7 +226,7 @@ const Edit = () => {
   }; */
 
   const makeData = (data) => {
-    const stocks = Object.values(selectedStocks).reduce(
+    /* const stocks = Object.values(selectedStocks).reduce(
       (acc, productStocks) => {
         Object.keys(productStocks).forEach((stockId) => {
           if (productStocks[stockId]) {
@@ -239,18 +239,20 @@ const Edit = () => {
         return acc;
       },
       [],
-    );
+    ); */
     const dataToSend = {
-      outgoing_batch_code: data.name,
-      total_quantity: data.quantity,
-      batch_template_id: batchTemplateId,
-      stocks: stocks,
+      outgoing_batch_code: data.name ? data.name : batch.outgoing_batch_code,
+      /* quantity: data.quantity ? data.quantity : batch.total_quantity, */
+      /* outgoing_batch_code: batch.outgoing_batch_code, */
+      /* batch_template_id: batchTemplateId, */
+      /* stocks: stocks, */
     };
     return dataToSend;
   };
 
   const handleUpdateBatch = async (data, e) => {
     const dataToSend = makeData(data);
+    console.log(dataToSend);
     const controller = new AbortController();
     e.preventDefault();
     setLoading(true);
