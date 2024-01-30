@@ -34,7 +34,7 @@ const columns = [
             <img src={show} className="show-action" alt="" />
           </button>
         </Link>
-        <Link to={`/dashboard/outgoing-batch/edit/${row.id}`}>
+        <Link to={`/dashboard/outgoing-batch/${row.id}`}>
           <button className="btn btn-action-customized">
             <img src={edit} className="edit-action" alt="" />
           </button>

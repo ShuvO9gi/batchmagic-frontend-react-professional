@@ -122,7 +122,7 @@ const Edit = () => {
     );
   }, [batchTemplates, batchTemplateId, quantity]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const isStocksSelectedProperly = batchProducts.every((batchProduct) => {
       const requiredProductWeight = parseFloat(batchProduct.weight) * quantity;
       const selectedProductStocksWeight = getTotalWeightEntered(batchProduct);
@@ -142,9 +142,9 @@ const Edit = () => {
         !isEmpty(selectedStocks) &&
         isStocksSelectedProperly,
     );
-  }, [batchProducts, selectedStocks, quantity]);
+  }, [batchProducts, selectedStocks, quantity]); */
 
-  const getTotalWeightEntered = (batchProduct) => {
+  /* const getTotalWeightEntered = (batchProduct) => {
     return Number(
       Object.values(selectedStocks[batchProduct.product_id])
         .reduce((acc, weight) => {
@@ -223,7 +223,7 @@ const Edit = () => {
         };
       });
     }
-  };
+  }; */
 
   const makeData = (data) => {
     const stocks = Object.values(selectedStocks).reduce(
@@ -249,27 +249,29 @@ const Edit = () => {
     return dataToSend;
   };
 
-  const handleCreateBatch = async (data, e) => {
-    e.preventDefault();
+  const handleUpdateBatch = async (data, e) => {
+    const dataToSend = makeData(data);
     const controller = new AbortController();
+    e.preventDefault();
+    setLoading(true);
 
-    if (isAllStocksSelected) {
-      const dataToSend = makeData(data);
-      setLoading(true);
-      try {
-        const res = await axiosPrivate.post('/outgoing-batch', dataToSend, {
+    try {
+      const res = await axiosPrivate.put(
+        `/outgoing-batch/${params.id}`,
+        dataToSend,
+        {
           signal: controller.signal,
-        });
+        },
+      );
 
-        if (res.status === 200) {
-          setLoading(false);
-          controller.abort();
-          navigate('/dashboard/outgoing-batch');
-        }
-      } catch (err) {
+      if (res.status === 200) {
         setLoading(false);
-        setErr(err.response.data.errors);
+        controller.abort();
+        navigate('/dashboard/outgoing-batch');
       }
+    } catch (err) {
+      setLoading(false);
+      setErr(err.response.data.errors);
     }
   };
 
@@ -312,7 +314,7 @@ const Edit = () => {
           <h1 className="text-center edit-header edit-header-my">
             Update Batch
           </h1>
-          <form onSubmit={handleSubmit(handleCreateBatch)}>
+          <form onSubmit={handleSubmit(handleUpdateBatch)}>
             <div className="row p-5 edit-data-container">
               <div className="col-md-6 py-3 px-80 pr-1 edit-data-info">
                 <div className="form-group py-3 d-flex align-items-center">
@@ -354,27 +356,29 @@ const Edit = () => {
                   <div className="col-sm-8">
                     <input
                       type="number"
-                      {...register('quantity', {
+                      {...register(
+                        'quantity' /* , {
                         required: 'Quantity is Required',
                         min: {
                           value: 1,
                           message: 'Quantity should be greater than 0',
                         },
-                      })}
+                      } */,
+                      )}
                       name="quantity"
-                      step="1"
+                      /* step="1" */
                       className="form-control rounded-0"
-                      onChange={handleQuantity}
+                      /* onChange={handleQuantity} */
                       id="quantity"
                       defaultValue={batch?.total_quantity}
                       placeholder="Quantity"
                       /* readOnly */
                       disabled
                     />
-                    {errors.quantity && (
+                    {/* {errors.quantity && (
                       <p className="text-danger">{errors.quantity.message}</p>
                     )}
-                    {err && <p className="text-danger">{err?.quantity[0]}</p>}
+                    {err && <p className="text-danger">{err?.quantity[0]}</p>} */}
                   </div>
                 </div>
 
@@ -387,8 +391,8 @@ const Edit = () => {
                   </label>
                   <div className="col-sm-8 mixrecipe-dropdown">
                     <DropDown
-                      handleDropDown={handleDropDown}
-                      dropDownValue={batchTemplates}
+                      /* handleDropDown={handleDropDown} */
+                      /* dropDownValue={batchTemplates} */
                       defaultValue={batchTemplates.find(
                         (batchTemplate) =>
                           batchTemplate.id === batch?.batch_template_id,
@@ -398,7 +402,7 @@ const Edit = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              {/* <div className="col-md-6">
                 {quantity > 0 && batchProducts.length > 0 && (
                   <>
                     {isAllStocksSelected ? (
@@ -650,15 +654,11 @@ const Edit = () => {
                     })}
                   </>
                 )}
-              </div>
+              </div> */}
               <div className="col-md-12 p-3 btn-customized">
                 <button
                   type="submit"
-                  disabled={
-                    !isUnique ||
-                    !isAllStocksSelected ||
-                    batchProducts.length === 0
-                  }
+                  disabled={!isUnique}
                   className="btn btn-orange float-end edit-update-btn"
                 >
                   Update

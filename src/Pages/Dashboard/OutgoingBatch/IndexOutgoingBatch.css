@@ -23,8 +23,9 @@
   color: #ffad05;
 }
 
-.text-purple-fade {
-  color: #30298094 !important;
+.text-purple {
+  /* color: #30298094 !important; */
+  font-weight: 400 !important;
 }
 
 .outgoing-batch-table-header > thead > tr > th {

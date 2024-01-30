@@ -96,7 +96,7 @@ export default function Search() {
             <div>
               <h3 className="text-left edit-header edit-header-my batch-found-header">
                 Batch Number Found:
-                <span className="text-purple-fade mx-2">
+                <span className="text-purple mx-2">
                   {foundBatch?.outgoing_batch_code}
                 </span>
               </h3>
@@ -125,7 +125,7 @@ export default function Search() {
                               data-bs-toggle="modal"
                               data-bs-target={`#customerModal${ship.id}`}
                             >
-                              Info
+                              INFO
                             </button>
                           </td>
                           <td>{ship.quantity}</td>
@@ -141,7 +141,7 @@ export default function Search() {
                               data-bs-toggle="modal"
                               data-bs-target={`#breakdownModal${ship.id}`}
                             >
-                              Info
+                              INFO
                             </button>
                           </td> */}
 
@@ -226,7 +226,7 @@ export default function Search() {
                                         htmlFor="address"
                                         className="text-purple"
                                       >
-                                        ContactPerson Name:
+                                        Contact Person Name:
                                       </label>
                                       <p id="address">
                                         {ship.customer.contact_person_name}
@@ -239,7 +239,7 @@ export default function Search() {
                                         htmlFor="phone"
                                         className="text-purple"
                                       >
-                                        ContactPerson Phone:
+                                        Contact Person Phone:
                                       </label>
                                       <p id="phone">
                                         {ship.customer.contact_person_phone}
@@ -250,7 +250,7 @@ export default function Search() {
                                         htmlFor="address"
                                         className="text-purple"
                                       >
-                                        ContactPerson Email:
+                                        Contact Person Email:
                                       </label>
                                       <p id="address">
                                         {ship.customer.contact_person_email}
