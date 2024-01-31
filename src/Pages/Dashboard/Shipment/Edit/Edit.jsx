@@ -44,7 +44,10 @@ const Edit = () => {
         if (isMounted && res.status === 200) {
           setLoading(false);
           controller.abort();
+          setTotalQuantity(res.data.data.outgoing_batch.total_quantity);
           setShipment(res.data.data);
+          setOutgoingBatch_id(res.data.data.outgoing_batch_id);
+          setCustomer_id(res.data.data.customer_id);
         }
       } catch (err) {
         setLoading(false);
@@ -62,9 +65,9 @@ const Edit = () => {
     if (shipment) {
       setValue('name', shipment.name);
       setValue('shipment_date', shipment.shipment_date);
-      setValue('quntity', shipment.quntity);
-      setValue('outgoingBatch_id', shipment.outgoing_batch.outgoing_batch_code);
-      setValue('customer_id', shipment.customer.name);
+      setValue('quantity', shipment.quantity);
+      setValue('outgoingBatch_id', shipment.outgoing_batch_id);
+      setValue('customer_id', shipment.customer_id);
     }
   }, [shipment, setValue]);
 
@@ -112,12 +115,13 @@ const Edit = () => {
   };
 
   const makeData = (data) => {
+    console.log(data);
     return {
       name: data.name ? data.name : shipment.name,
       shipment_date: data.shipment_date
         ? data.shipment_date
         : shipment.shipment_date,
-      quntity: data.quntity ? data.quntity : shipment.quntity,
+      quantity: data.quantity ? data.quantity : shipment.quantity,
       outgoing_batch_id: data.outgoing_batch_id
         ? data.outgoing_batch_id
         : shipment.outgoing_batch_id,
@@ -127,6 +131,7 @@ const Edit = () => {
 
   const handleUpdateShipment = async (data, e) => {
     const formData = makeData(data);
+    console.log(formData);
     const controller = new AbortController();
     e.preventDefault();
     setLoading(true);
@@ -258,8 +263,8 @@ const Edit = () => {
                     handleDropDown={handleDropDown}
                     dropDownValue={outgoingBatches}
                     defaultValue={outgoingBatches.find(
-                      (outgoingBatche) =>
-                        outgoingBatche.id === shipment?.outgoing_batch_id,
+                      (outgoingBatch) =>
+                        outgoingBatch.id === shipment?.outgoing_batch_id,
                     )}
                     optionLabel="outgoing_batch_code"
                   />
