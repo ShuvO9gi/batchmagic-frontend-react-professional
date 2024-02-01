@@ -1,7 +1,7 @@
 /* Sidebar container */
 .sidebar {
   width: 280px;
-  height: 100vh;
+  height: 100%;
   background-color: #eaeaf2;
   position: relative;
   top: 0;
@@ -9,8 +9,7 @@
   overflow: hidden;
 }
 
-.sidebar ul {
-  list-style-type: none;
+.sidebar-menu {
   margin: 0;
   padding: 0;
   top: 50px;
@@ -18,7 +17,7 @@
 }
 
 /* Sidebar links */
-.sidebar li {
+.sidebar-item {
   font-size: 20px;
   display: block;
   line-height: 20px;
@@ -26,8 +25,8 @@
 }
 
 /* sidebar children gap 8px */
-.sidebar li a {
-  padding: 8px;
+.sidebar-item a {
+  padding: 8px 16px 8px 0px;
   display: flex;
   align-items: center;
   color: #302980;
@@ -46,23 +45,23 @@
 }
 
 /* Active/current link */
-.sidebar li.active a,
-.sidebar li.last-item a {
+.sidebar-item.active a,
+.sidebar-item.last-item a {
   background-color: #302980;
   color: #ffffff;
 }
 
-.sidebar li.active {
+.sidebar-item.active {
   background-color: #302980;
   color: #ffffff;
 }
 
 /* Hover effect for non-selected items */
-.sidebar li:not(.active):hover {
+.sidebar-item:not(.active):hover {
   background-color: white;
 }
 
-.sidebar li:not(.active):hover a {
+.sidebar-item:not(.active):hover a {
   color: #302980; /* Adjust text color on hover */
 }
 
@@ -76,12 +75,58 @@
   padding-bottom: 20px;
 }
 
+/* Show submenu when parent is active */
+.sidebar-item.active .submenu {
+  display: contents;
+}
+
+.submenu {
+  background-color: #302980;
+  display: none;
+  max-height: 0;
+  flex-direction: column;
+}
+
+.submenu.open {
+  display: flex;
+  max-height: 1000px;
+  transition: max-height 0.2s ease-out;
+}
+
+.submenu-item {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  padding-top: 20px;
+  background-color: rgba(217, 217, 217, 1) !important;
+  color: black;
+  width: 100%;
+  padding-left: 70px;
+  padding-bottom: 20px;
+}
+
+.submenu-item:not(.active):hover {
+  background-color: #302980;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.submenu-item a {
+  color: black;
+  text-decoration: none;
+}
+
+.sub-active {
+  color: #ff6e05 !important;
+  text-decoration: none;
+}
+
 /* Responsive sidebar */
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;
   }
-  .sidebar li {
+  .sidebar-item {
     font-size: 18px;
   }
 }

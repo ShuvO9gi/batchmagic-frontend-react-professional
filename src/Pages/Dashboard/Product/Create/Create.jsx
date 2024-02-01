@@ -1,36 +1,12 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
+import { useNavigate, Link } from 'react-router-dom';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import ErrorModal from '../../../../components/ErrorModal';
-
-const buttons = [
-  {
-    name: 'Products',
-    link: '/dashboard/product',
-    class: 'btn-small',
-  },
-  {
-    name: 'Search product',
-    link: '/dashboard/product/search',
-    class: 'btn-small',
-  },
-  {
-    name: 'Create New Stock',
-    link: '/dashboard/stock/create',
-    class: 'btn-small',
-  },
-  //,
-  // {
-  //     name: 'Setup product syncing',
-  //     link: '/dashboard/product/syncing',
-  //     class: 'btn-small'
-  // }
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 const Create = () => {
   const {
@@ -118,8 +94,14 @@ const Create = () => {
   };
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
       <div className="container my-5">
+        <Link to="/dashboard/product" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close page-close-position-t28-r160"
+            src={close}
+            alt=""
+          />
+        </Link>
         <h3 className="text-purple my-5">Create a Product</h3>
         <form onSubmit={handleSubmit(handleAddProduct)}>
           <div className="row supplier-form p-5">

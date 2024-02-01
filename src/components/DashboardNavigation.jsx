@@ -13,8 +13,7 @@ const DashboardNavigation = ({ buttons }) => {
                 className={`btn btn-orange + ${button?.class}`}
                 key={index}
               >
-                {' '}
-                {button.name}{' '}
+                {button.name}
               </button>
             </Link>
           );

@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import useAuth from '../../../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import DropDown from '../../../../components/DropDown';
 import ErrorModal from '../../../../components/ErrorModal';
-
-const buttons = [
-  {
-    name: 'Shipments',
-    link: '/dashboard/shipments',
-    class: 'btn-small',
-  },
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 export default function Create() {
   const {
@@ -125,12 +117,20 @@ export default function Create() {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <div className="container my-5">
-        <h3 className="text-purple my-5">Create a Shipment</h3>
+      <div>
+        <Link to="/dashboard/shipments" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close create-page-close-position"
+            src={close}
+            alt=""
+          />
+        </Link>
+        <h1 className="text-center create-header create-header-my">
+          Create a Shipment
+        </h1>
         <form onSubmit={handleSubmit(handleAddShipment)}>
-          <div className="row supplier-form p-5">
-            <div className="col-md-6 p-3">
+          <div className="row p-5 create-data-container create-data-info">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="shipment-name"
                 className="form-label fw-bold text-warning"
@@ -153,7 +153,7 @@ export default function Create() {
               {err && <p className="text-danger">{err?.name[0]}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="shipment-date"
                 className="form-label fw-bold text-warning"
@@ -176,7 +176,7 @@ export default function Create() {
               {err && <p className="text-danger">{err?.shipment_date}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="outgoing-batch"
                 className="form-label fw-bold text-warning"
@@ -190,7 +190,7 @@ export default function Create() {
               />
             </div>
             {outgoingBatch_id && (
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="quantity"
                   className="form-label fw-bold text-warning"
@@ -225,7 +225,7 @@ export default function Create() {
               </div>
             )}
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="customer"
                 className="form-label fw-bold text-warning"
@@ -242,7 +242,7 @@ export default function Create() {
                 <button
                   type="submit"
                   disabled={errors?.name?.message}
-                  className="btn btn-orange float-end"
+                  className="btn btn-orange float-end create-create-btn"
                 >
                   Create
                 </button>

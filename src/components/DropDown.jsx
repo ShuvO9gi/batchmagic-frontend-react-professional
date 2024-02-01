@@ -7,6 +7,7 @@ const animatedComponents = makeAnimated();
 
 const DropDown = ({
   dropDownValue,
+  placeholderUpdated,
   handleDropDown,
   optionLabel,
   isClear,
@@ -42,7 +43,7 @@ const DropDown = ({
       <Select
         className="basic-single"
         classNamePrefix="select"
-        placeholder="Select Product"
+        placeholder={placeholderUpdated}
         isClearable={isClearable}
         components={animatedComponents}
         isSearchable={isSearchable}
@@ -60,6 +61,7 @@ const DropDown = ({
 
 DropDown.propTypes = {
   dropDownValue: PropTypes.array,
+  placeholderUpdated: PropTypes.string,
   handleDropDown: PropTypes.func,
   optionLabel: PropTypes.string,
   isClear: PropTypes.bool,

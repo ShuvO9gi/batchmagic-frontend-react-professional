@@ -1,31 +1,14 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import DashboardNavigation from '../../../../../components/DashboardNavigation';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import DropDown from '../../../../../components/DropDown';
 import useAuth from '../../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../../components/Loader';
 import { isEmpty } from '../../../../../components/utils';
 import ErrorModal from '../../../../../components/ErrorModal';
-
-const buttons = [
-  {
-    name: 'Products',
-    link: '/dashboard/product',
-    class: 'btn-small',
-  },
-  {
-    name: 'Product Stocks',
-    link: '/dashboard/stocks',
-    class: 'btn-small',
-  },
-  {
-    name: 'Search Product',
-    link: '/dashboard/product/search',
-    class: 'btn-small',
-  },
-];
+import close from '../../../../../assets/Logo/actions/cross.svg';
 
 const Edit = () => {
   const {
@@ -115,7 +98,7 @@ const Edit = () => {
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
-        navigate(`/dashboard/stock/show/${params.id}`);
+        navigate(`/dashboard/product/stock/show/${params.id}`);
       }
     } catch (err) {
       setLoading(false);
@@ -126,16 +109,24 @@ const Edit = () => {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
       {isEmpty(stock) ? (
         <Loader />
       ) : (
         <div>
-          <div className="container my-5">
-            <h3 className="text-purple my-5">Update Stock</h3>
+          <div>
+            <Link to="/dashboard/product/stock" className="d-flex flex-column">
+              <img
+                className="align-self-end page-close edit-page-close-position"
+                src={close}
+                alt=""
+              />
+            </Link>
+            <h1 className="text-center edit-header edit-header-my">
+              Update Stock
+            </h1>
             <form onSubmit={handleSubmit(handleUpdateProduct)}>
-              <div className="row supplier-form p-5">
-                <div className="col-md-6 p-3">
+              <div className="row p-5 edit-data-container edit-data-info">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="product"
                     className="form-label fw-bold text-warning"
@@ -151,7 +142,7 @@ const Edit = () => {
                     isDisabled={stock?.total_sold_weight > 0}
                   />
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="weight"
                     className="form-label fw-bold text-warning"
@@ -184,7 +175,7 @@ const Edit = () => {
                   )}
                   {err && <p className="text-danger">{err?.total_weight[0]}</p>}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="batch-number"
                     className="form-label fw-bold text-warning"
@@ -210,7 +201,7 @@ const Edit = () => {
                     <p className="text-danger">{err?.ingoing_batch_number}</p>
                   )}
                 </div>
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="stock-date"
                     className="form-label fw-bold text-warning"
@@ -233,7 +224,7 @@ const Edit = () => {
                   {err && <p className="text-danger">{err?.last_stock_date}</p>}
                 </div>
 
-                <div className="col-md-6 p-3">
+                <div className="col-md-6 py-3 px-80">
                   <label
                     htmlFor="batch-before-date"
                     className="form-label fw-bold text-warning"
@@ -258,8 +249,11 @@ const Edit = () => {
                   )}
                 </div>
                 {productId && (
-                  <div className="col-md-12 p-3">
-                    <button type="submit" className="btn btn-orange float-end">
+                  <div className="col-md-12 p-3 btn-customized">
+                    <button
+                      type="submit"
+                      className="btn btn-orange float-end edit-update-btn"
+                    >
                       Update
                     </button>
                   </div>

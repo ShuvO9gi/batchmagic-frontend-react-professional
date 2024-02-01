@@ -1,16 +1,16 @@
 import React from 'react';
-import './Edit.css';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { ToastContainer, toast } from 'react-toastify';
+import { /* ToastContainer, */ toast } from 'react-toastify';
 import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
 import remove from '../../../../assets/Logo/actions/delete.svg';
 import close from '../../../../assets/Logo/actions/cross.svg';
+import Loader from '../../../../components/Loader';
 
 const Edit = () => {
   const {
@@ -242,265 +242,276 @@ const Edit = () => {
 
   return (
     <div>
-      <div className="container my-5">
-        <h1 className="text-purple text-center fw-bold my-5 create-recipe-header">
-          Update Mix Recipe
-        </h1>
-        <Link to="/dashboard/mix-recipes">
-          <img className="close-sign" src={close} alt="" />
-        </Link>
-        <form onSubmit={handleSubmit(handleEditMixRecipe)}>
-          <div className="mixrecipe-create">
-            <div className="datatable-custom row supplier-form p-5">
-              <div className="col-md-4">
-                <div className="row">
-                  <div className="col-md-9">
-                    <label
-                      htmlFor="name"
-                      className="form-label fw-bold text-warning"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      {...register('name', {
-                        minLength: {
-                          value: 1,
-                          message: 'Name is required',
-                        },
-                      })}
-                      onChange={(e) => handleUnique('name', e.target.value)}
-                      id="name"
-                      placeholder="Name"
-                      defaultValue={batchTemplate?.name}
-                    />
-                    {errors.name && (
-                      <p className="text-danger">{errors.name.message}</p>
-                    )}
-                    {err && <p className="text-danger">{err?.name[0]}</p>}
-                  </div>
+      {isEmpty(batchTemplate) ? (
+        <Loader />
+      ) : (
+        <div>
+          <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
+            <img
+              className="align-self-end page-close edit-page-close-position"
+              src={close}
+              alt=""
+            />
+          </Link>
+          <h1 className="text-center edit-header edit-header-my">
+            Update Mix Recipe
+          </h1>
 
-                  <div className="col-md-9 py-3">
-                    <label
-                      htmlFor="total-weight"
-                      className="form-label fw-bold text-warning"
-                    >
-                      Total weight (g)
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={Number(total_weight.toFixed(2))}
-                      {...register('total_weight')}
-                      id="total-weight"
-                      placeholder="Total weight "
-                      defaultValue={batchTemplate?.total_weight}
-                      readOnly
-                    />
-                  </div>
-                  <div className="col-md-9">
-                    <label
-                      htmlFor="external-ref-id"
-                      className="form-label fw-bold text-warning"
-                    >
-                      External ref ID
-                    </label>
-                    <input
-                      type="text"
-                      {...register('external_ref', {
-                        required:
-                          isEmpty(batchProduct) &&
-                          'External ref ID is Required',
-                      })}
-                      onChange={(e) =>
-                        handleUnique('external_ref', e.target.value)
-                      }
-                      className="form-control"
-                      id="external-ref-id"
-                      placeholder="External ref ID"
-                      defaultValue={batchTemplate?.external_ref}
-                    />
-                    {errors.external_ref && (
-                      <p className="text-danger">
-                        {errors.external_ref.message}
-                      </p>
-                    )}
-                    {err && <p className="text-danger">{err?.external_ref}</p>}
-                  </div>
-                </div>
-              </div>
+          <form onSubmit={handleSubmit(handleEditMixRecipe)}>
+            <div className="mixrecipe-create">
+              <div className="row p-5 create-data-container">
+                <div className="col-md-4">
+                  <div className="row create-data-info">
+                    <div className="col-md-9">
+                      <label
+                        htmlFor="name"
+                        className="form-label fw-bold text-warning"
+                      >
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        {...register('name', {
+                          minLength: {
+                            value: 1,
+                            message: 'Name is required',
+                          },
+                        })}
+                        onChange={(e) => handleUnique('name', e.target.value)}
+                        id="name"
+                        placeholder="Name"
+                        defaultValue={batchTemplate?.name}
+                      />
+                      {errors.name && (
+                        <p className="text-danger">{errors.name.message}</p>
+                      )}
+                      {err && <p className="text-danger">{err?.name[0]}</p>}
+                    </div>
 
-              <div className="col-md-8 pb-5">
-                <a
-                  className="btn-style-add float-end"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                >
-                  ADD A PRODUCT
-                </a>
-
-                <div
-                  className="modal fade"
-                  id="staticBackdrop"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabIndex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                      <div className="modal-header px-4">
-                        <h1
-                          className="modal-title fs-5"
-                          id="staticBackdropLabel"
-                        >
-                          {' '}
-                          Add a New Product
-                        </h1>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <div className="modal-body">
-                        <div className="px-5 py-3">
-                          <label
-                            htmlFor="product"
-                            className="form-label fw-bold text-warning"
-                          >
-                            Product
-                          </label>
-                          <DropDown
-                            isClear={isClear}
-                            handleDropDown={handleDropDown}
-                            dropDownValue={product}
-                          />
-                        </div>
-                        <div className="px-5">
-                          <label
-                            htmlFor="weight"
-                            className="form-label fw-bold text-warning"
-                          >
-                            Weight (g)
-                          </label>
-                          <input
-                            type="number"
-                            {...register('weight')}
-                            name="weight"
-                            step="0.01"
-                            min={0}
-                            className="form-control"
-                            onBlur={handleWeight}
-                            id="weight"
-                            placeholder="Weight"
-                          />
-                        </div>
-                        <div className="px-5 py-3">
-                          <label
-                            htmlFor="amount"
-                            className="form-label fw-bold text-warning"
-                          >
-                            Amount
-                          </label>
-                          <input
-                            type="number"
-                            step="1"
-                            min={1}
-                            {...register('amount')}
-                            name="amount"
-                            className="form-control"
-                            onBlur={handleAmount}
-                            id="amount"
-                            placeholder="Amount"
-                          />
-                        </div>
-                      </div>
-                      <div className="d-flex justify-content-center p-5">
-                        <button
-                          type="button"
-                          data-bs-dismiss="modal"
-                          onClick={handleAddBatchProdct}
-                          className="btn-style-create"
-                          disabled={productSubmitDisabled}
-                        >
-                          SUBMIT
-                        </button>
-                      </div>
+                    <div className="col-md-9 py-3">
+                      <label
+                        htmlFor="total-weight"
+                        className="form-label fw-bold text-warning"
+                      >
+                        Total weight (g)
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={Number(total_weight.toFixed(2))}
+                        {...register('total_weight')}
+                        id="total-weight"
+                        placeholder="Total weight "
+                        defaultValue={batchTemplate?.total_weight}
+                        readOnly
+                      />
+                    </div>
+                    <div className="col-md-9">
+                      <label
+                        htmlFor="external-ref-id"
+                        className="form-label fw-bold text-warning"
+                      >
+                        External ref ID
+                      </label>
+                      <input
+                        type="text"
+                        {...register('external_ref', {
+                          required:
+                            isEmpty(batchProduct) &&
+                            'External ref ID is Required',
+                        })}
+                        onChange={(e) =>
+                          handleUnique('external_ref', e.target.value)
+                        }
+                        className="form-control"
+                        id="external-ref-id"
+                        placeholder="External ref ID"
+                        defaultValue={batchTemplate?.external_ref}
+                      />
+                      {errors.external_ref && (
+                        <p className="text-danger">
+                          {errors.external_ref.message}
+                        </p>
+                      )}
+                      {err && (
+                        <p className="text-danger">{err?.external_ref}</p>
+                      )}
                     </div>
                   </div>
                 </div>
-                <table className="table" style={{ marginTop: '100px' }}>
-                  <thead>
-                    <tr>
-                      <th scope="col" className="text-recipe">
-                        <b>Product name</b>
-                      </th>
-                      <th scope="col" className="text-recipe">
-                        <b>Weight (g)</b>
-                      </th>
-                      <th scope="col" className="text-recipe">
-                        <b>Amount</b>
-                      </th>
-                      <th scope="col" className="text-recipe">
-                        <b>Actions</b>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {batchProduct?.map((item) => {
-                      return (
-                        <tr key={item?.product_id}>
-                          <td scope="row">{item?.product_name}</td>
-                          <td>{item?.weight}</td>
-                          <td>{item?.amount}</td>
-                          <td>
-                            <div className="action-container">
-                              <a
-                                onClick={() =>
-                                  handleProductDelete(
-                                    item?.product_name,
-                                    item?.weight,
-                                    item?.product_id,
-                                  )
-                                }
-                              >
-                                <img
-                                  src={remove}
-                                  className="delete-recipe"
-                                  alt=""
-                                />
-                              </a>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-              <div className="mt-5 mb-3 p-0">
-                <button
-                  style={{ marginTop: '50px' }}
-                  type="submit"
-                  disabled={
-                    errors?.external_ref?.message ||
-                    errors?.name?.message ||
-                    isEmpty(batchProduct)
-                  }
-                  className="btn-style-create float-end"
-                >
-                  Update
-                </button>
+
+                <div className="col-md-8 pb-5">
+                  <a
+                    className="btn text-white float-end list-add-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    ADD A PRODUCT
+                  </a>
+
+                  <div
+                    className="modal fade"
+                    id="staticBackdrop"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabIndex="-1"
+                    aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog modal-dialog-centered">
+                      <div className="modal-content">
+                        <div className="modal-header px-4">
+                          <h1
+                            className="modal-title fs-5"
+                            id="staticBackdropLabel"
+                          >
+                            {' '}
+                            Add a New Product
+                          </h1>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          <div className="px-5 py-3">
+                            <label
+                              htmlFor="product"
+                              className="form-label fw-bold text-warning"
+                            >
+                              Product
+                            </label>
+                            <DropDown
+                              isClear={isClear}
+                              handleDropDown={handleDropDown}
+                              dropDownValue={product}
+                            />
+                          </div>
+                          <div className="px-5">
+                            <label
+                              htmlFor="weight"
+                              className="form-label fw-bold text-warning"
+                            >
+                              Weight (g)
+                            </label>
+                            <input
+                              type="number"
+                              {...register('weight')}
+                              name="weight"
+                              step="0.01"
+                              min={0}
+                              className="form-control"
+                              onBlur={handleWeight}
+                              id="weight"
+                              placeholder="Weight"
+                            />
+                          </div>
+                          <div className="px-5 py-3">
+                            <label
+                              htmlFor="amount"
+                              className="form-label fw-bold text-warning"
+                            >
+                              Amount
+                            </label>
+                            <input
+                              type="number"
+                              step="1"
+                              min={1}
+                              {...register('amount')}
+                              name="amount"
+                              className="form-control"
+                              onBlur={handleAmount}
+                              id="amount"
+                              placeholder="Amount"
+                            />
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-center p-5">
+                          <button
+                            type="button"
+                            data-bs-dismiss="modal"
+                            onClick={handleAddBatchProdct}
+                            className="btn btn-orange float-center create-create-btn"
+                            disabled={productSubmitDisabled}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <table className="table" style={{ marginTop: '100px' }}>
+                    <thead>
+                      <tr>
+                        <th scope="col" className="text-recipe">
+                          <b>Product name</b>
+                        </th>
+                        <th scope="col" className="text-recipe">
+                          <b>Weight (g)</b>
+                        </th>
+                        <th scope="col" className="text-recipe">
+                          <b>Amount</b>
+                        </th>
+                        <th scope="col" className="text-recipe">
+                          <b>Actions</b>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {batchProduct?.map((item) => {
+                        return (
+                          <tr key={item?.product_id}>
+                            <td scope="row">{item?.product_name}</td>
+                            <td>{item?.weight}</td>
+                            <td>{item?.amount}</td>
+                            <td>
+                              <div className="action-container">
+                                <a
+                                  onClick={() =>
+                                    handleProductDelete(
+                                      item?.product_name,
+                                      item?.weight,
+                                      item?.product_id,
+                                    )
+                                  }
+                                >
+                                  <img
+                                    src={remove}
+                                    className="delete-action"
+                                    alt=""
+                                  />
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="mt-5 mb-3 p-0">
+                  <button
+                    style={{ marginTop: '50px' }}
+                    type="submit"
+                    disabled={
+                      errors?.external_ref?.message ||
+                      errors?.name?.message ||
+                      isEmpty(batchProduct)
+                    }
+                    className="btn btn-orange float-end edit-update-btn"
+                  >
+                    Update
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
-      <ToastContainer />
+          </form>
+        </div>
+        // <ToastContainer />
+      )}
     </div>
   );
 };

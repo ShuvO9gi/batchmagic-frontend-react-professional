@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
+import { Link, useNavigate } from 'react-router-dom';
 import DropDown from '../../../../components/DropDown';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { isEmpty } from '../../../../components/utils';
 import { ToastContainer, toast } from 'react-toastify';
-
-const buttons = [
-  {
-    name: 'Batch templates',
-    link: '/dashboard/batch-template',
-  },
-  {
-    name: 'Outgoing Batches',
-    link: '/dashboard/outgoing-batch',
-  },
-  {
-    name: 'search batch',
-    link: '/dashboard/outgoing-batch/search',
-  },
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
+import SuccessModal from '../../../../components/SuccessModal';
 
 const Create = () => {
   const {
@@ -274,13 +260,21 @@ const Create = () => {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <div className="container my-5">
-        <h3 className="text-purple my-5">Create a Batch</h3>
+      <div>
+        <Link to="/dashboard/outgoing-batch" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close create-page-close-position"
+            src={close}
+            alt=""
+          />
+        </Link>
+        <h1 className="text-center create-header create-header-my">
+          Create New Batch
+        </h1>
         <form onSubmit={handleSubmit(handleCreateBatch)}>
-          <div className="row supplier-form p-5">
-            <div className="col-md-6">
-              <div className="form-group row py-3">
+          <div className="row p-5 create-data-container">
+            <div className="col-md-6 py-3 px-80 pr-1 create-data-info">
+              <div className="form-group py-3 d-flex align-items-center">
                 <label
                   htmlFor="name"
                   className="col-sm-4 text-warning fw-bold col-form-label"
@@ -290,7 +284,7 @@ const Create = () => {
                 <div className="col-sm-8">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-0"
                     {...register('name', {
                       required: 'Name is Required',
                     })}
@@ -308,7 +302,7 @@ const Create = () => {
                   {err && <p className="text-danger">{err?.name[0]}</p>}
                 </div>
               </div>
-              <div className="form-group row py-3">
+              <div className="form-group py-3 d-flex align-items-center">
                 <label
                   htmlFor="quantity"
                   className="col-sm-4 text-warning fw-bold col-form-label"
@@ -327,7 +321,7 @@ const Create = () => {
                     })}
                     name="quantity"
                     step="1"
-                    className="form-control"
+                    className="form-control rounded-0"
                     onChange={handleQuantity}
                     id="quantity"
                     placeholder="Quantity"
@@ -339,12 +333,12 @@ const Create = () => {
                 </div>
               </div>
 
-              <div className="form-group row py-3">
+              <div className="form-group py-3 d-flex align-items-center">
                 <label
                   htmlFor="batch-template"
                   className="col-sm-4 text-warning fw-bold col-form-label"
                 >
-                  Batch Template
+                  Mix Recipe
                 </label>
                 <div className="col-sm-8">
                   <DropDown
@@ -422,7 +416,7 @@ const Create = () => {
                                 aria-labelledby="stockModalLabel"
                                 aria-hidden="true"
                               >
-                                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-border-customized">
                                   <div className="modal-content">
                                     <div className="modal-header">
                                       <h1
@@ -606,17 +600,32 @@ const Create = () => {
                 </>
               )}
             </div>
-          </div>
-          <div className="col-md-12 p-3">
-            <button
-              type="submit"
-              disabled={
-                !isUnique || !isAllStocksSelected || batchProducts.length === 0
-              }
-              className="btn btn-orange float-end"
-            >
-              Create
-            </button>
+            <div className="col-md-12 p-3 btn-customized">
+              <button
+                type="submit"
+                disabled={
+                  !isUnique ||
+                  !isAllStocksSelected ||
+                  batchProducts.length === 0
+                }
+                className="btn btn-orange float-end create-create-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Create
+              </button>
+              <div
+                className="modal fade modal-success"
+                id="exampleModal"
+                tabIndex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <SuccessModal
+                  modalText={'Product has been added successfully'}
+                />
+              </div>
+            </div>
           </div>
         </form>
       </div>

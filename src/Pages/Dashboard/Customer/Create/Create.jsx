@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import '../../../../assets/style/CommonCSS/Create.css';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { useNavigate } from 'react-router-dom';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
-
-const buttons = [
-  {
-    name: 'Customers',
-    link: '/dashboard/customers',
-  },
-];
+import { Link, useNavigate } from 'react-router-dom';
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 export default function Create() {
   const {
@@ -72,12 +66,20 @@ export default function Create() {
 
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
-      <div className="container my-5">
-        <h3 className="text-purple my-5">Create a Customer</h3>
+      <div>
+        <Link to="/dashboard/customers" className="d-flex flex-column">
+          <img
+            className="align-self-end page-close create-page-close-position"
+            src={close}
+            alt=""
+          />
+        </Link>
+        <h1 className="text-center create-header create-header-my">
+          Create New Customer
+        </h1>
         <form onSubmit={handleSubmit(handleAddCustomer)}>
-          <div className="row supplier-form p-5">
-            <div className="col-md-6 p-3">
+          <div className="row p-5 create-data-container create-data-info">
+            <div className="col-md-6 py-3 px-80">
               <label htmlFor="name" className="form-label fw-bold text-warning">
                 Name
               </label>
@@ -97,12 +99,12 @@ export default function Create() {
               {err && <p className="text-danger">{err?.name[0]}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="contact-person-name"
                 className="form-label fw-bold text-warning"
               >
-                Contact person name
+                Contact Person Name
               </label>
               <input
                 type="text"
@@ -111,7 +113,7 @@ export default function Create() {
                   required: 'Contact Person Name is Required',
                 })}
                 id="contact-person-name"
-                placeholder="Contact person name"
+                placeholder="Contact Person Name"
               />
               {errors.contact_person_name && (
                 <p className="text-danger">
@@ -120,7 +122,7 @@ export default function Create() {
               )}
               {err && <p className="text-danger">{err?.contact_person_name}</p>}
             </div>
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="address"
                 className="form-label fw-bold text-warning"
@@ -142,12 +144,12 @@ export default function Create() {
               {err && <p className="text-danger">{err?.address}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="contact-email"
                 className="form-label fw-bold text-warning"
               >
-                Contact email
+                Contact Email
               </label>
               <input
                 type="email"
@@ -159,7 +161,7 @@ export default function Create() {
                   handleUnique('contact_person_email', e.target.value)
                 }
                 id="contact-email"
-                placeholder="Contact email"
+                placeholder="Contact Email"
               />
               {errors.contact_person_email && (
                 <p className="text-danger">
@@ -171,7 +173,7 @@ export default function Create() {
               )}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label htmlFor="city" className="form-label fw-bold text-warning">
                 City
               </label>
@@ -190,12 +192,12 @@ export default function Create() {
               {err && <p className="text-danger">{err?.city}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="contact-phone"
                 className="form-label fw-bold text-warning"
               >
-                Contact phone
+                Contact Phone
               </label>
               <input
                 type="text"
@@ -221,7 +223,7 @@ export default function Create() {
                   handleUnique('contact_person_phone', e.target.value)
                 }
                 id="contact-phone"
-                placeholder="Contact phone"
+                placeholder="Contact Phone"
               />
               {errors.contact_person_phone && (
                 <p className="text-danger">
@@ -233,7 +235,7 @@ export default function Create() {
               )}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label htmlFor="zip" className="form-label fw-bold text-warning">
                 Zip
               </label>
@@ -260,7 +262,7 @@ export default function Create() {
                   errors?.contact_person_phone?.message ||
                   errors?.contact_person_email?.message
                 }
-                className="btn btn-orange float-end"
+                className="btn btn-orange float-end create-create-btn"
               >
                 Create
               </button>

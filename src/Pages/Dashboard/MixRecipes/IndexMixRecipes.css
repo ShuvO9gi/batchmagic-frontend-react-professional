@@ -1,0 +1,34 @@
+/* css style for edit page */
+/* redeclaring box border */
+.mixrecipe-create input,
+.select__control {
+  border-radius: 0 !important;
+}
+
+/* redeclaring modal box */
+.mixrecipe-create .modal-content {
+  border-radius: 20px !important;
+}
+
+.create-data-info input[readonly] {
+  background-color: #e9ecef !important;
+}
+
+/* css style for show page */
+.show-table-first-mixrecipe > tbody > tr > th {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #ff6e05 !important;
+  width: 20%;
+}
+
+.show-table-first-mixrecipe > tbody > tr > td {
+  width: 30%;
+}
+
+.show-table-last-mixrecipe > thead > tr > th {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #ff6e05 !important;
+  width: 33%;
+}

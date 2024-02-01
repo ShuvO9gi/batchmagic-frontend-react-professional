@@ -1,19 +1,13 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import DashboardNavigation from '../../../../components/DashboardNavigation';
 import { useForm } from 'react-hook-form';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import '../../../../assets/style/CommonCSS/Edit.css';
 import useAuth from '../../../../hooks/useAuth';
-import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import Loader from '../../../../components/Loader';
 import { isEmpty } from '../../../../components/utils';
-
-const buttons = [
-  {
-    name: 'Customers',
-    link: '/dashboard/customers',
-  },
-];
+import close from '../../../../assets/Logo/actions/cross.svg';
 
 export default function Edit() {
   const {
@@ -137,15 +131,23 @@ export default function Edit() {
   };
   return (
     <div>
-      <DashboardNavigation buttons={buttons} />
       {isEmpty(customer) ? (
         <Loader />
       ) : (
-        <div className="container my-5">
-          <h3 className="text-purple my-5">Update Customer</h3>
+        <div>
+          <Link to="/dashboard/customers" className="d-flex flex-column">
+            <img
+              className="align-self-end page-close edit-page-close-position"
+              src={close}
+              alt=""
+            />
+          </Link>
+          <h1 className="text-center edit-header edit-header-my">
+            Update Customer Information
+          </h1>
           <form onSubmit={handleSubmit(handleUpdateCustomer)}>
-            <div className="row supplier-form p-5">
-              <div className="col-md-6 p-3">
+            <div className="row p-5 edit-data-container edit-data-info">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="name"
                   className="form-label fw-bold text-warning"
@@ -169,7 +171,7 @@ export default function Edit() {
                 {err && <p className="text-danger">{err?.name}</p>}
               </div>
 
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="contact-person-name"
                   className="form-label fw-bold text-warning"
@@ -184,7 +186,7 @@ export default function Edit() {
                   })}
                   id="contact-person-name"
                   defaultValue={customer?.contact_person_name}
-                  placeholder="Contact person name"
+                  placeholder="Contact Person Name"
                 />
                 {errors.contact_person_name && (
                   <p className="text-danger">
@@ -195,7 +197,7 @@ export default function Edit() {
                   <p className="text-danger">{err?.contact_person_name}</p>
                 )}
               </div>
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="address"
                   className="form-label fw-bold text-warning"
@@ -210,7 +212,7 @@ export default function Edit() {
                   className="form-control"
                   defaultValue={customer?.address}
                   id="address"
-                  placeholder="Adress"
+                  placeholder="Address"
                 />
                 {errors.address && (
                   <p className="text-danger">{errors.address.message}</p>
@@ -218,12 +220,12 @@ export default function Edit() {
                 {err && <p className="text-danger">{err?.address}</p>}
               </div>
 
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="contact-person-email"
                   className="form-label fw-bold text-warning"
                 >
-                  Contact Person Email
+                  Contact Email
                 </label>
                 <input
                   type="email"
@@ -236,7 +238,7 @@ export default function Edit() {
                   }
                   defaultValue={customer?.contact_person_email}
                   id="contact-person-email"
-                  placeholder="Contact person email"
+                  placeholder="Contact Email"
                 />
                 {errors.contact_person_email && (
                   <p className="text-danger">
@@ -247,7 +249,7 @@ export default function Edit() {
                   <p className="text-danger">{err?.contact_person_email}</p>
                 )}
               </div>
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="city"
                   className="form-label fw-bold text-warning"
@@ -269,12 +271,12 @@ export default function Edit() {
                 )}
                 {err && <p className="text-danger">{err?.city}</p>}
               </div>
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="contact-person-phone"
                   className="form-label fw-bold text-warning"
                 >
-                  Contact Person Phone
+                  Contact Phone
                 </label>
                 <input
                   type="text"
@@ -301,7 +303,7 @@ export default function Edit() {
                   }
                   id="contact-person-phone"
                   defaultValue={customer?.contact_person_phone}
-                  placeholder="Contact person phone"
+                  placeholder="Contact Phone"
                 />
                 {errors.contact_person_phone && (
                   <p className="text-danger">
@@ -312,7 +314,7 @@ export default function Edit() {
                   <p className="text-danger">{err?.contact_person_phone}</p>
                 )}
               </div>
-              <div className="col-md-6 p-3">
+              <div className="col-md-6 py-3 px-80">
                 <label
                   htmlFor="zip"
                   className="form-label fw-bold text-warning"
@@ -335,7 +337,7 @@ export default function Edit() {
                 {err && <p className="text-danger">{err?.zip}</p>}
               </div>
 
-              <div className="col-md-12 p-3">
+              <div className="col-md-12 p-3 btn-customized">
                 <button
                   type="submit"
                   disabled={
@@ -343,7 +345,7 @@ export default function Edit() {
                     errors?.contact_person_phone?.message ||
                     errors?.contact_person_email?.message
                   }
-                  className="btn btn-orange float-end"
+                  className="btn btn-orange float-end edit-update-btn"
                 >
                   Update
                 </button>
