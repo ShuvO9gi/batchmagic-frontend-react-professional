@@ -4,7 +4,7 @@ import Navbar from '../Pages/Shared/Navbar';
 import useAuth from '../hooks/useAuth';
 import Loader from '../components/Loader';
 import Sidebar from '../Pages/Dashboard/MixRecipes/Sidebar/Sidebar';
-import '../../../batch-magic-clientside/src/Pages/Dashboard/MixRecipes/Sidebar/Sidebar.css';
+import '@/batch-magic-clientside/src/Pages/Dashboard/MixRecipes/Sidebar/Sidebar.css';
 
 const DashboardLayout = () => {
   const { loading } = useAuth();
