@@ -14,7 +14,10 @@ const columns = [
   },
   {
     name: 'Customer Name',
-    selector: (row) => row?.customer?.name,
+    selector: (row) => {
+      console.log(row);
+      row?.customer?.name;
+    },
     sortable: true,
   },
   {
