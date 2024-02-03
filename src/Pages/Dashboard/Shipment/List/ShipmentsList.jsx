@@ -19,7 +19,12 @@ const columns = [
   },
   {
     name: 'Batch Number',
-    selector: (row) => row?.outgoing_batch?.outgoing_batch_code,
+    selector: (row) => {
+      console.log(row.outgoing_batch_code);
+      row?.outgoing_batch_code ?? (
+        <span style={{ color: 'red' }}>Waiting...</span>
+      );
+    },
     sortable: true,
   },
   {
