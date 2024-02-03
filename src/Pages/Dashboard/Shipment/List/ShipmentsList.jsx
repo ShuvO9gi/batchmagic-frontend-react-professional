@@ -28,6 +28,9 @@ const columns = [
     sortable: true,
   },
   {
+    name: 'Mix Recipe',
+  },
+  {
     name: 'Quantity',
     selector: (row) => row?.quantity,
     sortable: true,
