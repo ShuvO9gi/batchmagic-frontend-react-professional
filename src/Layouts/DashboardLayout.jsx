@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../Pages/Shared/Navbar';
 import useAuth from '../hooks/useAuth';
 import Loader from '../components/Loader';
-import Sidebar from '../Pages/Dashboard/MixRecipes/Sidebar/Sidebar';
-import '../../src/Pages/Dashboard/MixRecipes/Sidebar/Sidebar.css';
+import Sidebar from './Sidebar/Sidebar';
+import './Sidebar/Sidebar.css';
 
 const DashboardLayout = () => {
   const { loading } = useAuth();
