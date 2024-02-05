@@ -79,6 +79,7 @@ const CustomerList = () => {
         data={memoizedData}
         header={'Customers'}
         navigation={'/dashboard/customers/create'}
+        searchPlaceholder="Search Customer"
       />
     </div>
   );

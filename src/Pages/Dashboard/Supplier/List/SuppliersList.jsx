@@ -88,6 +88,7 @@ const Index = () => {
         data={memoizedData}
         header={'Supplier'}
         navigation={'/dashboard/supplier/create'}
+        searchPlaceholder="Search Suppliers"
       />
     </div>
   );
