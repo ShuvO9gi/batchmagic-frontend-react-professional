@@ -32,6 +32,9 @@ const columns = [
   },
   {
     name: 'Mix Recipe',
+    selector: (row) => {
+      console.log(row);
+    },
   },
   {
     name: 'Quantity',
