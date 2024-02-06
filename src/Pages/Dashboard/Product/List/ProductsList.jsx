@@ -19,7 +19,7 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Stock Weight (g)',
+    name: 'Stock Weight (kg)',
     selector: (row) => {
       let total = 0;
       let outgoing = 0;
@@ -27,9 +27,9 @@ const columns = [
       row?.stocks?.forEach((stock) => {
         total += stock.total_weight;
         outgoing += stock.total_sold_weight;
-        remaining = total - outgoing;
+        remaining = (total - outgoing) / 1000;
       });
-      return Number(remaining.toFixed(2));
+      return Number(remaining.toFixed(3));
     },
     sortable: true,
   },
