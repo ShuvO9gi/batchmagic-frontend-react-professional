@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
 import { sidebarMenu } from './sidebar-components';
 import { Link } from 'react-router-dom';
@@ -12,17 +12,24 @@ const Sidebar = () => {
   const [openSubMenu, setOpenSubMenu] = useState('');
 
   const isActive = (menuItem) => {
-    if (
-      menuItem.link.includes('dashboard/product') &&
-      currentPath.includes('dashboard/stock')
-    ) {
-      return true;
+    // Check if any submenu item is active
+    if (menuItem.submenu) {
+      return menuItem.submenu.some((subItem) =>
+        currentPath.includes(subItem.link),
+      );
     }
+
     return currentPath.includes(menuItem.link);
   };
 
   const isActiveSubmenu = (submenuItem) => {
     const data = currentPath.includes(submenuItem.link);
+    // If the submenu item is active, set the parent sidebar item as open
+    useEffect(() => {
+      if (data) {
+        setOpenSubMenu(submenuItem.parentLink || '');
+      }
+    }, [data, setOpenSubMenu, submenuItem.parentLink]);
     return data;
   };
 
