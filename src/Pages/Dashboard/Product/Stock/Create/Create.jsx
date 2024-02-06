@@ -109,7 +109,7 @@ const Create = () => {
                 type="number"
                 step="0.01"
                 max={999999.99}
-                className="form-control"
+                className="form-control rounded-0"
                 {...register('total_weight', {
                   required: 'Weight is required',
                   max: {
@@ -141,7 +141,7 @@ const Create = () => {
                 {...register('ingoing_batch_number', {
                   required: 'Batch number is Required',
                 })}
-                className="form-control"
+                className="form-control rounded-0"
                 id="batch-number"
                 placeholder="Batch number"
               />
@@ -167,7 +167,7 @@ const Create = () => {
                 {...register('best_before_date', {
                   required: 'Best Before Date is Required',
                 })}
-                className="form-control"
+                className="form-control rounded-0"
                 id="batch-before-date"
               />
               {errors.best_before_date && (
@@ -188,7 +188,7 @@ const Create = () => {
                 {...register('last_stock_date', {
                   required: 'Last Stock Date is Required',
                 })}
-                className="form-control"
+                className="form-control rounded-0"
                 defaultValue={new Date().toISOString().substr(0, 10)}
                 id="stock-date"
               />

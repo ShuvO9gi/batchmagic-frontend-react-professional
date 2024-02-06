@@ -185,7 +185,7 @@ const Edit = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control rounded-0"
                   {...register('name', {
                     required: 'Name is Required',
                   })}
@@ -225,7 +225,7 @@ const Edit = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control rounded-0"
                   {...register('external_ref_id', {
                     required: 'External Ref ID is Required',
                   })}

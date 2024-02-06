@@ -120,23 +120,15 @@ const Show = () => {
                 <table className="table table-striped table-bordered show-table-last show-table-last-stocks">
                   <tbody>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        Name
-                      </th>
+                      <th scope="col">Name</th>
                       <td>{stock?.related_product?.name}</td>
-                      <th scope="col" className="text-warning">
-                        Product Code
-                      </th>
+                      <th scope="col">Product Code</th>
                       <td>{stock?.related_product?.product_code}</td>
                     </tr>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        External Ref ID
-                      </th>
+                      <th scope="col">External Ref ID</th>
                       <td>{stock?.related_product?.external_ref}</td>
-                      <th scope="col" className="text-warning">
-                        Created At
-                      </th>
+                      <th scope="col">Created At</th>
                       <td>
                         <DateFormat
                           dateValue={stock?.related_product?.created_at}

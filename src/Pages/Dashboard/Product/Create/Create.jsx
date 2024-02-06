@@ -94,24 +94,26 @@ const Create = () => {
   };
   return (
     <div>
-      <div className="container my-5">
+      <div>
         <Link to="/dashboard/product" className="d-flex flex-column">
           <img
-            className="align-self-end page-close page-close-position-t28-r160"
+            className="align-self-end page-close create-page-close-position"
             src={close}
             alt=""
           />
         </Link>
-        <h3 className="text-purple my-5">Create a Product</h3>
+        <h1 className="text-center create-header create-header-my">
+          Create a Product
+        </h1>
         <form onSubmit={handleSubmit(handleAddProduct)}>
-          <div className="row supplier-form p-5">
-            <div className="col-md-6 p-3">
+          <div className="row p-5 create-data-container create-data-info">
+            <div className="col-md-6 py-3 px-80">
               <label htmlFor="name" className="form-label fw-bold text-warning">
                 Name
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control rounded-0"
                 {...register('name', {
                   required: 'Name is Required',
                 })}
@@ -125,7 +127,7 @@ const Create = () => {
               {err && <p className="text-danger">{err?.name[0]}</p>}
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="supplier"
                 className="form-label fw-bold text-warning"
@@ -138,7 +140,7 @@ const Create = () => {
               />
             </div>
 
-            <div className="col-md-6 p-3">
+            <div className="col-md-6 py-3 px-80">
               <label
                 htmlFor="external-id-ref"
                 className="form-label fw-bold text-warning"
@@ -151,7 +153,7 @@ const Create = () => {
                   required: 'external_ref is Required',
                 })}
                 onBlur={(e) => handleUnique('external_ref', e.target.value)}
-                className="form-control"
+                className="form-control rounded-0"
                 id="external-id-ref"
                 placeholder="External ID ref"
               />
@@ -167,7 +169,7 @@ const Create = () => {
                   disabled={
                     errors?.external_ref?.message || errors?.name?.message
                   }
-                  className="btn btn-orange float-end"
+                  className="btn btn-orange float-end create-create-btn"
                 >
                   Create
                 </button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './product.css';
+import './IndexProduct.css';
 import ProductCreate from './Create/Create';
 import ProductShow from './Show/Show';
 import NotFound from '../../../Pages/NotFound/NotFound';

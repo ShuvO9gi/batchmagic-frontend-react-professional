@@ -1,0 +1,60 @@
+.recipe-content {
+  display: flex;
+  /* height: 100%; */
+  min-height: 100vh;
+}
+
+.recipe-sidebar {
+  flex: 1;
+}
+
+.product-component {
+  position: relative;
+  flex: 4;
+}
+
+/*  recipe comonent children margin right 20px*/
+.product-component > * {
+  margin-right: 20px;
+}
+
+/* css style for product show page */
+.show-table-first-product > tbody > tr > th {
+  width: 20% !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #ff6e05 !important;
+}
+
+.show-table-last-product > tbody > tr > th {
+  width: 22% !important;
+  color: #fa7b1f !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+}
+
+.show-table-last-stock > thead > tr > th {
+  color: #ffad05 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.show-table-last-stock > tbody > tr > td {
+  font-weight: 400 !important;
+  font-size: 16px !important;
+}
+
+/* css style for stock show page */
+.show-table-first-stocks > tbody > tr > th {
+  width: 24% !important;
+  color: #fa7b1f !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+}
+
+.show-table-last-stocks > tbody > tr > th {
+  width: 20% !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #ff6e05 !important;
+}
