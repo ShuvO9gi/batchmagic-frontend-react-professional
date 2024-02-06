@@ -53,7 +53,7 @@ const Show = () => {
             />
           </Link>
 
-          <Link to={`/dashboard/outgoing-batch/edit/${batch.id}`}>
+          <Link to={`/dashboard/outgoing-batch/${batch.id}`}>
             <button
               type="button"
               className="align-self-end show-update-btn show-update-btn-position"
