@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 
 const DashboardLayout = () => {
   const { loading } = useAuth();
-  // const navigate = useNavigate();
   const location = useLocation();
 
   // Check if the current route ends with "/dashboard" or "/dashboard/"
