@@ -12,13 +12,6 @@ const Sidebar = () => {
   const [openSubMenu, setOpenSubMenu] = useState('');
 
   const isActive = (menuItem) => {
-    if (
-      menuItem.link.includes('dashboard/product') &&
-      currentPath.includes('dashboard/stock')
-    ) {
-      return true;
-    }
-
     // Check if any submenu item is active
     if (menuItem.submenu) {
       return menuItem.submenu.some((subItem) =>
