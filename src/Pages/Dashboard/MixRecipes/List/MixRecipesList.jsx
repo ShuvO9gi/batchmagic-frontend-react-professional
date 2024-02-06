@@ -76,6 +76,7 @@ const MixRecipeList = () => {
         data={memoizedData}
         header={'A Recipe'}
         navigation={'/dashboard/mix-recipes/create'}
+        searchPlaceholder="Search Batch Template"
       />
     </div>
   );

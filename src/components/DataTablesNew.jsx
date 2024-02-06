@@ -36,7 +36,13 @@ const tableCustomStyles = {
   },
 };
 
-const DataTables = ({ columns, data, header, navigation }) => {
+const DataTables = ({
+  columns,
+  data,
+  header,
+  navigation,
+  searchPlaceholder,
+}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRows, setFilteredRows] = useState([]);
   const [pending, setPending] = useState(true);
@@ -126,6 +132,7 @@ const DataTables = ({ columns, data, header, navigation }) => {
                       searchQuery={searchQuery}
                       setSearchQuery={setSearchQuery}
                       handleSearch={handleSearch}
+                      placeholder={searchPlaceholder}
                     />
                   </div>
                   <div id="toogle-add-btn" className="">
@@ -153,6 +160,7 @@ DataTables.propTypes = {
   data: PropTypes.array,
   header: PropTypes.string,
   navigation: PropTypes.string,
+  searchPlaceholder: PropTypes.string.isRequired,
 };
 
 export default DataTables;

@@ -202,6 +202,7 @@ const OutgoingBatchesList = () => {
           data={memoizedData}
           header={'A Batch'}
           navigation={'/dashboard/outgoing-batch/create'}
+          searchPlaceholder="Search Batch"
         />
       </div>
     </div>

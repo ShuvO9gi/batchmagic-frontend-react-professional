@@ -30,8 +30,6 @@ const Edit = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
-  // console.log(customer_id);
-
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -40,7 +38,6 @@ const Edit = () => {
         const res = await axiosPrivate.get(`/shipment/${params.id}`, {
           signal: controller.signal,
         });
-        // console.log(res);
         if (isMounted && res.status === 200) {
           setLoading(false);
           controller.abort();
@@ -115,7 +112,8 @@ const Edit = () => {
   };
 
   const makeData = (data) => {
-    console.log(data);
+    data.outgoing_batch_id = outgoingBatch_id;
+    data.customer_id = customer_id;
     return {
       name: data.name ? data.name : shipment.name,
       shipment_date: data.shipment_date
@@ -131,7 +129,6 @@ const Edit = () => {
 
   const handleUpdateShipment = async (data, e) => {
     const formData = makeData(data);
-    console.log(formData);
     const controller = new AbortController();
     e.preventDefault();
     setLoading(true);
@@ -139,8 +136,7 @@ const Edit = () => {
       const res = await axiosPrivate.put(`/shipment/${params.id}`, formData, {
         signal: controller.signal,
       });
-      // console.log('update');
-      // console.log(res);
+
       if (res.status === 200) {
         setLoading(false);
         controller.abort();
@@ -148,7 +144,6 @@ const Edit = () => {
       }
     } catch (err) {
       setLoading(false);
-      // console.log(err);
       setErr(err.response.data.errors);
     }
   };

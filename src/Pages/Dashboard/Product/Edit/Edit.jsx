@@ -9,6 +9,7 @@ import { isEmpty } from '../../../../components/utils';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import DropDown from '../../../../components/DropDown';
 import ErrorModal from '../../../../components/ErrorModal';
+import '../../../../assets/style/CommonCSS/Edit.css';
 
 const Edit = () => {
   const {
@@ -21,10 +22,7 @@ const Edit = () => {
   const { err, setErr } = useState({});
   const [product, setProduct] = useState();
   const [suppliers, setSuppliers] = useState([]);
-  // const [customers, setCustomers] = useState([]);
   const [supplierId, setSupplierId] = useState();
-  // const [customer_id, setCustomer_id] = useState();
-  // const [totalTotalQuantity, setTotalQuantity] = useState();
   const { setLoading } = useAuth();
   const params = useParams();
   const axiosPrivate = useAxiosPrivate();
@@ -161,97 +159,96 @@ const Edit = () => {
 
   return (
     <div>
-      <div>
-        {isEmpty(product) ? (
-          <Loader />
-        ) : (
-          <div>
-            <Link to="/dashboard/product" className="d-flex flex-column">
-              <img
-                className="align-self-end page-close create-page-close-position"
-                src={close}
-                alt=""
-              />
-            </Link>
-            <h1 className="text-center my-46 edit-header">
-              Update Information
-            </h1>
-            <form onSubmit={handleSubmit(handleUpdateProduct)}>
-              <div className="row p-5 edit-data-container edit-data-info">
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="product-name"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Product Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...register('name', {
-                      required: 'Name is Required',
-                    })}
-                    onBlur={(e) => handleUnique('name', e.target.value)}
-                    id="product-name"
-                    defaultValue={product?.name}
-                    placeholder="Name"
-                  />
-                  {errors.name && (
-                    <p className="text-danger">{errors.name.message}</p>
-                  )}
-                  {err && <p className="text-danger">{err?.name[0]}</p>}
-                </div>
+      {isEmpty(product) ? (
+        <Loader />
+      ) : (
+        <div>
+          <Link to="/dashboard/product" className="d-flex flex-column">
+            <img
+              className="align-self-end page-close edit-page-close-position"
+              src={close}
+              alt=""
+            />
+          </Link>
 
-                <div className="col-md-6 p-3">
-                  <label
-                    htmlFor="supplier"
-                    className="form-label fw-bold text-warning"
-                  >
-                    Supplier
-                  </label>
-                  <DropDown
-                    handleDropDown={handleDropDown}
-                    dropDownValue={suppliers}
-                    defaultValue={suppliers.find(
-                      (supplier) => supplier.id === product?.supplier_id,
-                    )}
-                  />
-                </div>
-
-                <div className="col-md-6 py-3 px-80">
-                  <label
-                    htmlFor="external_ref_id"
-                    className="form-label fw-bold text-warning"
-                  >
-                    External Ref ID
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    {...register('external_ref_id', {
-                      required: 'External Ref ID is Required',
-                    })}
-                    onBlur={(e) => handleUnique('external_ref', e.target.value)}
-                    id="external_ref_id"
-                    defaultValue={product?.external_ref_id}
-                    placeholder="External Ref ID"
-                  />
-                </div>
-
-                <div className="col-md-12 p-3">
-                  <button
-                    type="submit"
-                    disabled={errors?.name?.message}
-                    className="btn btn-orange float-end edit-update-btn"
-                  >
-                    Update
-                  </button>
-                </div>
+          <h1 className="text-center edit-header edit-header-my">
+            Update Product
+          </h1>
+          <form onSubmit={handleSubmit(handleUpdateProduct)}>
+            <div className="row p-5 edit-data-container edit-data-info">
+              <div className="col-md-6 py-3 px-80">
+                <label
+                  htmlFor="product-name"
+                  className="form-label fw-bold text-warning"
+                >
+                  Product Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  {...register('name', {
+                    required: 'Name is Required',
+                  })}
+                  onBlur={(e) => handleUnique('name', e.target.value)}
+                  id="product-name"
+                  defaultValue={product?.name}
+                  placeholder="Name"
+                />
+                {errors.name && (
+                  <p className="text-danger">{errors.name.message}</p>
+                )}
+                {err && <p className="text-danger">{err?.name[0]}</p>}
               </div>
-            </form>
-          </div>
-        )}
-      </div>
+
+              <div className="col-md-6 p-3">
+                <label
+                  htmlFor="supplier"
+                  className="form-label fw-bold text-warning"
+                >
+                  Supplier
+                </label>
+                <DropDown
+                  handleDropDown={handleDropDown}
+                  dropDownValue={suppliers}
+                  defaultValue={suppliers.find(
+                    (supplier) => supplier.id === product?.supplier_id,
+                  )}
+                />
+              </div>
+
+              <div className="col-md-6 py-3 px-80">
+                <label
+                  htmlFor="external_ref_id"
+                  className="form-label fw-bold text-warning"
+                >
+                  External Ref ID
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  {...register('external_ref_id', {
+                    required: 'External Ref ID is Required',
+                  })}
+                  onBlur={(e) => handleUnique('external_ref', e.target.value)}
+                  id="external_ref_id"
+                  defaultValue={product?.external_ref_id}
+                  placeholder="External Ref ID"
+                />
+              </div>
+
+              <div className="col-md-12 p-3">
+                <button
+                  type="submit"
+                  disabled={errors?.name?.message}
+                  className="btn btn-orange float-end edit-update-btn"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
