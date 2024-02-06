@@ -5,6 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import edit from '../../../../../assets/Logo/actions/edit.svg';
 import show from '../../../../../assets/Logo/actions/show.svg';
+import close from '../../../../../assets/Logo/actions/cross.svg';
 import DataTables from './DataTables';
 
 const StockModal = ({ isOpen = true, onClose, product, children }) => {
@@ -52,11 +53,14 @@ const StockModal = ({ isOpen = true, onClose, product, children }) => {
   return (
     <div className="modal-overlay">
       <div className="stock-modal">
-        <div className="stock-modal-header">
+        <div className="d-flex flex-column stock-modal-header list-header">
           <h2>Stock Details</h2>
-          <button className="close-btn" onClick={onClose}>
-            Close
-          </button>
+          <img
+            onClick={onClose}
+            className="align-self-end page-close"
+            src={close}
+            alt=""
+          />
         </div>
         <div className="stock-modal-content">
           {children}

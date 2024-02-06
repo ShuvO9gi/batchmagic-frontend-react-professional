@@ -13,7 +13,7 @@ import StockEdit from './Stock/Edit/Edit';
 
 const Products = () => {
   return (
-    <div className="product-component">
+    <div>
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/create" element={<ProductCreate />} />
