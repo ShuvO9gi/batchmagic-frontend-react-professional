@@ -61,7 +61,13 @@ const StockModal = ({ isOpen = true, onClose, product, children }) => {
         <div className="stock-modal-content">
           {children}
 
-          <DataTables columns={columns} data={product.stocks} />
+          <DataTables
+            columns={columns}
+            data={product.stocks}
+            /* header={'Stocks'}
+            navigation={'/dashboard/product/stock/create'}
+            searchPlaceholder="Search" */
+          />
         </div>
       </div>
     </div>

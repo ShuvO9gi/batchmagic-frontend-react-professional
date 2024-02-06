@@ -1,7 +1,7 @@
 // Index.js
 import React, { useEffect, useState, useMemo } from 'react';
 import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate';
-import DataTables from '../Components/DataTables';
+import DataTables from '../../../../../components/DataTablesNew';
 import show from '../../../../../assets/Logo/actions/show.svg';
 import StockModal from '../Components/StockModal';
 
@@ -101,8 +101,14 @@ const Index = () => {
 
   return (
     <div>
-      <h3 className="text-center my-5 text-purple">Product Stocks</h3>
-      <DataTables columns={columns} data={filteredProducts} />
+      <h1 className="text-center my-64 list-header">Product Stocks</h1>
+      <DataTables
+        columns={columns}
+        data={filteredProducts}
+        header={'Stocks'}
+        navigation={'/dashboard/product/stock/create'}
+        searchPlaceholder="Search Products"
+      />
 
       {selectedRowId && (
         <StockModal
