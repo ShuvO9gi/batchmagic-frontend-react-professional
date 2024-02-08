@@ -35,6 +35,7 @@ const columns = [
     selector: (row) => {
       console.log(row);
     },
+    sortable: true,
   },
   {
     name: 'Quantity',
