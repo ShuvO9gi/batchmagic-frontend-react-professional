@@ -10,6 +10,7 @@ const Index = () => {
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const [stockChanged, setStockChanged] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -38,15 +39,15 @@ const Index = () => {
       isMounted = false;
       controller.abort();
     };
-  }, [axiosPrivate]);
+  }, [axiosPrivate, stockChanged]);
 
-  const memoizedProducts = useMemo(() => products, [products]);
+  const filteredProducts = useMemo(() => products, [products]);
 
-  const filteredProducts = useMemo(() => {
-    return memoizedProducts?.filter(
-      (product) => product.stocks && product.stocks.length > 0,
-    );
-  }, [memoizedProducts]);
+  // const filteredProducts = useMemo(() => {
+  //   return memoizedProducts?.filter(
+  //     (product) => product.stocks && product.stocks.length > 0,
+  //   );
+  // }, [memoizedProducts]);
 
   const showStockModal = (rowId) => {
     setSelectedRowId(rowId);
@@ -115,6 +116,7 @@ const Index = () => {
           isOpen={isModalOpen}
           onClose={closeModal}
           product={products.find((product) => product.id === selectedRowId)}
+          setStockChanged={setStockChanged}
         >
           {/* Render your modal content here */}
         </StockModal>

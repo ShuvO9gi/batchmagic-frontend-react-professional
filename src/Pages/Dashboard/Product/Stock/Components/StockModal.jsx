@@ -7,12 +7,47 @@ import edit from '../../../../../assets/Logo/actions/edit.svg';
 import show from '../../../../../assets/Logo/actions/show.svg';
 import close from '../../../../../assets/Logo/actions/cross.svg';
 import DataTables from './DataTables';
+import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate';
+import { useState } from 'react';
+import ErrorModal from '../../../../../components/ErrorModal';
 
-const StockModal = ({ isOpen = true, onClose, product, children }) => {
+const StockModal = ({
+  isOpen = true,
+  onClose,
+  product,
+  setStockChanged,
+  children,
+}) => {
   // Render nothing if the modal is not open
   if (!isOpen) {
     return null;
   }
+
+  const [stocks, setStocks] = useState(product.stocks);
+
+  const axiosPrivate = useAxiosPrivate();
+
+  const handleArchiveClick = async (stockId) => {
+    const controller = new AbortController();
+    try {
+      const res = await axiosPrivate.put(
+        `/stock-archive/${stockId}`,
+        {
+          is_archive: true,
+        },
+        {
+          signal: controller.signal,
+        },
+      );
+
+      if (res.status === 200) {
+        setStocks(stocks.filter((stock) => stock.id !== stockId));
+        controller.abort();
+      }
+    } catch (err) {
+      <ErrorModal />;
+    }
+  };
 
   const columns = [
     {
@@ -44,19 +79,28 @@ const StockModal = ({ isOpen = true, onClose, product, children }) => {
               <img src={edit} className="edit-action" alt="" />
             </button>
           </Link>
+          <button
+            className="btn btn-action-customized"
+            onClick={() => handleArchiveClick(row.id)} // Call handleArchiveClick function
+          >
+            <img src={edit} className="archive-action" alt="" />
+          </button>
         </div>
       ),
     },
   ];
 
-  console.log({ product });
   return (
     <div className="modal-overlay">
       <div className="stock-modal">
         <div className="d-flex flex-column stock-modal-header list-header">
           <h2>Stock Details</h2>
           <img
-            onClick={onClose}
+            onClick={() => {
+              setStockChanged(true);
+
+              onClose();
+            }}
             className="align-self-end page-close"
             src={close}
             alt=""
@@ -67,10 +111,7 @@ const StockModal = ({ isOpen = true, onClose, product, children }) => {
 
           <DataTables
             columns={columns}
-            data={product.stocks}
-            /* header={'Stocks'}
-            navigation={'/dashboard/product/stock/create'}
-            searchPlaceholder="Search" */
+            data={stocks.filter((stock) => !stock.is_archive)}
           />
         </div>
       </div>
@@ -83,6 +124,7 @@ StockModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   product: PropTypes.object,
+  setStockChanged: PropTypes.func,
 };
 
 export default StockModal;
