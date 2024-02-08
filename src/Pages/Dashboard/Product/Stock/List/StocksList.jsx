@@ -34,6 +34,7 @@ const Index = () => {
     };
 
     fetchData();
+    setStockChanged(false);
 
     return () => {
       isMounted = false;

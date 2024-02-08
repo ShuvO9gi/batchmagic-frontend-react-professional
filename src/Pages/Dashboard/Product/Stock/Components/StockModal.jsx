@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import edit from '../../../../../assets/Logo/actions/edit.svg';
+import archive from '../../../../../assets/Logo/actions/archive.svg';
 import show from '../../../../../assets/Logo/actions/show.svg';
 import close from '../../../../../assets/Logo/actions/cross.svg';
 import DataTables from './DataTables';
@@ -56,35 +57,29 @@ const StockModal = ({
       sortable: true,
     },
     {
-      name: 'Sold Wieght (g)',
-      selector: (row) => row?.total_sold_weight ?? 0,
-      sortable: true,
+      name: 'Sold (kg)',
+      selector: (row) => row?.total_sold_weight / 1000 ?? 0,
     },
     {
-      name: 'Total Weight (g)',
-      selector: (row) => row?.total_weight,
-      sortable: true,
+      name: 'Total (kg)',
+      selector: (row) => row?.total_weight / 1000,
     },
     {
       name: 'Actions',
       cell: (row) => (
-        <div className="action-container">
+        <div className="modal-action-container">
           <Link to={`/dashboard/product/stock/show/${row.id}`}>
-            <button className="btn btn-action-customized">
-              <img src={show} className="show-action" alt="" />
-            </button>
+            <img src={show} className="modal-action" alt="" />
           </Link>
           <Link to={`/dashboard/product/stock/edit/${row.id}`}>
-            <button className="btn btn-action-customized">
-              <img src={edit} className="edit-action" alt="" />
-            </button>
+            <img src={edit} className="modal-action" alt="" />
           </Link>
-          <button
-            className="btn btn-action-customized"
-            onClick={() => handleArchiveClick(row.id)} // Call handleArchiveClick function
-          >
-            <img src={edit} className="archive-action" alt="" />
-          </button>
+          <img
+            src={archive}
+            onClick={() => handleArchiveClick(row.id)}
+            className="modal-action-archive"
+            alt=""
+          />
         </div>
       ),
     },
