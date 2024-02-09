@@ -34,6 +34,7 @@ const columns = [
     name: 'Mix Recipe',
     selector: (row) => {
       console.log(row);
+      row?.name;
     },
     sortable: true,
   },
