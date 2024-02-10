@@ -8,7 +8,6 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import { /* ToastContainer, */ toast } from 'react-toastify';
 import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
-import remove from '../../../../assets/Logo/actions/delete.svg';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import Loader from '../../../../components/Loader';
 
@@ -146,17 +145,6 @@ const Edit = () => {
   const handleDropDown = (product) => {
     setProduct_id(product?.id);
     setProduct_name(product?.name);
-  };
-
-  const handleProductDelete = (name, weight, id) => {
-    const updatedBatchProduct = batchProduct.filter(
-      (item) => item.product_name !== name,
-    );
-    setBatchProduct(updatedBatchProduct);
-    handleTotalWeight(weight);
-    const updatedProduct = product;
-    updatedProduct.push({ id: id, name: name });
-    setProduct(updatedProduct);
   };
 
   const handleAmount = (e) => {
@@ -455,9 +443,6 @@ const Edit = () => {
                         <th scope="col" className="text-recipe">
                           <b>Amount</b>
                         </th>
-                        <th scope="col" className="text-recipe">
-                          <b>Actions</b>
-                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -467,25 +452,6 @@ const Edit = () => {
                             <td scope="row">{item?.product_name}</td>
                             <td>{item?.weight}</td>
                             <td>{item?.amount}</td>
-                            <td>
-                              <div className="action-container">
-                                <a
-                                  onClick={() =>
-                                    handleProductDelete(
-                                      item?.product_name,
-                                      item?.weight,
-                                      item?.product_id,
-                                    )
-                                  }
-                                >
-                                  <img
-                                    src={remove}
-                                    className="delete-action"
-                                    alt=""
-                                  />
-                                </a>
-                              </div>
-                            </td>
                           </tr>
                         );
                       })}
