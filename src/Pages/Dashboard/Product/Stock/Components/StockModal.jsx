@@ -1,5 +1,4 @@
 // StockModal.js
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -7,7 +6,7 @@ import edit from '../../../../../assets/Logo/actions/edit.svg';
 import archive from '../../../../../assets/Logo/actions/archive.svg';
 import show from '../../../../../assets/Logo/actions/show.svg';
 import close from '../../../../../assets/Logo/actions/cross.svg';
-import DataTables from './DataTables';
+import DataTables from '../../../../../components/DataTablesNew';
 import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate';
 import { useState } from 'react';
 import ErrorModal from '../../../../../components/ErrorModal';
@@ -107,6 +106,9 @@ const StockModal = ({
           <DataTables
             columns={columns}
             data={stocks.filter((stock) => !stock.is_archive)}
+            header={'Stocks'}
+            navigation={'/dashboard/product/stock/create'}
+            searchPlaceholder="Search Product"
           />
         </div>
       </div>
