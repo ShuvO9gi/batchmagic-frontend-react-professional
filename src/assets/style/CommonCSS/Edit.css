@@ -34,6 +34,11 @@
   padding-right: 80px !important;
 }
 
+.btn-customized > .btn {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .edit-update-btn {
   font-weight: 700 !important;
   font-size: 18px !important;
@@ -44,6 +49,9 @@
   border-radius: 4px;
   width: 322px;
   height: 40px;
+  margin: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .edit-update-btn:hover {

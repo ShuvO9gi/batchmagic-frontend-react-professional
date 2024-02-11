@@ -431,7 +431,7 @@ const Edit = () => {
                       </div>
                     </div>
                   </div>
-                  <table className="table" style={{ marginTop: '100px' }}>
+                  <table className="table table-mt">
                     <thead>
                       <tr>
                         <th scope="col" className="text-recipe">
@@ -458,16 +458,15 @@ const Edit = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="mt-5 mb-3 p-0">
+                <div className="mt-5 mb-3 p-0 btn-customized">
                   <button
-                    style={{ marginTop: '50px' }}
                     type="submit"
                     disabled={
                       errors?.external_ref?.message ||
                       errors?.name?.message ||
                       isEmpty(batchProduct)
                     }
-                    className="btn btn-orange float-end edit-update-btn"
+                    className="btn float-end edit-update-btn submit-mt"
                   >
                     Update
                   </button>

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
+import duplicate from '../../../../assets/Logo/actions/duplicate.svg';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate.jsx';
 import ErrorModal from '../../../../components/ErrorModal.jsx';
@@ -30,6 +31,11 @@ const columns = [
         <Link to={`/dashboard/mix-recipes/edit/${row.id}`}>
           <button className="btn btn-action-customized">
             <img src={edit} className="edit-action" alt="" />
+          </button>
+        </Link>
+        <Link to={`/dashboard/mix-recipes/duplicate/${row.id}`}>
+          <button className="btn btn-action-customized">
+            <img src={duplicate} className="edit-action" alt="" />
           </button>
         </Link>
       </div>
