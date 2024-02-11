@@ -9,7 +9,7 @@ import edit from '../../../../assets/Logo/actions/edit.svg';
 const columns = [
   {
     name: 'Name',
-    selector: (row) => row.name,
+    selector: (row) => row?.name,
     sortable: true,
   },
   {
