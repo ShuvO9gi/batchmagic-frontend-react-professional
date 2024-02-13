@@ -58,3 +58,9 @@
   font-size: 20px !important;
   color: #ff6e05 !important;
 }
+
+.stock-archived {
+  background-color: #fa7b1f !important;
+  border: 5px solid #fa7b1f !important;
+  border-radius: 5px !important;
+}
