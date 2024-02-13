@@ -23,6 +23,8 @@ const Duplicate = () => {
   const [batchTemplate, setBatchTemplate] = useState({});
   const [product_id, setProduct_id] = useState({});
   const [product_name, setProduct_name] = useState({});
+  const [nameChanged, setNameChanged] = useState(false);
+  const [refIdChanged, setRefIdChanged] = useState(false);
   const [product, setProduct] = useState([]);
   const [amount, setAmount] = useState({});
   const [total_weight, setTotal_weight] = useState(0);
@@ -226,6 +228,15 @@ const Duplicate = () => {
       if (res.status === 200) {
         controller.abort();
         setError(nameProperty, {});
+        if (data.data.name && data.data.name !== batchTemplate.name) {
+          setNameChanged(true);
+        }
+        if (
+          data.data.external_ref &&
+          data.data.external_ref !== batchTemplate.external_ref
+        ) {
+          setRefIdChanged(true);
+        }
       }
     } catch (err) {
       setError(nameProperty, {
@@ -494,6 +505,8 @@ const Duplicate = () => {
                     <button
                       type="submit"
                       disabled={
+                        !nameChanged ||
+                        !refIdChanged ||
                         errors?.external_ref?.message ||
                         errors?.name?.message ||
                         isEmpty(batchProduct)
