@@ -28,6 +28,8 @@ const Duplicate = () => {
   const [total_weight, setTotal_weight] = useState(0);
   const [weight, setWeight] = useState({});
   const [productSubmitDisabled, setProductSubmitDisabled] = useState(true);
+  const [nameChanged, setNameChanged] = useState(true);
+  const [refChanged, setRefChanged] = useState(true);
   const { err, setErr } = useState({});
   const { setLoading } = useAuth();
   const axiosPrivate = useAxiosPrivate();
@@ -114,6 +116,14 @@ const Duplicate = () => {
       total_weight: Number(total_weight.toFixed(2)),
       external_ref: data.external_ref,
     };
+
+    /* if (
+      batchTemplate?.name !== data.name &&
+      batchTemplate?.external_ref !== data.external_ref
+    ) {
+      console.log('Same Name');
+      setInputChanged(false);
+    } */
 
     const controller = new AbortController();
     e.preventDefault();
@@ -209,8 +219,13 @@ const Duplicate = () => {
   };
 
   const handleUnique = async (nameProperty, value) => {
-    if (value === batchTemplate[nameProperty])
-      return setError(nameProperty, {});
+    if (nameProperty == 'name') {
+      setNameChanged(false);
+    }
+    if (nameProperty == 'external_ref') {
+      setRefChanged(false);
+    }
+
     const controller = new AbortController();
     const data = {
       property: nameProperty,
@@ -496,11 +511,13 @@ const Duplicate = () => {
                       disabled={
                         errors?.external_ref?.message ||
                         errors?.name?.message ||
-                        isEmpty(batchProduct)
+                        isEmpty(batchProduct) ||
+                        nameChanged ||
+                        refChanged
                       }
                       className="btn float-end edit-update-btn submit-mt"
                     >
-                      Create Duplicate
+                      Create
                     </button>
                   </div>
                 </div>
