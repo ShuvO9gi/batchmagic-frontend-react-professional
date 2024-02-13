@@ -13,7 +13,7 @@
   flex: 4;
 }
 
-/*  recipe comonent children margin right 20px*/
+/*  recipe component children margin right 20px*/
 .product-component > * {
   margin-right: 20px;
 }
@@ -108,4 +108,10 @@
 .modal-action-container {
   display: flex;
   gap: 10px !important; /* Adjust the gap value as needed */
+}
+
+.stock-archived {
+  background-color: #fa7b1f !important;
+  border: 5px solid #fa7b1f !important;
+  border-radius: 5px !important;
 }
