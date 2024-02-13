@@ -18,9 +18,12 @@ const Show = () => {
     const controller = new AbortController();
     const getProduct = async () => {
       try {
-        const response = await axiosPrivate.get(`/product/${params.id}`, {
-          signal: controller.signal,
-        });
+        const response = await axiosPrivate.get(
+          `/product/${params.id}?show_archive=true`,
+          {
+            signal: controller.signal,
+          },
+        );
         if (isMounted) {
           setProduct(response.data.data);
         }
@@ -140,6 +143,7 @@ const Show = () => {
                       <th scope="col">Remaining Weight (g)</th>
                       <th scope="col">Last Stock Date</th>
                       <th scope="col">Best Before Date</th>
+                      <th scope="col">Archive Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -161,6 +165,15 @@ const Show = () => {
                           </td>
                           <td>
                             <DateFormat dateValue={stock?.best_before_date} />
+                          </td>
+                          <td>
+                            <span
+                              className={
+                                stock?.is_archive ? 'stock-archived' : ''
+                              }
+                            >
+                              {stock?.is_archive ? 'Archived' : 'Not Archived'}
+                            </span>
                           </td>
                         </tr>
                       );

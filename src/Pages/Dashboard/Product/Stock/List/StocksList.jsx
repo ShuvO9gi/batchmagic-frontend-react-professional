@@ -26,9 +26,9 @@ const Index = () => {
         }
       } catch (error) {
         if (error instanceof DOMException && error.name === 'AbortError') {
-          // Handle abort error if needed
+          console.log('Request Aborted');
         } else {
-          // Handle other errors
+          console.log('Error', error);
         }
       }
     };
