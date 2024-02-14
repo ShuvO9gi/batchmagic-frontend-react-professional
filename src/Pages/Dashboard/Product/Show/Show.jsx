@@ -18,9 +18,12 @@ const Show = () => {
     const controller = new AbortController();
     const getProduct = async () => {
       try {
-        const response = await axiosPrivate.get(`/product/${params.id}`, {
-          signal: controller.signal,
-        });
+        const response = await axiosPrivate.get(
+          `/product/${params.id}?show_archive=true`,
+          {
+            signal: controller.signal,
+          },
+        );
         if (isMounted) {
           setProduct(response.data.data);
         }
@@ -43,7 +46,7 @@ const Show = () => {
       {isEmpty(product) ? (
         <Loader />
       ) : (
-        <div /* className="d-flex flex-column show-container" */>
+        <div>
           <Link to="/dashboard/product" className="d-flex flex-column">
             <img
               className="align-self-end page-close show-page-close-position"
@@ -66,26 +69,18 @@ const Show = () => {
               Product Information
             </h1>
             <div className="d-flex flex-column show-table-body">
-              <table className="table table-striped table-bordered">
+              <table className="table table-striped table-bordered show-table-first show-table-first-product">
                 <tbody>
                   <tr>
-                    <th scope="col" className="text-warning">
-                      Name
-                    </th>
+                    <th scope="col">Name</th>
                     <td>{product?.name}</td>
-                    <th scope="col" className="text-warning">
-                      Product Code
-                    </th>
+                    <th scope="col">Product Code</th>
                     <td>{product?.product_code}</td>
                   </tr>
                   <tr>
-                    <th scope="col" className="text-warning">
-                      External ID Ref
-                    </th>
+                    <th scope="col">External ID Ref</th>
                     <td>{product?.external_ref}</td>
-                    <th scope="col" className="text-warning">
-                      Created At
-                    </th>
+                    <th scope="col">Created At</th>
                     <td>
                       <DateFormat dateValue={product?.created_at} />
                     </td>
@@ -101,46 +96,30 @@ const Show = () => {
                 Supplier Information
               </h1>
               <div className="d-flex flex-column show-table-body">
-                <table className="table table-striped table-bordered">
+                <table className="table table-striped table-bordered show-table-last show-table-last-product">
                   <tbody>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        Name
-                      </th>
+                      <th scope="col">Name</th>
                       <td>{product?.supplier?.name}</td>
-                      <th scope="col" className="text-warning">
-                        Address
-                      </th>
+                      <th scope="col">Address</th>
                       <td>{product?.supplier?.address}</td>
                     </tr>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        City
-                      </th>
+                      <th scope="col">City</th>
                       <td>{product?.supplier?.city}</td>
-                      <th scope="col" className="text-warning">
-                        Zip
-                      </th>
+                      <th scope="col">Zip</th>
                       <td>{product?.supplier?.zip}</td>
                     </tr>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        Contact Person Name
-                      </th>
+                      <th scope="col">Contact Person Name</th>
                       <td>{product?.supplier?.contact_person_name}</td>
-                      <th scope="col" className="text-warning">
-                        Contact Person Phone
-                      </th>
+                      <th scope="col">Contact Person Phone</th>
                       <td>{product?.supplier?.contact_person_phone}</td>
                     </tr>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        Contact Person Email
-                      </th>
+                      <th scope="col">Contact Person Email</th>
                       <td>{product?.supplier?.contact_person_email}</td>
-                      <th scope="col" className="text-warning">
-                        Legal Identity Number
-                      </th>
+                      <th scope="col">Legal Identity Number</th>
                       <td>{product?.supplier?.legal_identity_number}</td>
                     </tr>
                   </tbody>
@@ -152,30 +131,19 @@ const Show = () => {
           {product?.stocks?.length > 0 && (
             <div>
               <h1 className="align-self-start show-header">
-                Stock Information
+                Stocks Information
               </h1>
               <div className="d-flex flex-column show-table-body">
-                <table className="table table-striped table-bordered">
+                <table className="table table-striped show-table-last show-table-last-stock">
                   <thead>
                     <tr>
-                      <th scope="col" className="text-warning">
-                        Ingoing Batch Number
-                      </th>
-                      <th scope="col" className="text-warning">
-                        Total Weight (g)
-                      </th>
-                      <th scope="col" className="text-warning">
-                        Total Sold Weight (g)
-                      </th>
-                      <th scope="col" className="text-warning">
-                        Remaining Weight (g)
-                      </th>
-                      <th scope="col" className="text-warning">
-                        Last Stock Date
-                      </th>
-                      <th scope="col" className="text-warning">
-                        Best Before Date
-                      </th>
+                      <th scope="col">Ingoing Batch Number</th>
+                      <th scope="col">Total Weight (g)</th>
+                      <th scope="col">Total Sold Weight (g)</th>
+                      <th scope="col">Remaining Weight (g)</th>
+                      <th scope="col">Last Stock Date</th>
+                      <th scope="col">Best Before Date</th>
+                      <th scope="col">Archive Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -197,6 +165,15 @@ const Show = () => {
                           </td>
                           <td>
                             <DateFormat dateValue={stock?.best_before_date} />
+                          </td>
+                          <td>
+                            <span
+                              className={
+                                stock?.is_archive ? 'stock-archived' : ''
+                              }
+                            >
+                              {stock?.is_archive ? 'Archived' : 'Not Archived'}
+                            </span>
                           </td>
                         </tr>
                       );

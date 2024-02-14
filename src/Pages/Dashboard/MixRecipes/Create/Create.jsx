@@ -376,7 +376,7 @@ const Create = () => {
                     </div>
                   </div>
                 </div>
-                <table className="table" style={{ marginTop: '100px' }}>
+                <table className="table table-mt">
                   <thead>
                     <tr>
                       <th scope="col" className="text-recipe">

@@ -3,6 +3,7 @@ import './App.css';
 import router from './Routes/Routes/Routes';
 import * as Sentry from '@sentry/react';
 import 'react-toastify/dist/ReactToastify.css';
+import React from 'react';
 
 function App() {
   return (

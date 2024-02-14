@@ -1,19 +1,19 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './product.css';
+import './IndexProduct.css';
 import ProductCreate from './Create/Create';
 import ProductShow from './Show/Show';
 import NotFound from '../../../Pages/NotFound/NotFound';
-import ProductList from './List/List';
+import ProductList from './List/ProductsList';
 import ProductEdit from './Edit/Edit';
-import StockList from './Stock/List/List';
+import StockList from './Stock/List/StocksList';
 import StockCreate from './Stock/Create/Create';
 import StockShow from './Stock/Show/Show';
 import StockEdit from './Stock/Edit/Edit';
 
 const Products = () => {
   return (
-    <div className="product-component">
+    <div>
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/create" element={<ProductCreate />} />

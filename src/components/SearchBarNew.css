@@ -12,32 +12,6 @@
   color: white !important;
 }
 
-/* .search-input {
-    transition: transform 0.5s ease-in-out;
-    transform-origin: top center;
-    transform: scaleY(0);
-  } */
-
-.search-expanded {
-  margin: 1em 0;
-}
-
-.search-bar {
-  height: 52px;
-}
-
-.pr-20 {
-  padding: 20px;
-}
-
-.p-20 {
-  padding: 20px;
-}
-
-.m-20 {
-  margin: 20px;
-}
-
 /* Style-Customized */
 .list-subheader {
   margin-top: 48px;
@@ -54,8 +28,6 @@
 
 .search-input-container {
   position: relative;
-  /* box-shadow: 1px 1px 1px #00000033;
-    border-radius: 12px !important; */
 }
 
 /* Search icon styles */

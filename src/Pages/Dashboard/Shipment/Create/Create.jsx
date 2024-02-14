@@ -139,7 +139,7 @@ export default function Create() {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control rounded-0"
                 {...register('name', {
                   required: 'Name is Required',
                 })}
@@ -166,7 +166,7 @@ export default function Create() {
                   required: 'Shipment Date is Required',
                 })}
                 defaultValue={new Date().toISOString().substr(0, 10)}
-                className="form-control"
+                className="form-control rounded-0"
                 id="shipment-date"
                 placeholder="Shipment Date"
               />
@@ -201,7 +201,7 @@ export default function Create() {
                   type="number"
                   step="1"
                   min={1}
-                  className="form-control"
+                  className="form-control rounded-0"
                   {...register('quantity', {
                     required: 'Quantity is Required',
                     validate: {

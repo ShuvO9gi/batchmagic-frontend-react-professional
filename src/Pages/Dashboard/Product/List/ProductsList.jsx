@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
 import ErrorModal from '../../../../components/ErrorModal';
-import DataTables from '../Components/DataTables';
+import DataTables from '../../../../components/DataTablesNew';
 
 const columns = [
   {
@@ -19,7 +19,7 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Stock Weight (g)',
+    name: 'Stock Weight (kg)',
     selector: (row) => {
       let total = 0;
       let outgoing = 0;
@@ -27,9 +27,9 @@ const columns = [
       row?.stocks?.forEach((stock) => {
         total += stock.total_weight;
         outgoing += stock.total_sold_weight;
-        remaining = total - outgoing;
+        remaining = (total - outgoing) / 1000;
       });
-      return Number(remaining.toFixed(2));
+      return Number(remaining.toFixed(3));
     },
     sortable: true,
   },
@@ -79,11 +79,20 @@ const ProductList = () => {
       controller.abort();
     };
   }, []);
+
+  const memoizedData = useMemo(() => products.data, [products]);
+
   return (
     <div>
       {/* <DashboardNavigation buttons={buttons} /> */}
-      <h3 className="text-center my-5 text-purple">Products</h3>
-      <DataTables columns={columns} data={products.data} />
+      <h1 className="text-center my-64 list-header">Product</h1>
+      <DataTables
+        columns={columns}
+        data={memoizedData}
+        header={'Product'}
+        navigation={'/dashboard/product/create'}
+        searchPlaceholder="Search Product Stocks"
+      />
     </div>
   );
 };

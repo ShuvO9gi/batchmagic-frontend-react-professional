@@ -1,7 +1,7 @@
 // Index.js
 import React, { useEffect, useState, useMemo } from 'react';
 import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate';
-import DataTables from '../Components/DataTables';
+import DataTables from '../../../../../components/DataTablesNew';
 import show from '../../../../../assets/Logo/actions/show.svg';
 import StockModal from '../Components/StockModal';
 
@@ -10,6 +10,7 @@ const Index = () => {
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const [stockChanged, setStockChanged] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -25,28 +26,29 @@ const Index = () => {
         }
       } catch (error) {
         if (error instanceof DOMException && error.name === 'AbortError') {
-          // Handle abort error if needed
+          console.log('Request Aborted');
         } else {
-          // Handle other errors
+          console.log('Error', error);
         }
       }
     };
 
     fetchData();
+    setStockChanged(false);
 
     return () => {
       isMounted = false;
       controller.abort();
     };
-  }, [axiosPrivate]);
+  }, [axiosPrivate, stockChanged]);
 
-  const memoizedProducts = useMemo(() => products, [products]);
+  const filteredProducts = useMemo(() => products, [products]);
 
-  const filteredProducts = useMemo(() => {
-    return memoizedProducts?.filter(
-      (product) => product.stocks && product.stocks.length > 0,
-    );
-  }, [memoizedProducts]);
+  // const filteredProducts = useMemo(() => {
+  //   return memoizedProducts?.filter(
+  //     (product) => product.stocks && product.stocks.length > 0,
+  //   );
+  // }, [memoizedProducts]);
 
   const showStockModal = (rowId) => {
     setSelectedRowId(rowId);
@@ -70,7 +72,7 @@ const Index = () => {
       sortable: true,
     },
     {
-      name: 'Stock Weight (g)',
+      name: 'Stock Weight (kg)',
       selector: (row) => {
         let total = 0;
         let outgoing = 0;
@@ -78,9 +80,9 @@ const Index = () => {
         row?.stocks?.forEach((stock) => {
           total += stock.total_weight;
           outgoing += stock.total_sold_weight;
-          remaining = total - outgoing;
+          remaining = (total - outgoing) / 1000;
         });
-        return Number(remaining.toFixed(2));
+        return Number(remaining.toFixed(3));
       },
       sortable: true,
     },
@@ -101,14 +103,21 @@ const Index = () => {
 
   return (
     <div>
-      <h3 className="text-center my-5 text-purple">Product Stocks</h3>
-      <DataTables columns={columns} data={filteredProducts} />
+      <h1 className="text-center my-64 list-header">Product Stocks</h1>
+      <DataTables
+        columns={columns}
+        data={filteredProducts}
+        header={'Stocks'}
+        navigation={'/dashboard/product/stock/create'}
+        searchPlaceholder="Search Products"
+      />
 
       {selectedRowId && (
         <StockModal
           isOpen={isModalOpen}
           onClose={closeModal}
           product={products.find((product) => product.id === selectedRowId)}
+          setStockChanged={setStockChanged}
         >
           {/* Render your modal content here */}
         </StockModal>

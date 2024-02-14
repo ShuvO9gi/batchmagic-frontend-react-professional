@@ -207,7 +207,7 @@ const Edit = () => {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-0"
                     {...register('name', {
                       required: 'Name is Required',
                     })}
@@ -235,7 +235,7 @@ const Edit = () => {
                       required: 'Shipment Date is Required',
                     })}
                     defaultValue={new Date().toISOString().substr(0, 10)}
-                    className="form-control"
+                    className="form-control rounded-0"
                     id="shipment-date"
                     placeholder="Shipment Date"
                   />
@@ -276,7 +276,7 @@ const Edit = () => {
                       type="number"
                       step="1"
                       min={1}
-                      className="form-control"
+                      className="form-control rounded-0"
                       {...register('quantity', {
                         required: 'Quantity is Required',
                         validate: {

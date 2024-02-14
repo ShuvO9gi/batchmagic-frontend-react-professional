@@ -14,6 +14,15 @@
   background-color: #e9ecef !important;
 }
 
+/* margin top for table and submit */
+.table-mt {
+  margin-top: 100px;
+}
+
+.submit-mt {
+  margin-top: 50px;
+}
+
 /* css style for show page */
 .show-table-first-mixrecipe > tbody > tr > th {
   font-weight: 600 !important;

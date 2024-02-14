@@ -6,6 +6,7 @@ import MixRecipeList from './List/MixRecipesList';
 import MixRecipesCreate from './Create/Create';
 import MixRecipesShow from './Show/Show';
 import MixRecipesEdit from './Edit/Edit';
+import MixRecipesDuplicate from './Duplicate/Duplicate';
 import NotFound from '../../NotFound/NotFound';
 
 const MixRecipes = () => {
@@ -16,6 +17,7 @@ const MixRecipes = () => {
         <Route path="/create" element={<MixRecipesCreate />} />
         <Route path="/show/:id" element={<MixRecipesShow />} />
         <Route path="/edit/:id" element={<MixRecipesEdit />} />
+        <Route path="/duplicate/:id" element={<MixRecipesDuplicate />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

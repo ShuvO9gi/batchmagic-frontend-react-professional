@@ -151,7 +151,7 @@ const Edit = () => {
                   </label>
                   <input
                     type="number"
-                    className="form-control"
+                    className="form-control rounded-0"
                     step="0.01"
                     max={999999.99}
                     {...register('total_weight', {
@@ -187,7 +187,7 @@ const Edit = () => {
                     {...register('ingoing_batch_number', {
                       required: 'Batch number is Required',
                     })}
-                    className="form-control"
+                    className="form-control rounded-0"
                     id="batch-number"
                     placeholder="Batch number"
                     disabled={stock?.total_sold_weight > 0}
@@ -213,7 +213,7 @@ const Edit = () => {
                     {...register('last_stock_date', {
                       required: 'Last Stock Date is Required',
                     })}
-                    className="form-control"
+                    className="form-control rounded-0"
                     id="stock-date"
                   />
                   {errors.last_stock_date && (
@@ -236,7 +236,7 @@ const Edit = () => {
                     {...register('best_before_date', {
                       required: 'Best Before Date is Required',
                     })}
-                    className="form-control"
+                    className="form-control rounded-0"
                     id="batch-before-date"
                   />
                   {errors.best_before_date && (
