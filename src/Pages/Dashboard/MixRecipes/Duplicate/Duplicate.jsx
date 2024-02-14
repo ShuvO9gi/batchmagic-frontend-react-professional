@@ -93,6 +93,8 @@ const Duplicate = () => {
             }),
           );
           setTotal_weight(response.data.data.total_weight);
+          handleUnique('name', response.data.data?.name);
+          handleUnique('external_ref', response.data.data?.external_ref);
         }
       } catch (error) {
         if (error instanceof DOMException && error.name == 'AbortError') {
@@ -233,6 +235,13 @@ const Duplicate = () => {
         [nameProperty]: value,
       },
     };
+
+    if (data.name === batchTemplate?.name) {
+      setError(nameProperty, {
+        type: 'manual',
+        message: `The ${nameProperty} is not unique`,
+      });
+    }
 
     try {
       const res = await axiosPrivate.post('/unique-batch-template', data, {
