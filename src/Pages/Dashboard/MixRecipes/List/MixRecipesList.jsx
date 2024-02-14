@@ -35,7 +35,7 @@ const columns = [
         </Link>
         <Link to={`/dashboard/mix-recipes/duplicate/${row.id}`}>
           <button className="btn btn-action-customized">
-            <img src={duplicate} className="edit-action" alt="" />
+            <img src={duplicate} className="duplicate-action" alt="" />
           </button>
         </Link>
       </div>

@@ -46,7 +46,9 @@
 }
 
 .show-action,
-.edit-action {
+.edit-action,
+.duplicate-action,
+.archives-action {
   height: 28px;
   width: 28px;
 }
