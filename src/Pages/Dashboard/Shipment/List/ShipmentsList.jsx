@@ -23,7 +23,6 @@ const columns = [
   {
     name: 'Batch Number',
     selector: (row) => {
-      console.log(row.outgoing_batch_code);
       row?.outgoing_batch_code ?? (
         <span style={{ color: 'red' }}>Waiting...</span>
       );
