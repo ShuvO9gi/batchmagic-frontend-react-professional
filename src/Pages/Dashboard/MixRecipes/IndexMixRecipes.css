@@ -41,3 +41,37 @@
   color: #ff6e05 !important;
   width: 33%;
 }
+
+/* css style for label & ingredient modal */
+.modal-recipes-close {
+  z-index: 0 !important;
+}
+
+.cursor-event {
+  cursor: pointer;
+}
+
+.modal-overlay-recipes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-body-recipes {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 10 rgba(0, 0, 0, 0.2);
+}
+
+/*  */
+.modal-body-recipes-label {
+  width: 40%;
+  margin-top: 50px;
+  padding: 20px;
+}
