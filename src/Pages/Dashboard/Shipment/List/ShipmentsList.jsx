@@ -99,7 +99,7 @@ export default function Index() {
       <DataTables
         columns={columns}
         data={memoizedData}
-        header={'Shipments'}
+        header={'Shipments Order'}
         navigation={'/dashboard/orders/create'}
         searchPlaceholder="Search Suppliers"
       />
