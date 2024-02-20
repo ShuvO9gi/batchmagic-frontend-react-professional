@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import { useForm } from 'react-hook-form';
@@ -8,14 +8,65 @@ import dowanload_label from '../../../../assets/Logo/actions/dowanload-label.svg
 import delete_label from '../../../../assets/Logo/actions/delete-label.svg';
 import close_label from '../../../../assets/Logo/actions/close-label.svg';
 
-const Label = ({ /* isOpen = true, */ onClose, children }) => {
-  const { register, handleSubmit } = useForm();
+const Label = ({ onClose }) => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
   const [openLabel, setOpenLabel] = useState(false);
 
-  /* if (!isOpen) {
-    return null;
-  } */
+  /* add labbel */
+  const [baseImage, setBaseImage] = useState('');
+  const [label_type, setLabel_type] = useState({});
+  const [batch_template_id, setBatch_template_id] = useState({});
+  const [isClear, setIsClear] = useState(false);
 
+  const ref = useRef();
+
+  /* add label */
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    const base64 = await convertBase64(file);
+    console.log(base64);
+    setBaseImage(base64);
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const product = [
+    /* { batch_template_id: 1, label_type: 'cu' },
+    { batch_template_id: 2, label_type: 'sku' },
+    { batch_template_id: 3, label_type: 'pallet' }, */
+    { id: 1, label_type: 'cu' },
+    { id: 2, label_type: 'sku' },
+    { id: 3, label_type: 'pallet' },
+  ];
+
+  const handleDropDown = (options) => {
+    console.log(options);
+    // console.log(options?.batch_template_id);
+    console.log(options?.id);
+    console.log(options?.label_type);
+    setBatch_template_id(options?.batch_template_id);
+    setLabel_type(options?.label_type);
+  };
+  /*  */
   const closeLabel = () => {
     setOpenLabel(false);
   };
@@ -41,7 +92,6 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
         </div>
         <hr className="my-0" />
         <div className="modal-content-recipes">
-          {children}
           <form onSubmit={handleSubmit(handleAddLabel)}>
             <div className="row p-2">
               <table className="table table-mt">
@@ -65,7 +115,7 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Dowanloaded');
                         }}
                         alt=""
                       />
@@ -92,12 +142,12 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                     </td>
                   </tr>
                   <tr>
-                    <td /* className="d-flex justify-content-between" */>
+                    <td className="text-center">
                       <img
                         src={dowanload_label}
                         className="cursor-event me-5"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Dowanloaded');
                         }}
                         alt=""
                       />
@@ -105,17 +155,17 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                         src={delete_label}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Deleted');
                         }}
                         alt=""
                       />
                     </td>
-                    <td>
+                    <td className="text-center">
                       <img
                         src={dowanload_label}
                         className="cursor-event me-5"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Dowanloaded');
                         }}
                         alt=""
                       />
@@ -123,17 +173,17 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                         src={delete_label}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Deleted');
                         }}
                         alt=""
                       />
                     </td>
-                    <td>
+                    <td className="text-center">
                       <img
                         src={dowanload_label}
                         className="cursor-event me-5"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Dowanloaded');
                         }}
                         alt=""
                       />
@@ -141,7 +191,7 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                         src={delete_label}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          console.log('Deleted');
                         }}
                         alt=""
                       />
@@ -194,9 +244,12 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                           Label Type
                         </label>
                         <DropDown
-                          isClear={console.log('isClear')}
-                          handleDropDown={console.log('handleDropDown')}
-                          dropDownValue={console.log('label')}
+                          isClear={isClear}
+                          handleDropDown={handleDropDown}
+                          dropDownValue={product}
+                          /* options={options}
+                          value={value}
+                          onChange={handleChange} */
                           placeholderUpdated="Select Label"
                         />
                       </div>
@@ -215,6 +268,11 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                           })}
                           id="ean_number"
                         />
+                        {errors.ean_number && (
+                          <p className="text-danger">
+                            {errors.ean_number.message}
+                          </p>
+                        )}
                       </div>
                       <div className="col-md-12">
                         <label
@@ -226,28 +284,33 @@ const Label = ({ /* isOpen = true, */ onClose, children }) => {
                         <input
                           type="file"
                           className="form-control"
+                          onChange={(e) => uploadImage(e)}
+                          ref={ref}
                           id="file"
                           placeholder="Upload File"
                         />
                       </div>
-                      <div className="mt-3">
-                        <img
-                          src={pdf}
-                          className="cursor-event"
-                          onClick={() => {
-                            setOpenLabel(true);
-                          }}
-                          alt=""
-                        />
-                        <img
-                          src={close_label}
-                          className="vertical-top cursor-event"
-                          onClick={() => {
-                            setOpenLabel(true);
-                          }}
-                          alt=""
-                        />
-                      </div>
+                      {baseImage && (
+                        <div className="mt-3">
+                          <img
+                            src={pdf}
+                            className="cursor-event"
+                            onClick={() => {
+                              setOpenLabel(true);
+                            }}
+                            alt=""
+                          />
+                          <img
+                            src={close_label}
+                            className="align-top cursor-event"
+                            onClick={() => {
+                              setBaseImage('');
+                              ref.current.value = '';
+                            }}
+                            alt=""
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="d-flex justify-content-center p-4">
                       <button
@@ -282,5 +345,4 @@ export default Label;
 Label.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };

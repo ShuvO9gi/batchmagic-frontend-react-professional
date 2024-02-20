@@ -69,9 +69,19 @@
   box-shadow: 0 0 10 rgba(0, 0, 0, 0.2);
 }
 
-/*  */
+/* css style for label modal */
 .modal-body-recipes-label {
   width: 40%;
   margin-top: 50px;
   padding: 20px;
+}
+
+/* css style for ingredient modal */
+.modal-body-recipes-ingredient {
+  width: 60%;
+  height: 80%;
+  margin-top: 170px;
+  margin-bottom: 50px;
+  padding: 16px;
+  overflow: auto;
 }

@@ -64,7 +64,7 @@ const MixRecipeList = () => {
     // setIsLabelOpen(false);
   };
 
-  const closeModal = () => {
+  const closeIngredientModal = () => {
     setSelectedRowId(null);
     setIsModalOpen(false);
   };
@@ -134,7 +134,10 @@ const MixRecipeList = () => {
       )}
 
       {selectedRowId && (
-        <Ingredient isOpen={isModalOpen} onClose={closeModal}>
+        <Ingredient
+          isOpen={isModalOpen}
+          onIngredientClose={closeIngredientModal}
+        >
           {' '}
         </Ingredient>
       )}
