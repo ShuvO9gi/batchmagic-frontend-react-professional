@@ -101,7 +101,7 @@ export default function Index() {
         data={memoizedData}
         header={'Shipments Order'}
         navigation={'/dashboard/orders/create'}
-        searchPlaceholder="Search Suppliers"
+        searchPlaceholder="Search Suppliers Order"
       />
     </div>
   );
