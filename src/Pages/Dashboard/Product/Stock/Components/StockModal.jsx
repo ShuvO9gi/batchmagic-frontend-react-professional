@@ -66,19 +66,27 @@ const StockModal = ({
     {
       name: 'Actions',
       cell: (row) => (
-        <div className="modal-action-container">
+        <div className="action-container">
           <Link to={`/dashboard/product/stock/show/${row.id}`}>
-            <img src={show} className="modal-action" alt="" />
+            <button className="btn btn-action-customized">
+              <img src={show} className="show-action" alt="" />
+            </button>
           </Link>
           <Link to={`/dashboard/product/stock/edit/${row.id}`}>
-            <img src={edit} className="modal-action" alt="" />
+            <button className="btn btn-action-customized">
+              <img src={edit} className="edit-action" alt="" />
+            </button>
           </Link>
-          <img
-            src={archive}
-            onClick={() => handleArchiveClick(row.id)}
-            className="modal-action-archive"
-            alt=""
-          />
+          <Link>
+            <button className="btn btn-action-customized">
+              <img
+                src={archive}
+                onClick={() => handleArchiveClick(row.id)}
+                className="archives-action"
+                alt=""
+              />
+            </button>
+          </Link>
         </div>
       ),
     },

@@ -94,22 +94,6 @@
   margin-bottom: 10px;
 }
 
-.modal-action {
-  height: 28px;
-  width: 28px;
-}
-
-.modal-action-archive {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-}
-
-.modal-action-container {
-  display: flex;
-  gap: 10px !important; /* Adjust the gap value as needed */
-}
-
 .stock-archived {
   background-color: #fa7b1f !important;
   border: 5px solid #fa7b1f !important;

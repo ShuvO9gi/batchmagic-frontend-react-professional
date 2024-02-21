@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import './DataTablesNew.css';
@@ -8,7 +8,6 @@ import Loader from './Loader.jsx';
 import SearchBar from './SearchBarNew.jsx';
 import { Link } from 'react-router-dom';
 // import SearchList from './SearchList.jsx';
-// import close from './../assets/Logo/actions/cross.svg';
 
 const tableCustomStyles = {
   table: {
@@ -62,9 +61,6 @@ const DataTables = ({
     if (!query) {
       setFilteredRows([]);
     } else {
-      /* document.getElementById('toogle-add-btn').style.visibility = 'hidden';
-      document.getElementById('toogle-page-close').style.visibility = 'visible'; */
-
       const filteredData = rows.filter((row) => {
         const propertiesToSearch = [
           'name',
@@ -85,30 +81,8 @@ const DataTables = ({
     }
   };
 
-  /* const handleClose = () => {
-    // setFilteredRows(data);
-    // setSearchQuery('');
-    // document.getElementById('toogle-add-btn').style.visibility = 'visible';
-    // document.getElementById('toogle-page-close').style.visibility = 'hidden';
-    window.location.reload(); //Not Recommended
-  }; */
-
   return (
     <div>
-      {/* <Link
-        // to={navigation}
-        onClick={handleClose}
-        id="toogle-page-close"
-        style={{ visibility: 'hidden' }}
-        className="d-flex flex-column"
-      >
-        <img
-          className="align-self-end page-close edit-page-close-position"
-          src={close}
-          alt=""
-        />
-      </Link> */}
-
       <div className="container list-container">
         {
           <DataTable
@@ -147,7 +121,6 @@ const DataTables = ({
             }
             subHeaderAlign="center"
             customStyles={tableCustomStyles}
-            // subHeaderWrap
           />
         }
       </div>
