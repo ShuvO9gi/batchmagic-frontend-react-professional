@@ -130,7 +130,7 @@ const MixRecipeList = () => {
       />
 
       {selectedLabelId && (
-        <Label /* isOpen={isLabelOpen} */ onClose={closeLabelModal} />
+        <Label batchTemplateID={selectedLabelId} onClose={closeLabelModal} />
       )}
 
       {selectedRowId && (
