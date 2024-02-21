@@ -15,7 +15,7 @@ const Label = ({ onClose }) => {
     setError,
     formState: { errors },
   } = useForm();
-  const [openLabel, setOpenLabel] = useState(false);
+  const [openLabel, setOpenLabel] = useState(0);
 
   /* add labbel */
   const [baseImage, setBaseImage] = useState('');
@@ -49,13 +49,10 @@ const Label = ({ onClose }) => {
     });
   };
 
-  const product = [
-    /* { batch_template_id: 1, label_type: 'cu' },
-    { batch_template_id: 2, label_type: 'sku' },
-    { batch_template_id: 3, label_type: 'pallet' }, */
-    { id: 1, label_type: 'cu' },
-    { id: 2, label_type: 'sku' },
-    { id: 3, label_type: 'pallet' },
+  const labels = [
+    { id: 1, name: 'cu' },
+    { id: 2, name: 'sku' },
+    { id: 3, name: 'pallet' },
   ];
 
   const handleDropDown = (options) => {
@@ -68,7 +65,7 @@ const Label = ({ onClose }) => {
   };
   /*  */
   const closeLabel = () => {
-    setOpenLabel(false);
+    setOpenLabel(0);
   };
 
   const handleAddLabel = () => {
@@ -115,7 +112,7 @@ const Label = ({ onClose }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          console.log('Dowanloaded');
+                          setOpenLabel(1);
                         }}
                         alt=""
                       />
@@ -125,7 +122,7 @@ const Label = ({ onClose }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          setOpenLabel(2);
                         }}
                         alt=""
                       />
@@ -135,7 +132,7 @@ const Label = ({ onClose }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          setOpenLabel(3);
                         }}
                         alt=""
                       />
@@ -246,7 +243,10 @@ const Label = ({ onClose }) => {
                         <DropDown
                           isClear={isClear}
                           handleDropDown={handleDropDown}
-                          dropDownValue={product}
+                          dropDownValue={labels}
+                          defaultValue={labels.filter(
+                            (l) => l.id === openLabel,
+                          )}
                           /* options={options}
                           value={value}
                           onChange={handleChange} */
