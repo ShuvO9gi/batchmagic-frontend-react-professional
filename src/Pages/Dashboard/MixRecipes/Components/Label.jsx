@@ -4,7 +4,7 @@ import close from '../../../../assets/Logo/actions/cross.svg';
 import { useForm } from 'react-hook-form';
 import DropDown from '../../../../components/DropDown';
 import pdf from '../../../../assets/Logo/actions/pdf.svg';
-import dowanload_label from '../../../../assets/Logo/actions/dowanload-label.svg';
+import download_label from '../../../../assets/Logo/actions/download-label.svg';
 import delete_label from '../../../../assets/Logo/actions/delete-label.svg';
 import close_label from '../../../../assets/Logo/actions/close-label.svg';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
@@ -24,7 +24,7 @@ const Label = ({ onClose, batchTemplateID }) => {
     { id: 3, name: 'pallet' },
   ];
 
-  /* add labbel */
+  /* add label */
   const [base64File, setBase64File] = useState('');
   const axiosPrivate = useAxiosPrivate();
 
@@ -167,10 +167,10 @@ const Label = ({ onClose, batchTemplateID }) => {
                 <tr>
                   <td className="text-center">
                     <img
-                      src={dowanload_label}
+                      src={download_label}
                       className="cursor-event me-5"
                       onClick={() => {
-                        console.log('Dowanloaded');
+                        console.log('Downloaded');
                       }}
                       alt=""
                     />
@@ -185,10 +185,10 @@ const Label = ({ onClose, batchTemplateID }) => {
                   </td>
                   <td className="text-center">
                     <img
-                      src={dowanload_label}
+                      src={download_label}
                       className="cursor-event me-5"
                       onClick={() => {
-                        console.log('Dowanloaded');
+                        console.log('Downloaded');
                       }}
                       alt=""
                     />
@@ -203,10 +203,10 @@ const Label = ({ onClose, batchTemplateID }) => {
                   </td>
                   <td className="text-center">
                     <img
-                      src={dowanload_label}
+                      src={download_label}
                       className="cursor-event me-5"
                       onClick={() => {
-                        console.log('Dowanloaded');
+                        console.log('Downloaded');
                       }}
                       alt=""
                     />
