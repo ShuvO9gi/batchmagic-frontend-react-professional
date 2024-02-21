@@ -130,13 +130,17 @@ const MixRecipeList = () => {
       />
 
       {selectedLabelId && (
-        <Label /* isOpen={isLabelOpen} */ onClose={closeLabelModal} />
+        <Label
+          /* isOpen={isLabelOpen} */ onLabelClose={closeLabelModal}
+          batchTemplateId={selectedLabelId}
+        />
       )}
 
       {selectedRowId && (
         <Ingredient
           isOpen={isModalOpen}
           onIngredientClose={closeIngredientModal}
+          batchTemplateId={selectedRowId}
         >
           {' '}
         </Ingredient>

@@ -7,21 +7,37 @@ import pdf from '../../../../assets/Logo/actions/pdf.svg';
 import dowanload_label from '../../../../assets/Logo/actions/dowanload-label.svg';
 import delete_label from '../../../../assets/Logo/actions/delete-label.svg';
 import close_label from '../../../../assets/Logo/actions/close-label.svg';
+import useAuth from '../../../../hooks/useAuth';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 
-const Label = ({ onClose }) => {
+const Label = ({ onLabelClose, batchTemplateId }) => {
   const {
     register,
     handleSubmit,
-    setError,
+    /* setError, */
     formState: { errors },
+    reset,
   } = useForm();
   const [openLabel, setOpenLabel] = useState(false);
 
   /* add labbel */
+  const option = [
+    { id: 1, name: 'CU' },
+    { id: 2, name: 'SKU' },
+    { id: 3, name: 'PALLET' },
+  ];
+  console.log(batchTemplateId);
+
   const [baseImage, setBaseImage] = useState('');
   const [label_type, setLabel_type] = useState({});
-  const [batch_template_id, setBatch_template_id] = useState({});
+  const [label_id, setLabel_id] = useState({});
+  const [eanNumber, setEanNumber] = useState('');
+  const [options, setOptions] = useState(option);
+  const [labelData, setLabelData] = useState([]);
   const [isClear, setIsClear] = useState(false);
+
+  const { setLoading } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
 
   const ref = useRef();
 
@@ -49,43 +65,99 @@ const Label = ({ onClose }) => {
     });
   };
 
-  const product = [
-    /* { batch_template_id: 1, label_type: 'cu' },
-    { batch_template_id: 2, label_type: 'sku' },
-    { batch_template_id: 3, label_type: 'pallet' }, */
-    { id: 1, label_type: 'cu' },
-    { id: 2, label_type: 'sku' },
-    { id: 3, label_type: 'pallet' },
-  ];
-
   const handleDropDown = (options) => {
     console.log(options);
-    // console.log(options?.batch_template_id);
     console.log(options?.id);
-    console.log(options?.label_type);
-    setBatch_template_id(options?.batch_template_id);
-    setLabel_type(options?.label_type);
+    console.log(options?.name);
+    setLabel_id(options?.id);
+    setLabel_type(options?.name);
   };
+
+  const handleEanNumber = (e) => {
+    setEanNumber(e.target.value);
+  };
+
+  const handleAddLabel = async (e) => {
+    const makeData = {
+      batch_template_id: batchTemplateId,
+      label_type: label_type,
+      ean_number: eanNumber,
+      file: baseImage,
+    };
+
+    handleLabel();
+
+    const controller = new AbortController();
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await axiosPrivate.post('/batch-template-label', makeData, {
+        signal: controller.signal,
+      });
+      if (res.status == 200) {
+        setLoading(false);
+        controller.abort();
+        e.preventDefault();
+        closeLabel();
+        console.log(res);
+      }
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
+  const handleLabel = () => {
+    console.log('Label added');
+
+    setLabelData((labelData) => [
+      ...labelData,
+      {
+        batch_template_id: batchTemplateId,
+        /* label_id: label_id, */
+        label_type: label_type,
+        ean_number: eanNumber,
+        file: baseImage,
+      },
+    ]);
+
+    const updateLabel = options.filter((option) => option.id != label_id);
+    setOptions(updateLabel);
+
+    setIsClear(true);
+
+    reset({
+      batch_template_id: '',
+      label_type: '',
+      ean_number: '',
+      file: (ref.current.value = ''),
+    });
+
+    setBaseImage('');
+
+    setTimeout(() => {
+      setIsClear(false);
+    }, 10);
+  };
+  console.log(labelData);
+
   /*  */
   const closeLabel = () => {
     setOpenLabel(false);
   };
 
-  const handleAddLabel = () => {
-    console.log('Label added');
-  };
-
   return (
     <div className="modal-overlay-recipes">
       <div className="modal-body-recipes modal-body-recipes-label ">
-        <div className="d-flex flex-column modal-header-recipes list-header">
-          <p className="align-self-start fw-bold fs-6">Label</p>
+        <div className="d-flex justify-content-between modal-header-recipes list-header">
+          <p className="fw-bold fs-6">Label</p>
 
           <img
             onClick={() => {
-              onClose();
+              onLabelClose();
             }}
-            className="align-self-end page-close modal-recipes-close"
+            className="modal-close"
             src={close}
             alt=""
           />
@@ -115,7 +187,7 @@ const Label = ({ onClose }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          console.log('Dowanloaded');
+                          setOpenLabel(true);
                         }}
                         alt=""
                       />
@@ -246,10 +318,7 @@ const Label = ({ onClose }) => {
                         <DropDown
                           isClear={isClear}
                           handleDropDown={handleDropDown}
-                          dropDownValue={product}
-                          /* options={options}
-                          value={value}
-                          onChange={handleChange} */
+                          dropDownValue={options}
                           placeholderUpdated="Select Label"
                         />
                       </div>
@@ -266,7 +335,9 @@ const Label = ({ onClose }) => {
                           {...register('ean_number', {
                             required: 'EAN Number is required',
                           })}
+                          onBlur={handleEanNumber}
                           id="ean_number"
+                          placeholder="EAN Number"
                         />
                         {errors.ean_number && (
                           <p className="text-danger">
@@ -344,5 +415,6 @@ export default Label;
 
 Label.propTypes = {
   isOpen: PropTypes.bool,
-  onClose: PropTypes.func.isRequired,
+  onLabelClose: PropTypes.func.isRequired,
+  batchTemplateId: PropTypes.number,
 };

@@ -43,8 +43,20 @@
 }
 
 /* css style for label & ingredient modal */
-.modal-recipes-close {
-  z-index: 0 !important;
+.modal-close {
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  color: #302980;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all ease-in-out 0.25s;
+}
+
+.modal-close:hover {
+  color: #302980;
+  text-decoration: none;
+  opacity: 1;
 }
 
 .cursor-event {
