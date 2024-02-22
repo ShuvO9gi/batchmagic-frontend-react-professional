@@ -71,6 +71,30 @@ const Label = ({ onClose, batchTemplateID }) => {
     };
   };
 
+  const handleDelete = async (labelType) => {
+    const labelID = recipeLabels.find(
+      (label) => label.label_type === labelType,
+    ).id;
+
+    if (!labelID) return;
+    const controller = new AbortController();
+    try {
+      const res = await axiosPrivate.delete(
+        `/batch-template-label/${labelID}`,
+        {
+          signal: controller.signal,
+        },
+      );
+
+      if (res.status === 200) {
+        setRefetch(!refetch);
+        controller.abort();
+      }
+    } catch (err) {
+      <ErrorModal />;
+    }
+  };
+
   /* add label */
   const uploadFile = async (e) => {
     const file = e.target.files[0];
@@ -249,9 +273,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                     <img
                       src={delete_label}
                       className="cursor-event"
-                      onClick={() => {
-                        console.log('Deleted');
-                      }}
+                      onClick={() => handleDelete('cu')}
                       alt=""
                     />
                   </td>
@@ -276,23 +298,13 @@ const Label = ({ onClose, batchTemplateID }) => {
                         src={download_label}
                         className="cursor-event me-5"
                         alt=""
-                        onClick={() => {
-                          window.location.href(
-                            recipeLabels?.find(
-                              (label) => label.label_type === 'sku',
-                            )?.file,
-                            '_blank',
-                          );
-                        }}
                       />
                     </a>
 
                     <img
                       src={delete_label}
                       className="cursor-event"
-                      onClick={() => {
-                        console.log('Deleted');
-                      }}
+                      onClick={() => handleDelete('sku')}
                       alt=""
                     />
                   </td>
@@ -316,18 +328,13 @@ const Label = ({ onClose, batchTemplateID }) => {
                       <img
                         src={download_label}
                         className="cursor-event me-5"
-                        onClick={() => {
-                          console.log('Downloaded');
-                        }}
                         alt=""
                       />
                     </a>
                     <img
                       src={delete_label}
                       className="cursor-event"
-                      onClick={() => {
-                        console.log('Deleted');
-                      }}
+                      onClick={() => handleDelete('pallet')}
                       alt=""
                     />
                   </td>
