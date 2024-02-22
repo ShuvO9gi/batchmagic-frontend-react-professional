@@ -156,6 +156,7 @@ const Label = ({ onClose, batchTemplateID }) => {
         resetField('file');
         resetField('ean_number');
         resetField('label');
+        setBase64File('');
       }
     } catch (err) {
       closeLabel();
