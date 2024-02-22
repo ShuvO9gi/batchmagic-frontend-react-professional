@@ -1,53 +1,65 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import { useForm } from 'react-hook-form';
 import DropDown from '../../../../components/DropDown';
 import pdf from '../../../../assets/Logo/actions/pdf.svg';
-import dowanload_label from '../../../../assets/Logo/actions/dowanload-label.svg';
+import download_label from '../../../../assets/Logo/actions/download-label.svg';
 import delete_label from '../../../../assets/Logo/actions/delete-label.svg';
 import close_label from '../../../../assets/Logo/actions/close-label.svg';
-import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 
-const Label = ({ onLabelClose, batchTemplateId }) => {
+const Label = ({ onClose, batchTemplateID }) => {
   const {
     register,
     handleSubmit,
     /* setError, */
     formState: { errors },
-    reset,
+    resetField,
   } = useForm();
-  const [openLabel, setOpenLabel] = useState(0);
-
-  /* add labbel */
-  const option = [
-    { id: 1, name: 'CU' },
-    { id: 2, name: 'SKU' },
-    { id: 3, name: 'PALLET' },
+  const [labelValue, setLabelValue] = useState(0);
+  const labels = [
+    { id: 1, name: 'cu' },
+    { id: 2, name: 'sku' },
+    { id: 3, name: 'pallet' },
   ];
-  console.log(batchTemplateId);
-
-  const [baseImage, setBaseImage] = useState('');
-  const [label_type, setLabel_type] = useState({});
-  const [label_id, setLabel_id] = useState({});
-  const [eanNumber, setEanNumber] = useState('');
-  const [options, setOptions] = useState(option);
-  const [labelData, setLabelData] = useState([]);
-  const [isClear, setIsClear] = useState(false);
-
-  const { setLoading } = useAuth();
-  const axiosPrivate = useAxiosPrivate();
-
-  const ref = useRef();
 
   /* add label */
-  const uploadImage = async (e) => {
+  const [base64File, setBase64File] = useState('');
+  const axiosPrivate = useAxiosPrivate();
+
+  const makeData = (data) => {
+    return {
+      batch_template_id: batchTemplateID,
+      label_type: labels.find((l) => l.id === labelValue).name,
+      ean_number: data.ean_number,
+      file: base64File,
+    };
+  };
+
+  /* add label */
+  const uploadFile = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
+
+    if (file.size > 5000000) {
+      setError('file', {
+        type: 'manual',
+        message: 'File size should be less than 5 MB',
+      });
+      return;
+    }
+
+    if (file.type !== 'application/pdf') {
+      setError('file', {
+        type: 'manual',
+        message: 'Only PDF files are allowed',
+      });
+      return;
+    }
+
     const base64 = await convertBase64(file);
-    console.log(base64);
-    setBaseImage(base64);
+    setBase64File(base64);
+    setError('file', {});
   };
 
   const convertBase64 = (file) => {
@@ -64,93 +76,27 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
       };
     });
   };
-
-  const labels = [
-    { id: 1, name: 'cu' },
-    { id: 2, name: 'sku' },
-    { id: 3, name: 'pallet' },
-  ];
-
-  const handleDropDown = (options) => {
-    console.log(options);
-    console.log(options?.id);
-    console.log(options?.name);
-    setLabel_id(options?.id);
-    setLabel_type(options?.name);
-  };
-
-  const handleEanNumber = (e) => {
-    setEanNumber(e.target.value);
-  };
-
-  const handleAddLabel = async (e) => {
-    const makeData = {
-      batch_template_id: batchTemplateId,
-      label_type: label_type,
-      ean_number: eanNumber,
-      file: baseImage,
-    };
-
-    handleLabel();
-
-    const controller = new AbortController();
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const res = await axiosPrivate.post('/batch-template-label', makeData, {
-        signal: controller.signal,
-      });
-      if (res.status == 200) {
-        setLoading(false);
-        controller.abort();
-        e.preventDefault();
-        closeLabel();
-        console.log(res);
-      }
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-    }
-  };
-
-  const handleLabel = () => {
-    console.log('Label added');
-
-    setLabelData((labelData) => [
-      ...labelData,
-      {
-        batch_template_id: batchTemplateId,
-        /* label_id: label_id, */
-        label_type: label_type,
-        ean_number: eanNumber,
-        file: baseImage,
-      },
-    ]);
-
-    const updateLabel = options.filter((option) => option.id != label_id);
-    setOptions(updateLabel);
-
-    setIsClear(true);
-
-    reset({
-      batch_template_id: '',
-      label_type: '',
-      ean_number: '',
-      file: (ref.current.value = ''),
-    });
-
-    setBaseImage('');
-
-    setTimeout(() => {
-      setIsClear(false);
-    }, 10);
-  };
-  console.log(labelData);
-
   /*  */
   const closeLabel = () => {
-    setOpenLabel(0);
+    setLabelValue(0);
+  };
+
+  const handleAddLabel = async (data, e) => {
+    const formData = makeData(data);
+    const controller = new AbortController();
+    e.preventDefault();
+    try {
+      const res = await axiosPrivate.post(`/batch-template-label`, formData, {
+        signal: controller.signal,
+      });
+      if (res.status === 200) {
+        controller.abort();
+        closeLabel();
+      }
+    } catch (err) {
+      closeLabel();
+      setError(err.response.data.errors);
+    }
   };
 
   return (
@@ -161,7 +107,7 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
 
           <img
             onClick={() => {
-              onLabelClose();
+              onClose();
             }}
             className="modal-close"
             src={close}
@@ -170,114 +116,113 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
         </div>
         <hr className="my-0" />
         <div className="modal-content-recipes">
-          <form onSubmit={handleSubmit(handleAddLabel)}>
-            <div className="row p-2">
-              <table className="table table-mt">
-                <thead>
-                  <tr>
-                    <th scope="col" className="text-recipe text-center">
-                      <b>CU</b>
-                    </th>
-                    <th scope="col" className="text-recipe text-center">
-                      <b>SKU</b>
-                    </th>
-                    <th scope="col" className="text-recipe text-center">
-                      <b>PALLET</b>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="text-center">
-                      <img
-                        src={pdf}
-                        className="cursor-event"
-                        onClick={() => {
-                          setOpenLabel(1);
-                        }}
-                        alt=""
-                      />
-                    </td>
-                    <td className="text-center">
-                      <img
-                        src={pdf}
-                        className="cursor-event"
-                        onClick={() => {
-                          setOpenLabel(2);
-                        }}
-                        alt=""
-                      />
-                    </td>
-                    <td className="text-center">
-                      <img
-                        src={pdf}
-                        className="cursor-event"
-                        onClick={() => {
-                          setOpenLabel(3);
-                        }}
-                        alt=""
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-center">
-                      <img
-                        src={dowanload_label}
-                        className="cursor-event me-5"
-                        onClick={() => {
-                          console.log('Dowanloaded');
-                        }}
-                        alt=""
-                      />
-                      <img
-                        src={delete_label}
-                        className="cursor-event"
-                        onClick={() => {
-                          console.log('Deleted');
-                        }}
-                        alt=""
-                      />
-                    </td>
-                    <td className="text-center">
-                      <img
-                        src={dowanload_label}
-                        className="cursor-event me-5"
-                        onClick={() => {
-                          console.log('Dowanloaded');
-                        }}
-                        alt=""
-                      />
-                      <img
-                        src={delete_label}
-                        className="cursor-event"
-                        onClick={() => {
-                          console.log('Deleted');
-                        }}
-                        alt=""
-                      />
-                    </td>
-                    <td className="text-center">
-                      <img
-                        src={dowanload_label}
-                        className="cursor-event me-5"
-                        onClick={() => {
-                          console.log('Dowanloaded');
-                        }}
-                        alt=""
-                      />
-                      <img
-                        src={delete_label}
-                        className="cursor-event"
-                        onClick={() => {
-                          console.log('Deleted');
-                        }}
-                        alt=""
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              {/* <div className="d-flex justify-content-between text--center">
+          <div className="row p-2">
+            <table className="table table-mt">
+              <thead>
+                <tr>
+                  <th scope="col" className="text-recipe text-center">
+                    <b>CU</b>
+                  </th>
+                  <th scope="col" className="text-recipe text-center">
+                    <b>SKU</b>
+                  </th>
+                  <th scope="col" className="text-recipe text-center">
+                    <b>PALLET</b>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="text-center">
+                    <img
+                      src={pdf}
+                      className="cursor-event"
+                      onClick={() => {
+                        setLabelValue(1);
+                      }}
+                      alt=""
+                    />
+                  </td>
+                  <td className="text-center">
+                    <img
+                      src={pdf}
+                      className="cursor-event"
+                      onClick={() => {
+                        setLabelValue(2);
+                      }}
+                      alt=""
+                    />
+                  </td>
+                  <td className="text-center">
+                    <img
+                      src={pdf}
+                      className="cursor-event"
+                      onClick={() => {
+                        setLabelValue(3);
+                      }}
+                      alt=""
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-center">
+                    <img
+                      src={download_label}
+                      className="cursor-event me-5"
+                      onClick={() => {
+                        console.log('Downloaded');
+                      }}
+                      alt=""
+                    />
+                    <img
+                      src={delete_label}
+                      className="cursor-event"
+                      onClick={() => {
+                        console.log('Deleted');
+                      }}
+                      alt=""
+                    />
+                  </td>
+                  <td className="text-center">
+                    <img
+                      src={download_label}
+                      className="cursor-event me-5"
+                      onClick={() => {
+                        console.log('Downloaded');
+                      }}
+                      alt=""
+                    />
+                    <img
+                      src={delete_label}
+                      className="cursor-event"
+                      onClick={() => {
+                        console.log('Deleted');
+                      }}
+                      alt=""
+                    />
+                  </td>
+                  <td className="text-center">
+                    <img
+                      src={download_label}
+                      className="cursor-event me-5"
+                      onClick={() => {
+                        console.log('Downloaded');
+                      }}
+                      alt=""
+                    />
+                    <img
+                      src={delete_label}
+                      className="cursor-event"
+                      onClick={() => {
+                        console.log('Deleted');
+                      }}
+                      alt=""
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <div className="d-flex justify-content-between text--center">
                 <div className="col-md-4">
                   <label htmlFor="cu" className="form-label fw-bold">
                     CU
@@ -295,8 +240,18 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                 </div>
               </div>
               <hr /> */}
-            </div>
-            {openLabel && (
+          </div>
+
+          <div className="d-flex justify-content-center p-2">
+            <button
+              type="submit"
+              className="btn btn-orange float-center create-create-btn"
+            >
+              UPLOAD LABELS
+            </button>
+          </div>
+          {labelValue ? (
+            <form onSubmit={handleSubmit(handleAddLabel)}>
               <div className="modal-overlay-recipes">
                 <div className="modal-body-recipes modal-body-recipes-label ">
                   <div className="d-flex flex-column modal-header-recipes list-header">
@@ -322,16 +277,14 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                           Label Type
                         </label>
                         <DropDown
-                          isClear={isClear}
-                          handleDropDown={handleDropDown}
-                          dropDownValue={labels}
-                          defaultValue={labels.filter(
-                            (l) => l.id === openLabel,
+                          isClear={false}
+                          // handleDropDown={handleDropDown}
+                          dropDownValue={labels.filter(
+                            (l) => l.id === labelValue,
                           )}
-                          /* options={options}
-                          value={value}
-                          onChange={handleChange} */
+                          defaultValue={labels.find((l) => l.id === labelValue)}
                           placeholderUpdated="Select Label"
+                          isDisabled={true}
                         />
                       </div>
                       <div className="col-md-12 py-2">
@@ -347,7 +300,6 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                           {...register('ean_number', {
                             required: 'EAN Number is required',
                           })}
-                          onBlur={handleEanNumber}
                           id="ean_number"
                           placeholder="EAN Number"
                         />
@@ -367,19 +319,25 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                         <input
                           type="file"
                           className="form-control"
-                          onChange={(e) => uploadImage(e)}
-                          ref={ref}
+                          {...register('file', {
+                            required: 'file is required',
+                          })}
+                          onChange={(e) => uploadFile(e)}
+                          // ref={ref}
                           id="file"
                           placeholder="Upload File"
                         />
+                        {errors.file && (
+                          <p className="text-danger">{errors?.file?.message}</p>
+                        )}
                       </div>
-                      {baseImage && (
+                      {base64File && (
                         <div className="mt-3">
                           <img
                             src={pdf}
                             className="cursor-event"
                             onClick={() => {
-                              setOpenLabel(true);
+                              setLabelValue(true);
                             }}
                             alt=""
                           />
@@ -387,8 +345,12 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                             src={close_label}
                             className="align-top cursor-event"
                             onClick={() => {
-                              setBaseImage('');
-                              ref.current.value = '';
+                              setBase64File('');
+                              resetField('file');
+                              setError('file', {
+                                type: 'manual',
+                                message: 'File is required',
+                              });
                             }}
                             alt=""
                           />
@@ -397,9 +359,10 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                     </div>
                     <div className="d-flex justify-content-center p-4">
                       <button
-                        type="button"
+                        type="submit"
                         className="btn btn-orange float-center create-create-btn"
-                        onClick={handleAddLabel}
+                        // onClick={handleAddLabel}
+                        // disabled={!baseImage || errors?.ean_number?.message}
                       >
                         Submit
                       </button>
@@ -407,16 +370,8 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                   </div>
                 </div>
               </div>
-            )}
-            <div className="d-flex justify-content-center p-2">
-              <button
-                type="submit"
-                className="btn btn-orange float-center create-create-btn"
-              >
-                UPLOAD LABELS
-              </button>
-            </div>
-          </form>
+            </form>
+          ) : null}
         </div>
       </div>
     </div>
@@ -426,7 +381,6 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
 export default Label;
 
 Label.propTypes = {
-  isOpen: PropTypes.bool,
-  onLabelClose: PropTypes.func.isRequired,
-  batchTemplateId: PropTypes.number,
+  batchTemplateID: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
