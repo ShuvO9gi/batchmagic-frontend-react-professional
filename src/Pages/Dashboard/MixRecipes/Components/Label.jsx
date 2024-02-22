@@ -18,7 +18,7 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
     formState: { errors },
     reset,
   } = useForm();
-  const [openLabel, setOpenLabel] = useState(false);
+  const [openLabel, setOpenLabel] = useState(0);
 
   /* add labbel */
   const option = [
@@ -64,6 +64,12 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
       };
     });
   };
+
+  const labels = [
+    { id: 1, name: 'cu' },
+    { id: 2, name: 'sku' },
+    { id: 3, name: 'pallet' },
+  ];
 
   const handleDropDown = (options) => {
     console.log(options);
@@ -144,7 +150,7 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
 
   /*  */
   const closeLabel = () => {
-    setOpenLabel(false);
+    setOpenLabel(0);
   };
 
   return (
@@ -187,7 +193,7 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          setOpenLabel(1);
                         }}
                         alt=""
                       />
@@ -197,7 +203,7 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          setOpenLabel(2);
                         }}
                         alt=""
                       />
@@ -207,7 +213,7 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                         src={pdf}
                         className="cursor-event"
                         onClick={() => {
-                          setOpenLabel(true);
+                          setOpenLabel(3);
                         }}
                         alt=""
                       />
@@ -318,7 +324,13 @@ const Label = ({ onLabelClose, batchTemplateId }) => {
                         <DropDown
                           isClear={isClear}
                           handleDropDown={handleDropDown}
-                          dropDownValue={options}
+                          dropDownValue={labels}
+                          defaultValue={labels.filter(
+                            (l) => l.id === openLabel,
+                          )}
+                          /* options={options}
+                          value={value}
+                          onChange={handleChange} */
                           placeholderUpdated="Select Label"
                         />
                       </div>
