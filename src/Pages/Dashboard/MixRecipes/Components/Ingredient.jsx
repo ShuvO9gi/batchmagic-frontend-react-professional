@@ -16,6 +16,7 @@ const Ingredient = ({
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const [err, setErr] = useState({});
@@ -50,6 +51,20 @@ const Ingredient = ({
       controller.abort();
     };
   }, []);
+
+  useEffect(() => {
+    if (ingredients) {
+      setValue('ingredients', ingredients?.ingredients);
+      setValue('energy_kj', ingredients?.energy_kj);
+      setValue('of_which_sugars', ingredients?.of_which_sugars);
+      setValue('energy_kcal', ingredients?.energy_kcal);
+      setValue('protein', ingredients?.protein);
+      setValue('fat', ingredients?.fat);
+      setValue('of_which_saturated', ingredients?.of_which_saturated);
+      setValue('carbohydrates', ingredients?.carbohydrates);
+      setValue('salt', ingredients?.salt);
+    }
+  }, [ingredients, setValue]);
 
   const handleAddIngredients = async (data, e) => {
     console.log(data);
