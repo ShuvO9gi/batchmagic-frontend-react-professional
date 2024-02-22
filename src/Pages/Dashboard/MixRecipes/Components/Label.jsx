@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import { useForm } from 'react-hook-form';
 import DropDown from '../../../../components/DropDown';
 import pdf from '../../../../assets/Logo/actions/pdf.svg';
+import pdf_blurred from '../../../../assets/Logo/actions/pdf_blurred.svg';
+import pdf_full from '../../../../assets/Logo/actions/pdf_full.svg';
 import download_label from '../../../../assets/Logo/actions/download-label.svg';
 import delete_label from '../../../../assets/Logo/actions/delete-label.svg';
 import close_label from '../../../../assets/Logo/actions/close-label.svg';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import ErrorModal from '../../../../components/ErrorModal';
 
 const Label = ({ onClose, batchTemplateID }) => {
   const {
     register,
     handleSubmit,
-    /* setError, */
+    setError,
     formState: { errors },
     resetField,
   } = useForm();
+
   const [labelValue, setLabelValue] = useState(0);
+  const [recipeLabels, setRecipeLabels] = useState([]);
+  const [currentLabel, setCurrentLabel] = useState([]);
+  const [refetch, setRefetch] = useState(false);
+
   const labels = [
     { id: 1, name: 'cu' },
     { id: 2, name: 'sku' },
@@ -28,6 +36,32 @@ const Label = ({ onClose, batchTemplateID }) => {
   const [base64File, setBase64File] = useState('');
   const axiosPrivate = useAxiosPrivate();
 
+  useEffect(() => {
+    const controller = new AbortController();
+    const getLabels = async () => {
+      try {
+        const res = await axiosPrivate.get(
+          `/batch-template-labels/${batchTemplateID}`,
+          {
+            signal: controller.signal,
+          },
+        );
+        if (res.status === 200) {
+          setRecipeLabels(res?.data?.data);
+          const label_types = res?.data?.data.map((label) => label.label_type);
+          setCurrentLabel(labels.find((l) => !label_types.includes(l.name)));
+        }
+      } catch (err) {
+        <ErrorModal />;
+      }
+    };
+
+    getLabels();
+    return () => {
+      controller.abort();
+    };
+  }, [refetch]);
+
   const makeData = (data) => {
     return {
       batch_template_id: batchTemplateID,
@@ -35,6 +69,30 @@ const Label = ({ onClose, batchTemplateID }) => {
       ean_number: data.ean_number,
       file: base64File,
     };
+  };
+
+  const handleDelete = async (labelType) => {
+    const labelID = recipeLabels.find(
+      (label) => label.label_type === labelType,
+    ).id;
+
+    if (!labelID) return;
+    const controller = new AbortController();
+    try {
+      const res = await axiosPrivate.delete(
+        `/batch-template-label/${labelID}`,
+        {
+          signal: controller.signal,
+        },
+      );
+
+      if (res.status === 200) {
+        setRefetch(!refetch);
+        controller.abort();
+      }
+    } catch (err) {
+      <ErrorModal />;
+    }
   };
 
   /* add label */
@@ -79,6 +137,7 @@ const Label = ({ onClose, batchTemplateID }) => {
   /*  */
   const closeLabel = () => {
     setLabelValue(0);
+    setRefetch(!refetch);
   };
 
   const handleAddLabel = async (data, e) => {
@@ -135,121 +194,165 @@ const Label = ({ onClose, batchTemplateID }) => {
                 <tr>
                   <td className="text-center">
                     <img
-                      src={pdf}
+                      src={
+                        recipeLabels
+                          .map((label) => label.label_type)
+                          .includes('cu')
+                          ? pdf_full
+                          : pdf_blurred
+                      }
                       className="cursor-event"
                       onClick={() => {
                         setLabelValue(1);
                       }}
                       alt=""
+                      height={100}
+                      width={100}
                     />
                   </td>
                   <td className="text-center">
                     <img
-                      src={pdf}
+                      src={
+                        recipeLabels
+                          .map((label) => label.label_type)
+                          .includes('sku')
+                          ? pdf_full
+                          : pdf_blurred
+                      }
                       className="cursor-event"
                       onClick={() => {
                         setLabelValue(2);
                       }}
                       alt=""
+                      height={100}
+                      width={100}
                     />
                   </td>
                   <td className="text-center">
                     <img
-                      src={pdf}
+                      src={
+                        recipeLabels
+                          .map((label) => label.label_type)
+                          .includes('pallet')
+                          ? pdf_full
+                          : pdf_blurred
+                      }
                       className="cursor-event"
                       onClick={() => {
                         setLabelValue(3);
                       }}
                       alt=""
+                      height={100}
+                      width={100}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td className="text-center">
-                    <img
-                      src={download_label}
-                      className="cursor-event me-5"
-                      onClick={() => {
-                        console.log('Downloaded');
-                      }}
-                      alt=""
-                    />
+                    <a
+                      href={
+                        recipeLabels?.find((label) => label.label_type === 'cu')
+                          ?.file ?? '#'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={
+                        recipeLabels?.find(
+                          (label) => label.label_type === 'pallet',
+                        )?.file
+                          ? 'cu_label'
+                          : false
+                      }
+                    >
+                      <img
+                        src={download_label}
+                        className="cursor-event me-5"
+                        alt=""
+                      />
+                    </a>
                     <img
                       src={delete_label}
                       className="cursor-event"
-                      onClick={() => {
-                        console.log('Deleted');
-                      }}
+                      onClick={() => handleDelete('cu')}
                       alt=""
                     />
                   </td>
                   <td className="text-center">
-                    <img
-                      src={download_label}
-                      className="cursor-event me-5"
-                      onClick={() => {
-                        console.log('Downloaded');
-                      }}
-                      alt=""
-                    />
+                    <a
+                      href={
+                        recipeLabels?.find(
+                          (label) => label.label_type === 'sku',
+                        )?.file ?? '#'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={
+                        recipeLabels?.find(
+                          (label) => label.label_type === 'pallet',
+                        )?.file
+                          ? 'sku_label'
+                          : false
+                      }
+                    >
+                      <img
+                        src={download_label}
+                        className="cursor-event me-5"
+                        alt=""
+                      />
+                    </a>
+
                     <img
                       src={delete_label}
                       className="cursor-event"
-                      onClick={() => {
-                        console.log('Deleted');
-                      }}
+                      onClick={() => handleDelete('sku')}
                       alt=""
                     />
                   </td>
                   <td className="text-center">
-                    <img
-                      src={download_label}
-                      className="cursor-event me-5"
-                      onClick={() => {
-                        console.log('Downloaded');
-                      }}
-                      alt=""
-                    />
+                    <a
+                      href={
+                        recipeLabels?.find(
+                          (label) => label.label_type === 'pallet',
+                        )?.file ?? '#'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download={
+                        recipeLabels?.find(
+                          (label) => label.label_type === 'pallet',
+                        )?.file
+                          ? 'pallet_label'
+                          : false
+                      }
+                    >
+                      <img
+                        src={download_label}
+                        className="cursor-event me-5"
+                        alt=""
+                      />
+                    </a>
                     <img
                       src={delete_label}
                       className="cursor-event"
-                      onClick={() => {
-                        console.log('Deleted');
-                      }}
+                      onClick={() => handleDelete('pallet')}
                       alt=""
                     />
                   </td>
                 </tr>
               </tbody>
             </table>
-            {/* <div className="d-flex justify-content-between text--center">
-                <div className="col-md-4">
-                  <label htmlFor="cu" className="form-label fw-bold">
-                    CU
-                  </label>
-                </div>
-                <div className="col-md-4">
-                  <label htmlFor="sku" className="form-label fw-bold">
-                    SKU
-                  </label>
-                </div>
-                <div className="col-md-4">
-                  <label htmlFor="pallet" className="form-label fw-bold">
-                    PALLET
-                  </label>
-                </div>
-              </div>
-              <hr /> */}
           </div>
-
-          <div className="d-flex justify-content-center p-2">
-            <button
-              type="submit"
-              className="btn btn-orange float-center create-create-btn"
-            >
-              UPLOAD LABELS
-            </button>
-          </div>
+          {currentLabel?.id && (
+            <div className="d-flex justify-content-center p-2">
+              <button
+                type="button"
+                className="btn btn-orange float-center create-create-btn"
+                onClick={() => setLabelValue(currentLabel?.id)}
+              >
+                UPLOAD LABELS
+              </button>
+            </div>
+          )}
           {labelValue ? (
             <form onSubmit={handleSubmit(handleAddLabel)}>
               <div className="modal-overlay-recipes">
