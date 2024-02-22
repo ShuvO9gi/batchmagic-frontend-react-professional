@@ -464,8 +464,6 @@ const Label = ({ onClose, batchTemplateID }) => {
                       <button
                         type="submit"
                         className="btn btn-orange float-center create-create-btn"
-                        // onClick={handleAddLabel}
-                        // disabled={!baseImage || errors?.ean_number?.message}
                       >
                         Submit
                       </button>

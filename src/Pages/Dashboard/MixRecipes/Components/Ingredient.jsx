@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import ErrorModal from '../../../../components/ErrorModal';
 
 const Ingredient = ({
   isOpen = true,
@@ -20,34 +21,81 @@ const Ingredient = ({
   const [err, setErr] = useState({});
   const { setLoading } = useAuth();
   const axiosPrivate = useAxiosPrivate();
+  const [ingredients, setIngredients] = useState(null);
 
   if (!isOpen) {
     return null;
   }
 
+  useEffect(() => {
+    const controller = new AbortController();
+    const getIngredients = async () => {
+      try {
+        const res = await axiosPrivate.get(
+          `/batch-template-ingredient/${batchTemplateId}`,
+          {
+            signal: controller.signal,
+          },
+        );
+        if (res.status === 200) {
+          setIngredients(res?.data?.data);
+        }
+      } catch (err) {
+        <ErrorModal />;
+      }
+    };
+
+    getIngredients();
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
   const handleAddIngredients = async (data, e) => {
-    console.log('Label data added');
+    console.log(data);
     data = { ...data, batch_template_id: batchTemplateId };
     const controller = new AbortController();
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const res = await axiosPrivate.post('/batch-template-ingredient', data, {
-        signal: controller.signal,
-      });
+    if (ingredients) {
+      try {
+        const res = await axiosPrivate.put(
+          `/batch-template-ingredient/${ingredients.id}`,
+          data,
+          {
+            signal: controller.signal,
+          },
+        );
 
-      if (res.status == 200) {
+        if (res.status == 200) {
+          setLoading(false);
+          controller.abort();
+        }
+      } catch (err) {
         setLoading(false);
-        controller.abort();
-        console.log('Success');
-        console.log(res);
+
+        setErr(err.response.data.errors);
       }
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      console.log(err.response.data.errors);
-      setErr(err.response.data.errors);
+    } else {
+      try {
+        const res = await axiosPrivate.post(
+          '/batch-template-ingredient',
+          data,
+          {
+            signal: controller.signal,
+          },
+        );
+
+        if (res.status == 200) {
+          setLoading(false);
+          controller.abort();
+        }
+      } catch (err) {
+        setLoading(false);
+
+        setErr(err.response.data.errors);
+      }
     }
   };
 
@@ -88,15 +136,12 @@ const Ingredient = ({
                   placeholder="Ingredient"
                   cols="auto"
                   rows="auto"
+                  defaultValue={ingredients?.ingredients}
                 ></textarea>
                 {errors.ingredients && (
-                  <p className="text-danger">
-                    {/* console.log(errors) */ errors.ingredients.message}
-                  </p>
+                  <p className="text-danger">{errors.ingredients.message}</p>
                 )}
-                {err && (
-                  <p className="text-danger">{console.log(err?.energy_kj)}</p>
-                )}
+                {err && <p className="text-danger">{err?.ingredients}</p>}
               </div>
 
               <div className="col-md-6 py-3">
@@ -113,7 +158,7 @@ const Ingredient = ({
                     required: 'Energy(kj) is required',
                   })}
                   id="energy-kj"
-                  /* placeholder="Energy(kj)" */
+                  defaultValue={ingredients?.energy_kj}
                 />
                 {errors.energy_kj && (
                   <p className="text-danger">{errors.energy_kj.message}</p>
@@ -133,9 +178,9 @@ const Ingredient = ({
                     required: 'Of which sugar is required',
                   })}
                   id="sugar"
-                  /* placeholder="Of which sugars" */
+                  defaultValue={ingredients?.of_which_sugars}
                 />
-                {errors.energy_kj && (
+                {errors.of_which_sugars && (
                   <p className="text-danger">
                     {errors.of_which_sugars.message}
                   </p>
@@ -155,9 +200,9 @@ const Ingredient = ({
                     required: 'Energy(kcal) is required',
                   })}
                   id="energy-kcal"
-                  /* placeholder="Energy(kcal)" */
+                  defaultValue={ingredients?.energy_kcal}
                 />
-                {errors.energy_kj && (
+                {errors.energy_kcal && (
                   <p className="text-danger">{errors.energy_kcal.message}</p>
                 )}
               </div>
@@ -175,9 +220,9 @@ const Ingredient = ({
                     required: 'Protein is required',
                   })}
                   id="protein"
-                  /* placeholder="Protein" */
+                  defaultValue={ingredients?.protein}
                 />
-                {errors.energy_kj && (
+                {errors.protein && (
                   <p className="text-danger">{errors.protein.message}</p>
                 )}
               </div>
@@ -195,9 +240,9 @@ const Ingredient = ({
                     required: 'Fat is required',
                   })}
                   id="fat"
-                  /* placeholder="Fat" */
+                  defaultValue={ingredients?.fat}
                 />
-                {errors.energy_kj && (
+                {errors.fat && (
                   <p className="text-danger">{errors.fat.message}</p>
                 )}
               </div>
@@ -215,9 +260,9 @@ const Ingredient = ({
                     required: 'Of which saturated is required',
                   })}
                   id="saturated"
-                  /* placeholder="Of which saturated" */
+                  defaultValue={ingredients?.of_which_saturated}
                 />
-                {errors.energy_kj && (
+                {errors.of_which_saturated && (
                   <p className="text-danger">
                     {errors.of_which_saturated.message}
                   </p>
@@ -237,9 +282,9 @@ const Ingredient = ({
                     required: 'Carbohydrates is required',
                   })}
                   id="carbohydrates"
-                  /* placeholder="Carbohydrates" */
+                  defaultValue={ingredients?.carbohydrates}
                 />
-                {errors.energy_kj && (
+                {errors.carbohydrates && (
                   <p className="text-danger">{errors.carbohydrates.message}</p>
                 )}
               </div>
@@ -257,9 +302,9 @@ const Ingredient = ({
                     required: 'Salt is required',
                   })}
                   id="salt"
-                  /* placeholder="Salt" */
+                  defaultValue={ingredients?.salt}
                 />
-                {errors.energy_kj && (
+                {errors.salt && (
                   <p className="text-danger">{errors.salt.message}</p>
                 )}
               </div>
