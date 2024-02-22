@@ -153,6 +153,9 @@ const Label = ({ onClose, batchTemplateID }) => {
       if (res.status === 200) {
         controller.abort();
         closeLabel();
+        resetField('file');
+        resetField('ean_number');
+        resetField('label');
       }
     } catch (err) {
       closeLabel();
@@ -321,7 +324,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       ) : null}
                     </td>
                     <td className="text-center">
-                      {recipeLabelTypes.includes('sku') ? (
+                      {recipeLabelTypes.includes('pallet') ? (
                         <>
                           <a
                             href={
