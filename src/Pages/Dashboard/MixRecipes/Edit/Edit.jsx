@@ -10,6 +10,8 @@ import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import Loader from '../../../../components/Loader';
+/*  */
+import ingredient from '../../../../assets/Logo/actions/ingredient.svg';
 
 const Edit = () => {
   const {
@@ -234,6 +236,11 @@ const Edit = () => {
         <Loader />
       ) : (
         <div>
+          <img
+            className="align-self-start page-close edit-page-close-position"
+            src={ingredient}
+            alt=""
+          />
           <Link to="/dashboard/mix-recipes" className="d-flex flex-column">
             <img
               className="align-self-end page-close edit-page-close-position"

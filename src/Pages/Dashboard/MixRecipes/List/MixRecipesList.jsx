@@ -86,31 +86,46 @@ const MixRecipeList = () => {
         <div className="action-container">
           <Link to={`/dashboard/mix-recipes/show/${row.id}`}>
             <button className="btn btn-action-customized">
-              <img src={show} className="show-action" alt="" />
+              <img src={show} className="show-action" alt="" title="View" />
             </button>
           </Link>
           <Link to={`/dashboard/mix-recipes/edit/${row.id}`}>
             <button className="btn btn-action-customized">
-              <img src={edit} className="edit-action" alt="" />
+              <img src={edit} className="edit-action" alt="" title="Edit" />
             </button>
           </Link>
           <Link to={`/dashboard/mix-recipes/duplicate/${row.id}`}>
             <button className="btn btn-action-customized">
-              <img src={duplicate} className="duplicate-action" alt="" />
+              <img
+                src={duplicate}
+                className="duplicate-action"
+                alt=""
+                title="Duplicate"
+              />
             </button>
           </Link>
           <button
             className="btn btn-action-customized"
             onClick={() => showLabelModal(row.id)}
           >
-            <img src={label} className="duplicate-action" alt="" />
+            <img
+              src={label}
+              className="duplicate-action"
+              alt=""
+              title="Labels"
+            />
           </button>
           {/* <Link to={`/dashboard/mix-recipes/duplicate/${row.id}`}> */}
           <button
             className="btn btn-action-customized"
             onClick={() => showIngredientModal(row.id)}
           >
-            <img src={ingredient} className="duplicate-action" alt="" />
+            <img
+              src={ingredient}
+              className="duplicate-action"
+              alt=""
+              title="Ingredients and nutrients"
+            />
           </button>
           {/* </Link> */}
         </div>
@@ -137,6 +152,7 @@ const MixRecipeList = () => {
         <Ingredient
           isOpen={isModalOpen}
           onIngredientClose={closeIngredientModal}
+          batchTemplateId={selectedRowId}
         >
           {' '}
         </Ingredient>

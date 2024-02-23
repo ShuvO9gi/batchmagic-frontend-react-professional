@@ -23,6 +23,7 @@ const Label = ({ onClose, batchTemplateID }) => {
 
   const [labelValue, setLabelValue] = useState(0);
   const [recipeLabels, setRecipeLabels] = useState([]);
+  const [recipeLabelTypes, setRecipeLabelTypes] = useState([]);
   const [currentLabel, setCurrentLabel] = useState([]);
   const [refetch, setRefetch] = useState(false);
 
@@ -49,6 +50,7 @@ const Label = ({ onClose, batchTemplateID }) => {
         if (res.status === 200) {
           setRecipeLabels(res?.data?.data);
           const label_types = res?.data?.data.map((label) => label.label_type);
+          setRecipeLabelTypes(label_types);
           setCurrentLabel(labels.find((l) => !label_types.includes(l.name)));
         }
       } catch (err) {
@@ -151,6 +153,10 @@ const Label = ({ onClose, batchTemplateID }) => {
       if (res.status === 200) {
         controller.abort();
         closeLabel();
+        resetField('file');
+        resetField('ean_number');
+        resetField('label');
+        setBase64File('');
       }
     } catch (err) {
       closeLabel();
@@ -161,14 +167,14 @@ const Label = ({ onClose, batchTemplateID }) => {
   return (
     <div className="modal-overlay-recipes">
       <div className="modal-body-recipes modal-body-recipes-label ">
-        <div className="d-flex flex-column modal-header-recipes list-header">
-          <p className="align-self-start fw-bold fs-6">Label</p>
+        <div className="d-flex justify-content-between modal-header-recipes list-header">
+          <p className="fw-bold fs-6">Label</p>
 
           <img
             onClick={() => {
               onClose();
             }}
-            className="align-self-end page-close modal-recipes-close"
+            className="modal-close"
             src={close}
             alt=""
           />
@@ -247,98 +253,113 @@ const Label = ({ onClose, batchTemplateID }) => {
                     />
                   </td>
                 </tr>
-                <tr>
-                  <td className="text-center">
-                    <a
-                      href={
-                        recipeLabels?.find((label) => label.label_type === 'cu')
-                          ?.file ?? '#'
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download={
-                        recipeLabels?.find(
-                          (label) => label.label_type === 'pallet',
-                        )?.file
-                          ? 'cu_label'
-                          : false
-                      }
-                    >
-                      <img
-                        src={download_label}
-                        className="cursor-event me-5"
-                        alt=""
-                      />
-                    </a>
-                    <img
-                      src={delete_label}
-                      className="cursor-event"
-                      onClick={() => handleDelete('cu')}
-                      alt=""
-                    />
-                  </td>
-                  <td className="text-center">
-                    <a
-                      href={
-                        recipeLabels?.find(
-                          (label) => label.label_type === 'sku',
-                        )?.file ?? '#'
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download={
-                        recipeLabels?.find(
-                          (label) => label.label_type === 'pallet',
-                        )?.file
-                          ? 'sku_label'
-                          : false
-                      }
-                    >
-                      <img
-                        src={download_label}
-                        className="cursor-event me-5"
-                        alt=""
-                      />
-                    </a>
+                {recipeLabelTypes.length > 0 ? (
+                  <tr>
+                    <td className="text-center">
+                      {recipeLabelTypes.includes('cu') ? (
+                        <>
+                          <a
+                            href={
+                              recipeLabels?.find(
+                                (label) => label.label_type === 'cu',
+                              )?.file ?? '#'
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={
+                              recipeLabels?.find(
+                                (label) => label.label_type === 'pallet',
+                              )?.file
+                                ? 'cu_label'
+                                : false
+                            }
+                          >
+                            <img
+                              src={download_label}
+                              className="cursor-event me-5"
+                              alt=""
+                            />
+                          </a>
+                          <img
+                            src={delete_label}
+                            className="cursor-event"
+                            onClick={() => handleDelete('cu')}
+                            alt=""
+                          />
+                        </>
+                      ) : null}
+                    </td>
+                    <td className="text-center">
+                      {recipeLabelTypes.includes('sku') ? (
+                        <>
+                          <a
+                            href={
+                              recipeLabels?.find(
+                                (label) => label.label_type === 'sku',
+                              )?.file ?? '#'
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={
+                              recipeLabels?.find(
+                                (label) => label.label_type === 'pallet',
+                              )?.file
+                                ? 'sku_label'
+                                : false
+                            }
+                          >
+                            <img
+                              src={download_label}
+                              className="cursor-event me-5"
+                              alt=""
+                            />
+                          </a>
 
-                    <img
-                      src={delete_label}
-                      className="cursor-event"
-                      onClick={() => handleDelete('sku')}
-                      alt=""
-                    />
-                  </td>
-                  <td className="text-center">
-                    <a
-                      href={
-                        recipeLabels?.find(
-                          (label) => label.label_type === 'pallet',
-                        )?.file ?? '#'
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      download={
-                        recipeLabels?.find(
-                          (label) => label.label_type === 'pallet',
-                        )?.file
-                          ? 'pallet_label'
-                          : false
-                      }
-                    >
-                      <img
-                        src={download_label}
-                        className="cursor-event me-5"
-                        alt=""
-                      />
-                    </a>
-                    <img
-                      src={delete_label}
-                      className="cursor-event"
-                      onClick={() => handleDelete('pallet')}
-                      alt=""
-                    />
-                  </td>
-                </tr>
+                          <img
+                            src={delete_label}
+                            className="cursor-event"
+                            onClick={() => handleDelete('sku')}
+                            alt=""
+                          />
+                        </>
+                      ) : null}
+                    </td>
+                    <td className="text-center">
+                      {recipeLabelTypes.includes('pallet') ? (
+                        <>
+                          <a
+                            href={
+                              recipeLabels?.find(
+                                (label) => label.label_type === 'pallet',
+                              )?.file ?? '#'
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={
+                              recipeLabels?.find(
+                                (label) => label.label_type === 'pallet',
+                              )?.file
+                                ? 'pallet_label'
+                                : false
+                            }
+                          >
+                            <img
+                              src={download_label}
+                              className="cursor-event me-5"
+                              alt=""
+                            />
+                          </a>
+                          <img
+                            src={delete_label}
+                            className="cursor-event"
+                            onClick={() => handleDelete('pallet')}
+                            alt=""
+                          />
+                        </>
+                      ) : null}
+                    </td>
+                  </tr>
+                ) : null}
               </tbody>
             </table>
           </div>
@@ -381,13 +402,9 @@ const Label = ({ onClose, batchTemplateID }) => {
                         </label>
                         <DropDown
                           isClear={false}
-                          // handleDropDown={handleDropDown}
-                          dropDownValue={labels.filter(
-                            (l) => l.id === labelValue,
-                          )}
+                          dropDownValue={labels}
                           defaultValue={labels.find((l) => l.id === labelValue)}
                           placeholderUpdated="Select Label"
-                          isDisabled={true}
                         />
                       </div>
                       <div className="col-md-12 py-2">
@@ -404,6 +421,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                             required: 'EAN Number is required',
                           })}
                           id="ean_number"
+                          placeholder="EAN Number"
                         />
                         {errors.ean_number && (
                           <p className="text-danger">
@@ -463,8 +481,6 @@ const Label = ({ onClose, batchTemplateID }) => {
                       <button
                         type="submit"
                         className="btn btn-orange float-center create-create-btn"
-                        // onClick={handleAddLabel}
-                        // disabled={!baseImage || errors?.ean_number?.message}
                       >
                         Submit
                       </button>
