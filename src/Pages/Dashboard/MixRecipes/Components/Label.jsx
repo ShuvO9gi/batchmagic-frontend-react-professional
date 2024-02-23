@@ -209,7 +209,9 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        setLabelValue(1);
+                        recipeLabelTypes.includes('cu')
+                          ? null
+                          : setLabelValue(1);
                       }}
                       alt=""
                       height={100}
@@ -227,7 +229,9 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        setLabelValue(2);
+                        recipeLabelTypes.includes('sku')
+                          ? null
+                          : setLabelValue(2);
                       }}
                       alt=""
                       height={100}
@@ -245,7 +249,9 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        setLabelValue(3);
+                        recipeLabelTypes.includes('pallet')
+                          ? null
+                          : setLabelValue(3);
                       }}
                       alt=""
                       height={100}
