@@ -5,6 +5,10 @@ import close from '../../../../assets/Logo/actions/cross.svg';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import ErrorModal from '../../../../components/ErrorModal';
+import CKEditor from 'react-ckeditor-component';
+
+// Rest of the code...
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const Ingredient = ({
   isOpen = true,
@@ -114,6 +118,11 @@ const Ingredient = ({
     }
   };
 
+  const handleEditorChange = (e) => {
+    const newContent = e.editor.getData();
+    setValue('ingredients', newContent);
+  };
+
   return (
     <div className="modal-overlay-recipes">
       <div className="modal-body-recipes modal-body-recipes-ingredient">
@@ -141,18 +150,19 @@ const Ingredient = ({
                 >
                   Ingredients
                 </label>
-                <textarea
-                  name="ingredients"
-                  className="form-control"
+
+                <CKEditor
+                  activeClass="p10"
+                  content={ingredients?.ingredients}
                   {...register('ingredients', {
                     required: 'Ingredient is required',
                   })}
-                  id="ingredient"
-                  placeholder="Ingredient"
-                  cols="auto"
-                  rows="auto"
-                  defaultValue={ingredients?.ingredients}
-                ></textarea>
+                  events={{
+                    blur: (e) => handleEditorChange(e),
+                    afterPaste: (e) => handleEditorChange(e),
+                    change: (e) => handleEditorChange(e),
+                  }}
+                />
                 {errors.ingredients && (
                   <p className="text-danger">{errors.ingredients.message}</p>
                 )}
