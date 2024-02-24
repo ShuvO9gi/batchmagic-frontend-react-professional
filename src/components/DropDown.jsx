@@ -34,9 +34,6 @@ const DropDown = ({
   }, [defaultValue]);
 
   const handleChange = (value, action) => {
-    console.log('Dropdown checking');
-    console.log(value);
-    console.log(action);
     setValue(value);
     handleDropDown(value, action);
   };
