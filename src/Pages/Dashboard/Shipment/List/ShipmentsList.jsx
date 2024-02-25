@@ -58,7 +58,13 @@ const columns = [
         </Link>
         <Link to={`/dashboard/orders/edit/${row.id}`}>
           <button className="btn btn-action-customized">
-            <img src={edit} className="edit-action" alt="" />
+            <img
+              src={edit}
+              className="edit-action"
+              alt=""
+              width={28}
+              height={28}
+            />
           </button>
         </Link>
         {/* <button className="btn btn-danger"><img src={deletes} className="edit-image" alt="" /></button> */}
