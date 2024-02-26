@@ -384,6 +384,11 @@ const Create = () => {
                                   }
                                   dropDownValue={batchProduct.product.stocks}
                                   optionLabel="ingoing_batch_number"
+                                  defaultValue={
+                                    batchProduct.product.stocks.length === 1
+                                      ? batchProduct.product.stocks[0]
+                                      : null
+                                  }
                                 />
                               ) : (
                                 <p className="text-danger">
