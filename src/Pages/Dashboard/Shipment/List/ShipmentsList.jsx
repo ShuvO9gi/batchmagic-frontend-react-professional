@@ -107,7 +107,12 @@ export default function Index() {
 
   return (
     <div>
-      <h1 className="text-center my-64 list-header">Shipments Order</h1>
+      <h1
+        className="text-center my-64 list-header"
+        style={{ fontSize: '30px' }}
+      >
+        Shipments Order
+      </h1>
       <DataTables
         columns={columns}
         data={memoizedData}
