@@ -56,7 +56,7 @@ const Duplicate = () => {
         const res = await axiosPrivate.get('/products', {
           signal: controller.signal,
         });
-        console.log(res?.data?.data);
+
         if (res.status === 200) {
           setProduct(res?.data?.data);
           setAllProduct(res?.data?.data);
@@ -103,21 +103,13 @@ const Duplicate = () => {
               };
             }),
           );
-          console.log(response.data.data.batch_products);
-          console.log(
-            response.data.data.batch_products.map((data) => data?.product.name),
-          );
+
           const productName = response.data.data.batch_products.map(
             (data) => data?.product.name,
           );
 
-          console.log(productName);
           setProductName(productName);
-          console.log('check');
-          console.log(product);
-          console.log(
-            product?.filter((data) => !productName.includes(data.name)),
-          );
+
           setTotal_weight(response.data.data.total_weight);
           handleUnique('name', response.data.data?.name);
           handleUnique('external_ref', response.data.data?.external_ref);
@@ -150,7 +142,7 @@ const Duplicate = () => {
     const sortedProduct = product?.filter(
       (data) => !productName.includes(data.name),
     );
-    console.log(product?.filter((data) => !productName.includes(data.name)));
+
     setProduct(sortedProduct);
 
     /*  */
@@ -180,7 +172,7 @@ const Duplicate = () => {
   const handleEditProduct = (productId) => {
     setIsClear(false);
     const editProduct = batchProduct.filter((l) => l.product_id === productId);
-    console.log(editProduct);
+
     setEditProduct(editProduct);
     setSelectProduct(true);
     /* setValue */
@@ -189,7 +181,7 @@ const Duplicate = () => {
     setWeight(editProduct[0]?.weight);
     setAmount(editProduct[0]?.amount);
     /*  */
-    console.log(allProduct);
+
     // setProduct(allProduct);
   };
 
@@ -234,18 +226,16 @@ const Duplicate = () => {
     const updatedBatchProduct = batchProduct.filter(
       (item) => item.product_name !== name,
     );
-    console.log(updatedBatchProduct);
+
     setBatchProduct(updatedBatchProduct);
     handleTotalWeight(weight);
 
     const updatedProduct = product;
     updatedProduct.push({ id: id, name: name });
-    console.log(updatedProduct);
     setProduct(updatedProduct);
 
     /*  */
     const deletedProduct = updatedBatchProduct.map((item) => item.product_name);
-    console.log(deletedProduct);
     setProductName(deletedProduct);
   };
 
@@ -276,16 +266,11 @@ const Duplicate = () => {
       if (!(editProduct[0].weight === weight)) {
         if (editProduct[0].weight < weight) {
           const weightAdd = weight - editProduct[0]?.weight;
-          console.log(weightAdd);
           setWeight(weightAdd);
-          console.log('Add');
           handleTotalWeight('', weightAdd);
         } else if (editProduct[0].weight > weight) {
           const weightRemove = editProduct[0]?.weight - weight;
-          console.log(weightRemove);
           setWeight(weightRemove);
-          console.log('Remove');
-          console.log(weight);
           handleTotalWeight(weightRemove);
         }
       }
