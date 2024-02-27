@@ -10,6 +10,7 @@ import { isEmpty } from '../../../../components/utils';
 import ErrorModal from '../../../../components/ErrorModal';
 import close from '../../../../assets/Logo/actions/cross.svg';
 import remove from '../../../../assets/Logo/actions/delete.svg';
+import edit from '../../../../assets/Logo/actions/edit_small.svg';
 import Loader from '../../../../components/Loader';
 
 const Duplicate = () => {
@@ -19,6 +20,7 @@ const Duplicate = () => {
     formState: { errors },
     reset,
     setError,
+    setValue,
   } = useForm();
   const [batchTemplate, setBatchTemplate] = useState({});
   const [product_id, setProduct_id] = useState({});
@@ -30,6 +32,12 @@ const Duplicate = () => {
   const [productSubmitDisabled, setProductSubmitDisabled] = useState(true);
   const [nameChanged, setNameChanged] = useState(true);
   const [refChanged, setRefChanged] = useState(true);
+  /*  */
+  const [editProduct, setEditProduct] = useState([]);
+  const [productName, setProductName] = useState([]);
+  const [selectProduct, setSelectProduct] = useState(false);
+  const [allProduct, setAllProduct] = useState([]);
+  /*  */
   const { err, setErr } = useState({});
   const { setLoading } = useAuth();
   const axiosPrivate = useAxiosPrivate();
@@ -48,8 +56,10 @@ const Duplicate = () => {
         const res = await axiosPrivate.get('/products', {
           signal: controller.signal,
         });
+
         if (res.status === 200) {
           setProduct(res?.data?.data);
+          setAllProduct(res?.data?.data);
         }
       } catch (err) {
         <ErrorModal />;
@@ -80,6 +90,7 @@ const Duplicate = () => {
             signal: controller.signal,
           },
         );
+
         if (isMounted) {
           setBatchTemplate(response.data.data);
           setBatchProduct(
@@ -92,6 +103,13 @@ const Duplicate = () => {
               };
             }),
           );
+
+          const productName = response.data.data.batch_products.map(
+            (data) => data?.product.name,
+          );
+
+          setProductName(productName);
+
           setTotal_weight(response.data.data.total_weight);
           handleUnique('name', response.data.data?.name);
           handleUnique('external_ref', response.data.data?.external_ref);
@@ -105,11 +123,67 @@ const Duplicate = () => {
       }
     };
     getBatchtemplate();
+
     return () => {
       isMounted = false;
       controller.abort();
     };
   }, []);
+
+  /*  */
+  const handleDeletedProduct = (name, id) => {
+    console.log(name, id);
+  };
+
+  /*  */
+  const handleProduct = () => {
+    setSelectProduct(false);
+    // setEditProduct([]);
+    const sortedProduct = product?.filter(
+      (data) => !productName.includes(data.name),
+    );
+
+    setProduct(sortedProduct);
+
+    /*  */
+    handleDeletedProduct();
+
+    /*  */
+    setIsClear(true);
+    // Reset form fields
+    reset({
+      product_name: '',
+      weight: '',
+      amount: '',
+      product_id: '',
+    });
+  };
+
+  /* edit products */
+  useEffect(() => {
+    if (editProduct.length > 0) {
+      setValue('product_id', editProduct[0]?.product_id);
+      setValue('product_name', editProduct[0]?.product_name);
+      setValue('weight', editProduct[0]?.weight);
+      setValue('amount', editProduct[0]?.amount);
+    }
+  }, [editProduct, setValue]);
+
+  const handleEditProduct = (productId) => {
+    setIsClear(false);
+    const editProduct = batchProduct.filter((l) => l.product_id === productId);
+
+    setEditProduct(editProduct);
+    setSelectProduct(true);
+    /* setValue */
+    setProduct_id(editProduct[0]?.product_id);
+    setProduct_name(editProduct[0]?.product_name);
+    setWeight(editProduct[0]?.weight);
+    setAmount(editProduct[0]?.amount);
+    /*  */
+
+    // setProduct(allProduct);
+  };
 
   const handleAddBatchTemplete = async (data, e) => {
     const makeData = {
@@ -118,14 +192,6 @@ const Duplicate = () => {
       total_weight: Number(total_weight.toFixed(2)),
       external_ref: data.external_ref,
     };
-
-    /* if (
-      batchTemplate?.name !== data.name &&
-      batchTemplate?.external_ref !== data.external_ref
-    ) {
-      console.log('Same Name');
-      setInputChanged(false);
-    } */
 
     const controller = new AbortController();
     e.preventDefault();
@@ -160,11 +226,17 @@ const Duplicate = () => {
     const updatedBatchProduct = batchProduct.filter(
       (item) => item.product_name !== name,
     );
+
     setBatchProduct(updatedBatchProduct);
     handleTotalWeight(weight);
+
     const updatedProduct = product;
     updatedProduct.push({ id: id, name: name });
     setProduct(updatedProduct);
+
+    /*  */
+    const deletedProduct = updatedBatchProduct.map((item) => item.product_name);
+    setProductName(deletedProduct);
   };
 
   const handleAmount = (e) => {
@@ -176,18 +248,48 @@ const Duplicate = () => {
   };
 
   const handleAddBatchProdct = () => {
-    setBatchProduct((batchProduct) => [
-      ...batchProduct,
-      {
-        product_id: product_id,
-        product_name: product_name,
-        weight: weight,
-        amount: amount,
-      },
-    ]);
-    setProduct_name(product?.name);
-    handleTotalWeight();
+    if (editProduct.length > 0) {
+      setBatchProduct((current) =>
+        current.map((obj) => {
+          if (obj.product_id === editProduct[0]?.product_id) {
+            return {
+              ...obj,
+              product_name: product_name,
+              weight: weight,
+              amount: amount,
+            };
+          }
+          return obj;
+        }),
+      );
+      setEditProduct([]);
+      if (!(editProduct[0].weight === weight)) {
+        if (editProduct[0].weight < weight) {
+          const weightAdd = weight - editProduct[0]?.weight;
+          setWeight(weightAdd);
+          handleTotalWeight('', weightAdd);
+        } else if (editProduct[0].weight > weight) {
+          const weightRemove = editProduct[0]?.weight - weight;
+          setWeight(weightRemove);
+          handleTotalWeight(weightRemove);
+        }
+      }
+    } else {
+      setBatchProduct((batchProduct) => [
+        ...batchProduct,
+        {
+          product_id: product_id,
+          product_name: product_name,
+          weight: weight,
+          amount: amount,
+        },
+      ]);
+      handleTotalWeight();
 
+      /*  */
+    }
+
+    setProduct_name(product?.name);
     //update product list exclude selected product
     const updatedProduct = product.filter((item) => item.id !== product_id);
     setProduct(updatedProduct);
@@ -208,11 +310,11 @@ const Duplicate = () => {
     }, 10);
   };
 
-  const handleTotalWeight = (removWight = 0) => {
+  const handleTotalWeight = (removWight = 0, weightAdd = 0) => {
     total_weight_count =
       parseFloat(removWight) > 0
         ? total_weight_count - parseFloat(removWight)
-        : total_weight_count + parseFloat(weight);
+        : total_weight_count + parseFloat(selectProduct ? weightAdd : weight);
     setTotal_weight((total_weight) =>
       parseFloat(removWight) > 0
         ? total_weight - parseFloat(removWight)
@@ -367,6 +469,7 @@ const Duplicate = () => {
                       className="btn text-white float-end list-add-btn"
                       data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"
+                      onClick={handleProduct}
                     >
                       ADD A PRODUCT
                     </a>
@@ -408,7 +511,23 @@ const Duplicate = () => {
                               <DropDown
                                 isClear={isClear}
                                 handleDropDown={handleDropDown}
-                                dropDownValue={product}
+                                dropDownValue={
+                                  selectProduct ? allProduct : product
+                                }
+                                isDisabled={selectProduct}
+                                defaultValue={
+                                  selectProduct
+                                    ? allProduct.find(
+                                        (products) =>
+                                          products.id ===
+                                          editProduct[0]?.product_id,
+                                      )
+                                    : product.find(
+                                        (products) =>
+                                          products.id ===
+                                          editProduct[0]?.product_id,
+                                      )
+                                }
                               />
                             </div>
                             <div className="px-5">
@@ -428,6 +547,7 @@ const Duplicate = () => {
                                 onBlur={handleWeight}
                                 id="weight"
                                 placeholder="Weight"
+                                // defaultValue={editProduct?.weight}
                               />
                             </div>
                             <div className="px-5 py-3">
@@ -447,6 +567,7 @@ const Duplicate = () => {
                                 onBlur={handleAmount}
                                 id="amount"
                                 placeholder="Amount"
+                                // defaultValue={editProduct?.amount}
                               />
                             </div>
                           </div>
@@ -491,18 +612,36 @@ const Duplicate = () => {
                               <td>
                                 <div className="action-container">
                                   <a
-                                    onClick={() =>
+                                    onClick={() => {
                                       handleProductDelete(
                                         item?.product_name,
                                         item?.weight,
                                         item?.product_id,
-                                      )
-                                    }
+                                      );
+                                      handleDeletedProduct(
+                                        item?.product_name,
+                                        item?.product_id,
+                                      );
+                                    }}
                                     cursor="cursor"
                                   >
                                     <img
                                       src={remove}
                                       className="delete-action"
+                                      alt=""
+                                    />
+                                  </a>
+                                  <a
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"
+                                    onClick={() => {
+                                      handleEditProduct(item?.product_id);
+                                    }}
+                                    cursor="cursor"
+                                  >
+                                    <img
+                                      src={edit}
+                                      className="edit-action"
                                       alt=""
                                     />
                                   </a>
