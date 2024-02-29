@@ -109,7 +109,7 @@ export default function Index() {
     <div>
       <h1
         className="text-center my-64 list-header"
-        style={{ fontSize: '30px' }}
+        style={{ fontSize: '30px', fontWeight: '700' }}
       >
         Shipments Order
       </h1>
