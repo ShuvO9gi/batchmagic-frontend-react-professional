@@ -15,7 +15,6 @@ const columns = [
   {
     name: 'Customer Name',
     selector: (row) => {
-      console.log(row);
       row?.customer_name;
     },
     sortable: true,
