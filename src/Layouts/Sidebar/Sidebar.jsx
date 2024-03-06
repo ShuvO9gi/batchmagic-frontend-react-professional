@@ -30,7 +30,10 @@ const Sidebar = () => {
         setOpenSubMenu(submenuItem.parentLink || '');
       }
     }, [data, setOpenSubMenu, submenuItem.parentLink]);
-    return data;
+
+    if (submenuItem.link === currentPath) {
+      return data;
+    }
   };
 
   const toggleSubMenu = (menuItem) => {
