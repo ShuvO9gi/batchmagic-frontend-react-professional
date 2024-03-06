@@ -118,6 +118,11 @@ const Duplicate = () => {
           console.log(
             product?.filter((data) => !productName.includes(data.name)),
           );
+
+          const sortedProduct = product?.filter(
+            (data) => !productName.includes(data.name),
+          );
+          setProduct(sortedProduct);
           setTotal_weight(response.data.data.total_weight);
           handleUnique('name', response.data.data?.name);
           handleUnique('external_ref', response.data.data?.external_ref);
@@ -139,11 +144,6 @@ const Duplicate = () => {
   }, []);
 
   /*  */
-  const handleDeletedProduct = (name, id) => {
-    console.log(name, id);
-  };
-
-  /*  */
   const handleProduct = () => {
     setSelectProduct(false);
     // setEditProduct([]);
@@ -152,9 +152,6 @@ const Duplicate = () => {
     );
     console.log(product?.filter((data) => !productName.includes(data.name)));
     setProduct(sortedProduct);
-
-    /*  */
-    handleDeletedProduct();
 
     /*  */
     setIsClear(true);
@@ -441,7 +438,7 @@ const Duplicate = () => {
                           {...register('total_weight')}
                           id="total-weight"
                           placeholder="Total weight "
-                          defaultValue={batchTemplate?.total_weight}
+                          // defaultValue={batchTemplate?.total_weight}
                           readOnly
                         />
                       </div>
@@ -631,10 +628,6 @@ const Duplicate = () => {
                                       handleProductDelete(
                                         item?.product_name,
                                         item?.weight,
-                                        item?.product_id,
-                                      );
-                                      handleDeletedProduct(
-                                        item?.product_name,
                                         item?.product_id,
                                       );
                                     }}
