@@ -46,13 +46,7 @@ const columns = [
       <div className="action-container">
         <Link to={`/dashboard/orders/show/${row.id}`}>
           <button className="btn btn-action-customized">
-            <img
-              src={show}
-              className="show-action"
-              alt=""
-              width={28}
-              height={28}
-            />
+            <img src={show} className="show-action" alt="" />
           </button>
         </Link>
         <Link to={`/dashboard/orders/edit/${row.id}`}>
