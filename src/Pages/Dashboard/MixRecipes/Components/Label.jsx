@@ -64,6 +64,7 @@ const Label = ({ onClose, batchTemplateID }) => {
         if (res.status === 200) {
           console.log(res?.data?.data?.batch_template_label);
           setSelectedLabels(res?.data?.data?.batch_template_label);
+          setSelectedImage(res?.data?.data?.batch_template_image);
           const label_types = res?.data?.data?.batch_template_label.map(
             (label) => label.label_type,
           );
@@ -146,6 +147,33 @@ const Label = ({ onClose, batchTemplateID }) => {
     setError('file', {});
   };
 
+  /* add image */
+  const uploadImageFile = async (e) => {
+    const file = e.target.files[0];
+
+    if (file.size > 5000000) {
+      setError('file', {
+        type: 'manual',
+        message: 'File size should be less than 5 MB',
+      });
+      return;
+    }
+
+    if (
+      ['image/jpeg', 'image/png', 'image/jpg'].includes(file.type) === false
+    ) {
+      setError('file', {
+        type: 'manual',
+        message: 'Only jpg, jpeg or png files are allowed',
+      });
+      return;
+    }
+
+    const base64 = await convertBase64(file);
+    setBase64ImageFile(base64);
+    setError('file', {});
+  };
+
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -188,24 +216,69 @@ const Label = ({ onClose, batchTemplateID }) => {
     }
   };
 
+  /* close image modal */
+  const closeImageModal = () => {
+    setUploadImage(0);
+    setRefetch(!refetch);
+  };
+
+  /* submit image */
+  const handleImageLabel = async (data, e) => {
+    const formData = {
+      image: base64ImageFile,
+    };
+    const controller = new AbortController();
+    e.preventDefault();
+    try {
+      const res = await axiosPrivate.post(
+        `/batch-template/image/${batchTemplateID}`,
+        formData,
+        {
+          signal: controller.signal,
+        },
+      );
+      if (res.status === 200) {
+        controller.abort();
+        closeImageModal();
+        resetField('file');
+        setBase64ImageFile('');
+      }
+    } catch (err) {
+      closeImageModal();
+      setError(err.response.data.errors);
+    }
+  };
+
   return (
     <div className="modal-overlay-recipes">
       <div className="modal-body-recipes modal-body-recipes-label ">
-        <div className="d-flex justify-content-between modal-header-recipes list-header">
+        <div className="d-flex justify-content-between align-items-baseline modal-header-recipes list-header">
           <p className="fw-bold fs-6">Label</p>
-
-          <img
-            onClick={() => {
-              onClose();
-            }}
-            className="modal-close"
-            src={close}
-            alt=""
-          />
+          {currentLabel?.id && (
+            <div className="d-flex justify-content-center">
+              <button
+                type="button"
+                className="btn btn-orange float-center create-create-btn-customized"
+                onClick={() => setLabelValue(currentLabel?.id)}
+              >
+                UPLOAD LABELS
+              </button>
+            </div>
+          )}
+          <div>
+            <img
+              onClick={() => {
+                onClose();
+              }}
+              className="modal-close"
+              src={close}
+              alt=""
+            />
+          </div>
         </div>
         <hr className="my-0" />
         <div className="modal-content-recipes">
-          <div className="row p-2">
+          <div className="row">
             <table className="table table-mt">
               <thead>
                 <tr>
@@ -627,17 +700,60 @@ const Label = ({ onClose, batchTemplateID }) => {
               </tbody>
             </table>
           </div>
-          {currentLabel?.id && (
-            <div className="d-flex justify-content-center p-2">
-              <button
-                type="button"
-                className="btn btn-orange float-center create-create-btn"
-                onClick={() => setLabelValue(currentLabel?.id)}
-              >
-                UPLOAD LABELS
-              </button>
-            </div>
-          )}
+          {uploadImage ? (
+            <form onSubmit={handleSubmit(handleImageLabel)}>
+              <div className="modal-overlay-recipes">
+                <div className="modal-body-recipes modal-body-recipes-label ">
+                  <div className="d-flex flex-column modal-header-recipes list-header">
+                    <p className="align-self-start fw-bold fs-6">Add Image</p>
+
+                    <img
+                      onClick={() => {
+                        closeImageModal();
+                      }}
+                      className="align-self-end page-close"
+                      src={close}
+                      alt=""
+                    />
+                  </div>
+                  <hr className="my-0" />
+                  <div className="modal-content-recipes">
+                    <div className="row p-2">
+                      <div className="mt-2 col-md-12">
+                        <label
+                          htmlFor="file"
+                          className="form-label fw-bold text-warning"
+                        >
+                          Image File
+                        </label>
+                        <input
+                          type="file"
+                          className="form-control"
+                          {...register('file', {
+                            required: 'file is required',
+                          })}
+                          onChange={(e) => uploadImageFile(e)}
+                          id="file"
+                          placeholder="Upload File"
+                        />
+                        {errors.file && (
+                          <p className="text-danger">{errors?.file?.message}</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-center p-4">
+                      <button
+                        type="submit"
+                        className="btn btn-orange float-center create-create-btn"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          ) : null}
           {labelValue ? (
             <form onSubmit={handleSubmit(handleAddLabel)}>
               <div className="modal-overlay-recipes">
