@@ -199,7 +199,7 @@ const Label = ({ onClose, batchTemplateID }) => {
               </thead>
               <tbody>
                 <tr>
-                  <th></th>
+                  <td></td>
                   <td className="text-center">
                     <img
                       src={
@@ -368,6 +368,81 @@ const Label = ({ onClose, batchTemplateID }) => {
                     </td>
                   </tr>
                 ) : null}
+                <tr>
+                  <th>Barcode</th>
+                  <th scope="col" className="text-recipe text-center">
+                    <b>CU</b>
+                  </th>
+                  <th scope="col" className="text-recipe text-center">
+                    <b>SKU</b>
+                  </th>
+                  <th scope="col" className="text-recipe text-center">
+                    <b>PALLET</b>
+                  </th>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td className="text-center">
+                    <img
+                      src={
+                        recipeLabels
+                          .map((label) => label.label_type)
+                          .includes('barcode_cu')
+                          ? pdf_full
+                          : pdf_blurred
+                      }
+                      className="cursor-event"
+                      onClick={() => {
+                        recipeLabelTypes.includes('barcode_cu')
+                          ? null
+                          : setLabelValue(4);
+                      }}
+                      alt=""
+                      height={100}
+                      width={100}
+                    />
+                  </td>
+                  <td className="text-center">
+                    <img
+                      src={
+                        recipeLabels
+                          .map((label) => label.label_type)
+                          .includes('barcode_sku')
+                          ? pdf_full
+                          : pdf_blurred
+                      }
+                      className="cursor-event"
+                      onClick={() => {
+                        recipeLabelTypes.includes('barcode_sku')
+                          ? null
+                          : setLabelValue(5);
+                      }}
+                      alt=""
+                      height={100}
+                      width={100}
+                    />
+                  </td>
+                  <td className="text-center">
+                    <img
+                      src={
+                        recipeLabels
+                          .map((label) => label.label_type)
+                          .includes('barcode_pallet')
+                          ? pdf_full
+                          : pdf_blurred
+                      }
+                      className="cursor-event"
+                      onClick={() => {
+                        recipeLabelTypes.includes('barcode_pallet')
+                          ? null
+                          : setLabelValue(6);
+                      }}
+                      alt=""
+                      height={100}
+                      width={100}
+                    />
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
