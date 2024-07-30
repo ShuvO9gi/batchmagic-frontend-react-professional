@@ -75,6 +75,20 @@
   cursor: pointer;
 }
 
+.create-create-btn-customized {
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  text-transform: uppercase;
+  color: #ffffff !important;
+  background-color: #ff6e05 !important;
+  border: none;
+  border-radius: 2px;
+  width: 200px;
+  height: 40px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 .create-create-btn:hover {
   background-color: #302980 !important;
   border: 1px solid #302980 !important;
