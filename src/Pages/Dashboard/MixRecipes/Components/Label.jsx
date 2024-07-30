@@ -52,7 +52,10 @@ const Label = ({ onClose, batchTemplateID }) => {
         );
         if (res.status === 200) {
           setSelectedLabels(res?.data?.data?.batch_template_label);
-          const label_types = res?.data?.data.map((label) => label.label_type);
+          console.log(res?.data?.data?.batch_template_label);
+          const label_types = res?.data?.data?.batch_template_label.map(
+            (label) => label.label_type,
+          );
           const product_label_types = label_types.filter((label) =>
             productLabels.includes(label),
           );
@@ -270,20 +273,21 @@ const Label = ({ onClose, batchTemplateID }) => {
                 </tr>
                 {productLabelTypes.length > 0 ? (
                   <tr>
+                    <td></td>
                     <td className="text-center">
-                      {productLabelTypes.includes('cu') ? (
+                      {productLabelTypes.includes('product_cu') ? (
                         <>
                           <a
                             href={
                               selectedLabels?.find(
-                                (label) => label.label_type === 'cu',
+                                (label) => label.label_type === 'product_cu',
                               )?.file ?? '#'
                             }
                             target="_blank"
                             rel="noopener noreferrer"
                             download={
                               selectedLabels?.find(
-                                (label) => label.label_type === 'pallet',
+                                (label) => label.label_type === 'product_cu',
                               )?.file
                                 ? 'cu_label'
                                 : false
@@ -298,26 +302,26 @@ const Label = ({ onClose, batchTemplateID }) => {
                           <img
                             src={delete_label}
                             className="cursor-event"
-                            onClick={() => handleDelete('cu')}
+                            onClick={() => handleDelete('product_cu')}
                             alt=""
                           />
                         </>
                       ) : null}
                     </td>
                     <td className="text-center">
-                      {productLabelTypes.includes('sku') ? (
+                      {productLabelTypes.includes('product_sku') ? (
                         <>
                           <a
                             href={
                               selectedLabels?.find(
-                                (label) => label.label_type === 'sku',
+                                (label) => label.label_type === 'product_sku',
                               )?.file ?? '#'
                             }
                             target="_blank"
                             rel="noopener noreferrer"
                             download={
                               selectedLabels?.find(
-                                (label) => label.label_type === 'pallet',
+                                (label) => label.label_type === 'product_sku',
                               )?.file
                                 ? 'sku_label'
                                 : false
@@ -333,26 +337,28 @@ const Label = ({ onClose, batchTemplateID }) => {
                           <img
                             src={delete_label}
                             className="cursor-event"
-                            onClick={() => handleDelete('sku')}
+                            onClick={() => handleDelete('product_sku')}
                             alt=""
                           />
                         </>
                       ) : null}
                     </td>
                     <td className="text-center">
-                      {productLabelTypes.includes('pallet') ? (
+                      {productLabelTypes.includes('product_pallet') ? (
                         <>
                           <a
                             href={
                               selectedLabels?.find(
-                                (label) => label.label_type === 'pallet',
+                                (label) =>
+                                  label.label_type === 'product_pallet',
                               )?.file ?? '#'
                             }
                             target="_blank"
                             rel="noopener noreferrer"
                             download={
                               selectedLabels?.find(
-                                (label) => label.label_type === 'pallet',
+                                (label) =>
+                                  label.label_type === 'product_pallet',
                               )?.file
                                 ? 'pallet_label'
                                 : false
@@ -367,7 +373,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                           <img
                             src={delete_label}
                             className="cursor-event"
-                            onClick={() => handleDelete('pallet')}
+                            onClick={() => handleDelete('product_pallet')}
                             alt=""
                           />
                         </>
