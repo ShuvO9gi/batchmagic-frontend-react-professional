@@ -29,10 +29,12 @@ const Label = ({ onClose, batchTemplateID }) => {
   const [refetch, setRefetch] = useState(false);
 
   const labels = [
-    { id: 1, name: 'cu' },
-    { id: 2, name: 'sku' },
-    { id: 3, name: 'pallet' },
+    { id: 1, name: 'product_cu' },
+    { id: 2, name: 'product_sku' },
+    { id: 3, name: 'product_pallet' },
   ];
+
+  const productLabels = ['product_cu', 'product_sku', 'product_pallet'];
 
   /* add label */
   const [base64File, setBase64File] = useState('');
@@ -51,7 +53,10 @@ const Label = ({ onClose, batchTemplateID }) => {
         if (res.status === 200) {
           setSelectedLabels(res?.data?.data?.batch_template_label);
           const label_types = res?.data?.data.map((label) => label.label_type);
-          setProductLabelTypes(label_types);
+          const product_label_types = label_types.filter((label) =>
+            productLabels.includes(label),
+          );
+          setProductLabelTypes(product_label_types);
 
           setCurrentLabel(labels.find((l) => !label_types.includes(l.name)));
         }
