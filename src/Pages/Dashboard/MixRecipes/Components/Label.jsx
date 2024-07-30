@@ -22,8 +22,9 @@ const Label = ({ onClose, batchTemplateID }) => {
   } = useForm();
 
   const [labelValue, setLabelValue] = useState(0);
-  const [recipeLabels, setRecipeLabels] = useState([]);
-  const [recipeLabelTypes, setRecipeLabelTypes] = useState([]);
+  const [selectedLabels, setSelectedLabels] = useState([]);
+  const [productLabelTypes, setProductLabelTypes] = useState([]);
+  const [barcodeLabelTypes, setBarcodeLabelTypes] = useState([]);
   const [currentLabel, setCurrentLabel] = useState([]);
   const [refetch, setRefetch] = useState(false);
 
@@ -48,9 +49,10 @@ const Label = ({ onClose, batchTemplateID }) => {
           },
         );
         if (res.status === 200) {
-          setRecipeLabels(res?.data?.data?.batch_template_label);
+          setSelectedLabels(res?.data?.data?.batch_template_label);
           const label_types = res?.data?.data.map((label) => label.label_type);
-          setRecipeLabelTypes(label_types);
+          setProductLabelTypes(label_types);
+
           setCurrentLabel(labels.find((l) => !label_types.includes(l.name)));
         }
       } catch (err) {
@@ -74,7 +76,7 @@ const Label = ({ onClose, batchTemplateID }) => {
   };
 
   const handleDelete = async (labelType) => {
-    const labelID = recipeLabels.find(
+    const labelID = selectedLabels.find(
       (label) => label.label_type === labelType,
     ).id;
 
@@ -203,7 +205,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                   <td className="text-center">
                     <img
                       src={
-                        recipeLabels
+                        selectedLabels
                           .map((label) => label.label_type)
                           .includes('product_cu')
                           ? pdf_full
@@ -211,7 +213,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('product_cu')
+                        productLabelTypes.includes('product_cu')
                           ? null
                           : setLabelValue(1);
                       }}
@@ -223,7 +225,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                   <td className="text-center">
                     <img
                       src={
-                        recipeLabels
+                        selectedLabels
                           .map((label) => label.label_type)
                           .includes('product_sku')
                           ? pdf_full
@@ -231,7 +233,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('product_sku')
+                        productLabelTypes.includes('product_sku')
                           ? null
                           : setLabelValue(2);
                       }}
@@ -243,7 +245,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                   <td className="text-center">
                     <img
                       src={
-                        recipeLabels
+                        selectedLabels
                           .map((label) => label.label_type)
                           .includes('product_pallet')
                           ? pdf_full
@@ -251,7 +253,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('product_pallet')
+                        productLabelTypes.includes('product_pallet')
                           ? null
                           : setLabelValue(3);
                       }}
@@ -261,21 +263,21 @@ const Label = ({ onClose, batchTemplateID }) => {
                     />
                   </td>
                 </tr>
-                {recipeLabelTypes.length > 0 ? (
+                {productLabelTypes.length > 0 ? (
                   <tr>
                     <td className="text-center">
-                      {recipeLabelTypes.includes('cu') ? (
+                      {productLabelTypes.includes('cu') ? (
                         <>
                           <a
                             href={
-                              recipeLabels?.find(
+                              selectedLabels?.find(
                                 (label) => label.label_type === 'cu',
                               )?.file ?? '#'
                             }
                             target="_blank"
                             rel="noopener noreferrer"
                             download={
-                              recipeLabels?.find(
+                              selectedLabels?.find(
                                 (label) => label.label_type === 'pallet',
                               )?.file
                                 ? 'cu_label'
@@ -298,18 +300,18 @@ const Label = ({ onClose, batchTemplateID }) => {
                       ) : null}
                     </td>
                     <td className="text-center">
-                      {recipeLabelTypes.includes('sku') ? (
+                      {productLabelTypes.includes('sku') ? (
                         <>
                           <a
                             href={
-                              recipeLabels?.find(
+                              selectedLabels?.find(
                                 (label) => label.label_type === 'sku',
                               )?.file ?? '#'
                             }
                             target="_blank"
                             rel="noopener noreferrer"
                             download={
-                              recipeLabels?.find(
+                              selectedLabels?.find(
                                 (label) => label.label_type === 'pallet',
                               )?.file
                                 ? 'sku_label'
@@ -333,18 +335,18 @@ const Label = ({ onClose, batchTemplateID }) => {
                       ) : null}
                     </td>
                     <td className="text-center">
-                      {recipeLabelTypes.includes('pallet') ? (
+                      {productLabelTypes.includes('pallet') ? (
                         <>
                           <a
                             href={
-                              recipeLabels?.find(
+                              selectedLabels?.find(
                                 (label) => label.label_type === 'pallet',
                               )?.file ?? '#'
                             }
                             target="_blank"
                             rel="noopener noreferrer"
                             download={
-                              recipeLabels?.find(
+                              selectedLabels?.find(
                                 (label) => label.label_type === 'pallet',
                               )?.file
                                 ? 'pallet_label'
@@ -385,7 +387,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                   <td className="text-center">
                     <img
                       src={
-                        recipeLabels
+                        selectedLabels
                           .map((label) => label.label_type)
                           .includes('barcode_cu')
                           ? pdf_full
@@ -393,7 +395,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('barcode_cu')
+                        barcodeLabelTypes.includes('barcode_cu')
                           ? null
                           : setLabelValue(4);
                       }}
@@ -405,7 +407,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                   <td className="text-center">
                     <img
                       src={
-                        recipeLabels
+                        selectedLabels
                           .map((label) => label.label_type)
                           .includes('barcode_sku')
                           ? pdf_full
@@ -413,7 +415,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('barcode_sku')
+                        barcodeLabelTypes.includes('barcode_sku')
                           ? null
                           : setLabelValue(5);
                       }}
@@ -425,7 +427,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                   <td className="text-center">
                     <img
                       src={
-                        recipeLabels
+                        selectedLabels
                           .map((label) => label.label_type)
                           .includes('barcode_pallet')
                           ? pdf_full
@@ -433,7 +435,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('barcode_pallet')
+                        barcodeLabelTypes.includes('barcode_pallet')
                           ? null
                           : setLabelValue(6);
                       }}
