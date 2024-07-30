@@ -48,7 +48,7 @@ const Label = ({ onClose, batchTemplateID }) => {
           },
         );
         if (res.status === 200) {
-          setRecipeLabels(res?.data?.data);
+          setRecipeLabels(res?.data?.data?.batch_template_label);
           const label_types = res?.data?.data.map((label) => label.label_type);
           setRecipeLabelTypes(label_types);
           setCurrentLabel(labels.find((l) => !label_types.includes(l.name)));
@@ -185,6 +185,7 @@ const Label = ({ onClose, batchTemplateID }) => {
             <table className="table table-mt">
               <thead>
                 <tr>
+                  <th>Product</th>
                   <th scope="col" className="text-recipe text-center">
                     <b>CU</b>
                   </th>
@@ -198,6 +199,7 @@ const Label = ({ onClose, batchTemplateID }) => {
               </thead>
               <tbody>
                 <tr>
+                  <th></th>
                   <td className="text-center">
                     <img
                       src={
