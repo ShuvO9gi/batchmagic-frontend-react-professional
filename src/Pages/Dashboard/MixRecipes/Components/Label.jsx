@@ -24,7 +24,7 @@ const Label = ({ onClose, batchTemplateID }) => {
   const [labelValue, setLabelValue] = useState(0);
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [productLabelTypes, setProductLabelTypes] = useState([]);
-  const [barcodeLabelTypes, setBarcodeLabelTypes] = useState([]);
+  // const [barcodeLabelTypes, setBarcodeLabelTypes] = useState([]);
   const [currentLabel, setCurrentLabel] = useState([]);
   const [refetch, setRefetch] = useState(false);
 
@@ -387,7 +387,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                     <b>PALLET</b>
                   </th>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td></td>
                   <td className="text-center">
                     <img
@@ -449,7 +449,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                       width={100}
                     />
                   </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>
@@ -533,7 +533,6 @@ const Label = ({ onClose, batchTemplateID }) => {
                             required: 'file is required',
                           })}
                           onChange={(e) => uploadFile(e)}
-                          // ref={ref}
                           id="file"
                           placeholder="Upload File"
                         />
