@@ -8,6 +8,7 @@ import pdf_blurred from '../../../../assets/Logo/actions/pdf_blurred.svg';
 import pdf_full from '../../../../assets/Logo/actions/pdf_full.svg';
 import download_label from '../../../../assets/Logo/actions/download-label.svg';
 import delete_label from '../../../../assets/Logo/actions/delete-label.svg';
+import upload from '../../../../assets/Logo/actions/upload.svg';
 import close_label from '../../../../assets/Logo/actions/close-label.svg';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import ErrorModal from '../../../../components/ErrorModal';
