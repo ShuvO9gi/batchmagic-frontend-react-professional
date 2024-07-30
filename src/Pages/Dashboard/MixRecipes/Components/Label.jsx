@@ -205,13 +205,13 @@ const Label = ({ onClose, batchTemplateID }) => {
                       src={
                         recipeLabels
                           .map((label) => label.label_type)
-                          .includes('cu')
+                          .includes('product_cu')
                           ? pdf_full
                           : pdf_blurred
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('cu')
+                        recipeLabelTypes.includes('product_cu')
                           ? null
                           : setLabelValue(1);
                       }}
@@ -225,13 +225,13 @@ const Label = ({ onClose, batchTemplateID }) => {
                       src={
                         recipeLabels
                           .map((label) => label.label_type)
-                          .includes('sku')
+                          .includes('product_sku')
                           ? pdf_full
                           : pdf_blurred
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('sku')
+                        recipeLabelTypes.includes('product_sku')
                           ? null
                           : setLabelValue(2);
                       }}
@@ -245,13 +245,13 @@ const Label = ({ onClose, batchTemplateID }) => {
                       src={
                         recipeLabels
                           .map((label) => label.label_type)
-                          .includes('pallet')
+                          .includes('product_pallet')
                           ? pdf_full
                           : pdf_blurred
                       }
                       className="cursor-event"
                       onClick={() => {
-                        recipeLabelTypes.includes('pallet')
+                        recipeLabelTypes.includes('product_pallet')
                           ? null
                           : setLabelValue(3);
                       }}
