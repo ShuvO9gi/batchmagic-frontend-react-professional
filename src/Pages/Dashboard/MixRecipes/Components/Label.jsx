@@ -42,6 +42,12 @@ const Label = ({ onClose, batchTemplateID }) => {
 
   /* add label */
   const [base64File, setBase64File] = useState('');
+
+  /* add image */
+  const [uploadImage, setUploadImage] = useState(0);
+  const [base64ImageFile, setBase64ImageFile] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
@@ -202,7 +208,9 @@ const Label = ({ onClose, batchTemplateID }) => {
             <table className="table table-mt">
               <thead>
                 <tr>
-                  <th>Product</th>
+                  <th scope="col" className="text-recipe text-center">
+                    Product
+                  </th>
                   <th scope="col" className="text-recipe text-center">
                     <b>CU</b>
                   </th>
@@ -389,7 +397,9 @@ const Label = ({ onClose, batchTemplateID }) => {
                   </tr>
                 ) : null}
                 <tr>
-                  <th>Barcode</th>
+                  <th scope="col" className="text-recipe text-center">
+                    Barcode
+                  </th>
                   <th scope="col" className="text-recipe text-center">
                     <b>CU</b>
                   </th>
@@ -572,6 +582,47 @@ const Label = ({ onClose, batchTemplateID }) => {
                     </td>
                   </tr>
                 )}
+                <tr>
+                  <th scope="col" className="text-recipe text-center">
+                    Product Image
+                  </th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <td scope="col"></td>
+
+                  <td
+                    scope="col"
+                    className="text-recipe text-center"
+                    onClick={() => {
+                      setUploadImage(1);
+                    }}
+                  >
+                    <button className="border-0 rounded p-2">
+                      <img
+                        src={upload}
+                        className="pt-2"
+                        alt="Upload Image"
+                        width={30}
+                        height={30}
+                      />
+                      <div className="pb-2">Upload Image</div>
+                    </button>
+                  </td>
+                  <td colSpan={2}>
+                    {selectedImage && (
+                      <img
+                        src={selectedImage ? selectedImage : null}
+                        className="cursor-event"
+                        alt=""
+                        height={100}
+                        width={200}
+                      />
+                    )}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
