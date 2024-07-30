@@ -500,7 +500,76 @@ const Label = ({ onClose, batchTemplateID }) => {
                         </>
                       ) : null}
                     </td>
-                    <td></td>
+                    <td className="text-center">
+                      {barcodeLabelTypes.includes('barcode_sku') ? (
+                        <>
+                          <a
+                            href={
+                              selectedLabels.find(
+                                (label) => label.label_type === 'barcode_sku',
+                              )?.file ?? '#'
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={
+                              selectedLabels.find(
+                                (label) => label.label_type === 'barcode_sku',
+                              )?.file
+                                ? 'sku_label'
+                                : false
+                            }
+                          >
+                            <img
+                              src={download_label}
+                              className="cursor-event me-5"
+                              alt=""
+                            />
+                          </a>
+                          <img
+                            src={delete_label}
+                            className="cursor-event"
+                            onClick={() => handleDelete('barcode_sku')}
+                            alt=""
+                          />
+                        </>
+                      ) : null}
+                    </td>
+                    <td className="text-center">
+                      {barcodeLabelTypes.includes('barcode_pallet') ? (
+                        <>
+                          <a
+                            href={
+                              selectedLabels.find(
+                                (label) =>
+                                  label.label_type === 'barcode_pallet',
+                              )?.file ?? '#'
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={
+                              selectedLabels.find(
+                                (label) =>
+                                  label.label_type === 'barcode_pallet',
+                              )?.file
+                                ? 'pallet_label'
+                                : false
+                            }
+                          >
+                            <img
+                              src={download_label}
+                              className="cursor-event me-5"
+                              alt=""
+                            />
+                          </a>
+                          <img
+                            src={delete_label}
+                            className="cursor-event"
+                            onClick={() => handleDelete('barcode_pallet')}
+                            alt=""
+                          />
+                        </>
+                      ) : null}
+                    </td>
                   </tr>
                 )}
               </tbody>
