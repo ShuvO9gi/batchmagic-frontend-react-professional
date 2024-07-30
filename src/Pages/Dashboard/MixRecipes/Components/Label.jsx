@@ -24,7 +24,7 @@ const Label = ({ onClose, batchTemplateID }) => {
   const [labelValue, setLabelValue] = useState(0);
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [productLabelTypes, setProductLabelTypes] = useState([]);
-  // const [barcodeLabelTypes, setBarcodeLabelTypes] = useState([]);
+  const [barcodeLabelTypes, setBarcodeLabelTypes] = useState([]);
   const [currentLabel, setCurrentLabel] = useState([]);
   const [refetch, setRefetch] = useState(false);
 
@@ -32,9 +32,13 @@ const Label = ({ onClose, batchTemplateID }) => {
     { id: 1, name: 'product_cu' },
     { id: 2, name: 'product_sku' },
     { id: 3, name: 'product_pallet' },
+    { id: 4, name: 'barcode_cu' },
+    { id: 5, name: 'barcode_sku' },
+    { id: 6, name: 'barcode_pallet' },
   ];
 
   const productLabels = ['product_cu', 'product_sku', 'product_pallet'];
+  const barcodeLabels = ['barcode_cu', 'barcode_sku', 'barcode_pallet'];
 
   /* add label */
   const [base64File, setBase64File] = useState('');
@@ -51,16 +55,19 @@ const Label = ({ onClose, batchTemplateID }) => {
           },
         );
         if (res.status === 200) {
-          setSelectedLabels(res?.data?.data?.batch_template_label);
           console.log(res?.data?.data?.batch_template_label);
+          setSelectedLabels(res?.data?.data?.batch_template_label);
           const label_types = res?.data?.data?.batch_template_label.map(
             (label) => label.label_type,
           );
           const product_label_types = label_types.filter((label) =>
             productLabels.includes(label),
           );
+          const barcode_label_types = label_types.filter((label) =>
+            barcodeLabels.includes(label),
+          );
           setProductLabelTypes(product_label_types);
-
+          setBarcodeLabelTypes(barcode_label_types);
           setCurrentLabel(labels.find((l) => !label_types.includes(l.name)));
         }
       } catch (err) {
@@ -393,7 +400,7 @@ const Label = ({ onClose, batchTemplateID }) => {
                     <b>PALLET</b>
                   </th>
                 </tr>
-                {/* <tr>
+                <tr>
                   <td></td>
                   <td className="text-center">
                     <img
@@ -455,7 +462,47 @@ const Label = ({ onClose, batchTemplateID }) => {
                       width={100}
                     />
                   </td>
-                </tr> */}
+                </tr>
+                {barcodeLabelTypes.length > 0 && (
+                  <tr>
+                    <td></td>
+                    <td className="text-center">
+                      {barcodeLabelTypes.includes('barcode_cu') ? (
+                        <>
+                          <a
+                            href={
+                              selectedLabels.find(
+                                (label) => label.label_type === 'barcode_cu',
+                              )?.file ?? '#'
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={
+                              selectedLabels.find(
+                                (label) => label.label_type === 'barcode_cu',
+                              )?.file
+                                ? 'cu_label'
+                                : false
+                            }
+                          >
+                            <img
+                              src={download_label}
+                              className="cursor-event me-5"
+                              alt=""
+                            />
+                          </a>
+                          <img
+                            src={delete_label}
+                            className="cursor-event"
+                            onClick={() => handleDelete('barcode_cu')}
+                            alt=""
+                          />
+                        </>
+                      ) : null}
+                    </td>
+                    <td></td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
