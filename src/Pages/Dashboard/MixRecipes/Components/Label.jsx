@@ -255,16 +255,14 @@ const Label = ({ onClose, batchTemplateID }) => {
         <div className="d-flex justify-content-between align-items-baseline modal-header-recipes list-header">
           <p className="fw-bold fs-6">Label</p>
           {currentLabel?.id && (
-            <div className="d-flex justify-content-center">
-              <button
-                type="button"
-                className="btn btn-orange create-create-btn-customized me-2"
-                style={{ paddingTop: 0, paddingBottom: 0, width: 'auto' }}
-                onClick={() => setLabelValue(currentLabel?.id)}
-              >
-                UPLOAD
-              </button>
-            </div>
+            <button
+              type="button"
+              className="btn btn-orange create-create-btn-customized me-2"
+              style={{ paddingTop: 0, paddingBottom: 0, width: 'auto' }}
+              onClick={() => setLabelValue(currentLabel?.id)}
+            >
+              UPLOAD
+            </button>
           )}
           <div>
             <img
