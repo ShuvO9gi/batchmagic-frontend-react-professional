@@ -760,7 +760,10 @@ const Label = ({ onClose, batchTemplateID }) => {
           {labelValue ? (
             <form onSubmit={handleSubmit(handleAddLabel)}>
               <div className="modal-overlay-recipes">
-                <div className="modal-body-recipes modal-body-recipes-label ">
+                <div
+                  className="modal-body-recipes modal-body-recipes-label"
+                  style={{ minHeight: 'auto' }}
+                >
                   <div className="d-flex flex-column modal-header-recipes list-header">
                     <p className="align-self-start fw-bold fs-6">Add Label</p>
 
