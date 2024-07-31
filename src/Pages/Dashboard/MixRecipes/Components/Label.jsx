@@ -250,7 +250,7 @@ const Label = ({ onClose, batchTemplateID }) => {
   };
 
   return (
-    <div className="modal-overlay-recipes">
+    <div className="modal-overlay-recipes" style={{ zIndex: 1050 }}>
       <div className="modal-body-recipes modal-body-recipes-label ">
         <div className="d-flex justify-content-between align-items-baseline modal-header-recipes list-header">
           <p className="fw-bold fs-6">Label</p>
