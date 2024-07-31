@@ -191,6 +191,7 @@ const Label = ({ onClose, batchTemplateID }) => {
   /*  */
   const closeLabel = () => {
     setLabelValue(0);
+    setBase64File('');
     setRefetch(!refetch);
   };
 
