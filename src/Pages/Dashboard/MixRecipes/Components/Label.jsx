@@ -703,7 +703,10 @@ const Label = ({ onClose, batchTemplateID }) => {
           {uploadImage ? (
             <form onSubmit={handleSubmit(handleImageLabel)}>
               <div className="modal-overlay-recipes">
-                <div className="modal-body-recipes modal-body-recipes-label ">
+                <div
+                  className="modal-body-recipes modal-body-recipes-label"
+                  style={{ minHeight: 'auto' }}
+                >
                   <div className="d-flex flex-column modal-header-recipes list-header">
                     <p className="align-self-start fw-bold fs-6">Add Image</p>
 
