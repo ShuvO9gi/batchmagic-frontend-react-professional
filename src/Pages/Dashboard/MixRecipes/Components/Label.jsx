@@ -265,16 +265,15 @@ const Label = ({ onClose, batchTemplateID }) => {
                 UPLOAD
               </button>
             )}
-            <div>
-              <img
-                onClick={() => {
-                  onClose();
-                }}
-                className="modal-close"
-                src={close}
-                alt=""
-              />
-            </div>
+
+            <img
+              onClick={() => {
+                onClose();
+              }}
+              className="modal-close"
+              src={close}
+              alt=""
+            />
           </div>
         </div>
         <hr className="my-0" />
