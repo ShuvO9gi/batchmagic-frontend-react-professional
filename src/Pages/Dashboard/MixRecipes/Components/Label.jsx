@@ -258,10 +258,11 @@ const Label = ({ onClose, batchTemplateID }) => {
             <div className="d-flex justify-content-center">
               <button
                 type="button"
-                className="btn btn-orange float-center create-create-btn-customized"
+                className="btn btn-orange create-create-btn-customized me-2"
+                style={{ paddingTop: 0, paddingBottom: 0, width: 'auto' }}
                 onClick={() => setLabelValue(currentLabel?.id)}
               >
-                UPLOAD LABELS
+                UPLOAD
               </button>
             </div>
           )}
