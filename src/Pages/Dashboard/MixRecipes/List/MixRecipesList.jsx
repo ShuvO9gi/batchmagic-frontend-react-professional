@@ -6,6 +6,7 @@ import ErrorModal from '../../../../components/ErrorModal.jsx';
 import DataTables from '../../../../components/DataTablesNew';
 import show from '../../../../assets/Logo/actions/show.svg';
 import edit from '../../../../assets/Logo/actions/edit.svg';
+import remove from '../../../../assets/Logo/actions/delete.svg';
 import duplicate from '../../../../assets/Logo/actions/duplicate.svg';
 import ingredient from '../../../../assets/Logo/actions/ingredient.svg';
 import label from '../../../../assets/Logo/actions/label.svg';
@@ -129,7 +130,7 @@ const MixRecipeList = () => {
           </button>
           {/* </Link> */}
           <button className="btn btn-action-customized">
-            <img src="" className="delete-action" alt="" title="Delete" />
+            <img src={remove} className="delete-action" alt="" title="Delete" />
           </button>
         </div>
       ),
