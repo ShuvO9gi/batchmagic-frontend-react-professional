@@ -72,6 +72,7 @@ const MixRecipeList = () => {
     setIsModalOpen(false);
   };
 
+  //delete mix recipe
   const deleteMixRecipe = async (id) => {
     const controller = new AbortController();
     try {
