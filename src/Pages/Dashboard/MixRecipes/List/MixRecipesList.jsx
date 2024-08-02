@@ -52,11 +52,6 @@ const MixRecipeList = () => {
 
   const memoizedData = useMemo(() => batch_template.data, [batch_template]);
 
-  const showIngredientModal = (rowId) => {
-    setSelectedRowId(rowId);
-    setIsModalOpen(true);
-  };
-
   const showLabelModal = (rowId) => {
     setSelectedLabelId(rowId);
     // setIsLabelOpen(true);
@@ -65,6 +60,11 @@ const MixRecipeList = () => {
   const closeLabelModal = () => {
     setSelectedLabelId(null);
     // setIsLabelOpen(false);
+  };
+
+  const showIngredientModal = (rowId) => {
+    setSelectedRowId(rowId);
+    setIsModalOpen(true);
   };
 
   const closeIngredientModal = () => {
