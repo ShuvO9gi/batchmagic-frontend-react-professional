@@ -129,7 +129,10 @@ const MixRecipeList = () => {
             />
           </button>
           {/* </Link> */}
-          <button className="btn btn-action-customized">
+          <button
+            className="btn btn-action-customized"
+            onClick={() => deleteMixRecipe(row.id)}
+          >
             <img src={remove} className="delete-action" alt="" title="Delete" />
           </button>
         </div>
