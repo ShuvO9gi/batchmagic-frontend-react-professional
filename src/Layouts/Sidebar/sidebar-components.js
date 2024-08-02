@@ -60,7 +60,7 @@ export const sidebarMenu = [
     title: 'Outgoing Orders',
     icon: outgoing_shipments,
     iconSelected: outgoing_shipments_selected,
-    link: '/dashboard/shipments',
+    link: '/dashboard/orders',
   },
   {
     title: 'Mix Recipes',
