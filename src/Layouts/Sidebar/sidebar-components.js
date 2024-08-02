@@ -57,7 +57,7 @@ export const sidebarMenu = [
     link: '/dashboard/customers',
   },
   {
-    title: 'Outgoing Shipments',
+    title: 'Outgoing Orders',
     icon: outgoing_shipments,
     iconSelected: outgoing_shipments_selected,
     link: '/dashboard/shipments',
