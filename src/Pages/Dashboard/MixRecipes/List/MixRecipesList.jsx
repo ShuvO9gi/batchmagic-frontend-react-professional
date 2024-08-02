@@ -52,6 +52,7 @@ const MixRecipeList = () => {
 
   const memoizedData = useMemo(() => batch_template.data, [batch_template]);
 
+  //handle label modal
   const showLabelModal = (rowId) => {
     setSelectedLabelId(rowId);
     // setIsLabelOpen(true);
