@@ -21,6 +21,7 @@ const MixRecipeList = () => {
   const [selectedLabelId, setSelectedLabelId] = useState(null);
   // const [isLabelOpen, setIsLabelOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateMixRecipe, setUpdateMixRecipe] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
