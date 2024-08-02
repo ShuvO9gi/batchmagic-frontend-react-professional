@@ -62,6 +62,7 @@ const MixRecipeList = () => {
     // setIsLabelOpen(false);
   };
 
+  //handle ingredient modal
   const showIngredientModal = (rowId) => {
     setSelectedRowId(rowId);
     setIsModalOpen(true);
