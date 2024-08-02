@@ -47,7 +47,7 @@ const MixRecipeList = () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [updateMixRecipe]);
 
   const memoizedData = useMemo(() => batch_template.data, [batch_template]);
 
