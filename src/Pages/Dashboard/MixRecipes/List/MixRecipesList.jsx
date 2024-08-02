@@ -128,6 +128,9 @@ const MixRecipeList = () => {
             />
           </button>
           {/* </Link> */}
+          <button className="btn btn-action-customized">
+            <img src="" className="delete-action" alt="" title="Delete" />
+          </button>
         </div>
       ),
     },
