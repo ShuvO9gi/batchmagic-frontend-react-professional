@@ -70,6 +70,22 @@ const MixRecipeList = () => {
     setIsModalOpen(false);
   };
 
+  const deleteMixRecipe = async (id) => {
+    const controller = new AbortController();
+    try {
+      const res = await axiosPrivate.delete(`/batch-template/${id}`, {
+        signal: controller.signal,
+      });
+
+      if (res.status === 200) {
+        setUpdateMixRecipe(true);
+        controller.abort();
+      }
+    } catch (err) {
+      <ErrorModal />;
+    }
+  };
+
   const columns = [
     {
       name: 'Name',
