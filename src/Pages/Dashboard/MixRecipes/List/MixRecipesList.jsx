@@ -45,6 +45,7 @@ const MixRecipeList = () => {
     getBatchtemplates();
     return () => {
       isMounted = false;
+      setUpdateMixRecipe(false);
       controller.abort();
     };
   }, [updateMixRecipe]);
