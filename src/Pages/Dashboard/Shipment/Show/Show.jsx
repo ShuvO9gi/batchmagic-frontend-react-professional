@@ -43,7 +43,7 @@ export default function Show() {
         <Loader />
       ) : (
         <div>
-          <Link to="/dashboard/shipments" className="d-flex flex-column">
+          <Link to="/dashboard/orders" className="d-flex flex-column">
             <img
               className="align-self-end page-close show-page-close-position"
               src={close}
