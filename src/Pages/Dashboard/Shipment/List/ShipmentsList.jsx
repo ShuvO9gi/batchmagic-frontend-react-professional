@@ -86,7 +86,7 @@ export default function Index() {
         columns={columns}
         data={memoizedData}
         header={'Shipments'}
-        navigation={'/dashboard/shipments/create'}
+        navigation={'/dashboard/orders/create'}
         searchPlaceholder="Search Suppliers"
       />
     </div>
