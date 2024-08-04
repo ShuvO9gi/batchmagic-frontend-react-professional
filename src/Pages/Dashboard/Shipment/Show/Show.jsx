@@ -50,7 +50,7 @@ export default function Show() {
               alt=""
             />
           </Link>
-          <Link to={`/dashboard/shipments/edit/${shipment.id}`}>
+          <Link to={`/dashboard/orders/edit/${shipment.id}`}>
             <button
               type="button"
               className="align-self-end show-update-btn show-update-btn-position"
