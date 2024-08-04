@@ -31,7 +31,7 @@ const columns = [
     name: 'Actions',
     cell: (row) => (
       <div className="action-container">
-        <Link to={`/dashboard/shipments/show/${row.id}`}>
+        <Link to={`/dashboard/orders/show/${row.id}`}>
           <button className="btn btn-action-customized">
             <img src={show} className="show-action" alt="" />
           </button>
